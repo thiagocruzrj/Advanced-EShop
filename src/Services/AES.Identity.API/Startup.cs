@@ -63,11 +63,11 @@ namespace AES.Identity.API
                 baererOptions.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("x")),
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidAudience = "x",
-                    ValidIssuer = "x"
+                    ValidAudience = appSettings.ValidOn,
+                    ValidIssuer = appSettings.Issuer
                 };
             });
         }
