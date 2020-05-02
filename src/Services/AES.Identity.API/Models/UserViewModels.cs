@@ -35,7 +35,7 @@ namespace AES.Identity.API.Models
         public double ExpiresIn { get; set; }
         public UserToken UserToken { get; set; }
     }
-
+     
     public class UserToken
     {
         public string Id { get; set; }
