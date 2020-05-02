@@ -42,4 +42,10 @@ namespace AES.Identity.API.Models
         public string Email { get; set; }
         public IEnumerable<UserClaim> Claims { get; set; }
     }
+
+    public class UserClaim
+    {
+        public string Value { get; set; }
+        public string Type { get; set; }
+    }
 }
