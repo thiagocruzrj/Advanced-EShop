@@ -1,15 +1,16 @@
-﻿using AES.Identity.API.Extensions;
+﻿using System;
+using AES.Identity.API.Extensions;
 using AES.Identity.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
+using System.Linq;
 
 namespace AES.Identity.API.Controllers
 {
@@ -97,7 +98,23 @@ namespace AES.Identity.API.Controllers
                 Subject = identityClaims,
                 Expires = DateTime.UtcNow.AddHours(_appSettings.ExpiryHours),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            }); ;
+            });
+
+            var encodedToken = tokenHandler.WriteToken(token);
+
+            var response = new UserLoginResponse
+            {
+                AccessToken = encodedToken,
+                ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiryHours).TotalSeconds,
+                UserToken = new UserToken
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    Claims = claims.Select(c => new UserClaim { Type = c.Type, Value = c.Value })
+                }
+            };
+
+            return response;
         }
 
         private static long ToUnixEpochDate(DateTime date)
