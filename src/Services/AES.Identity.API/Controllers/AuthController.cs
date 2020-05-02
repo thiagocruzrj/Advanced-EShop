@@ -47,7 +47,7 @@ namespace AES.Identity.API.Controllers
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
-                return Ok(); 
+                return Ok(await GenerateJwt(userRegister.Email));
             }
 
             return BadRequest();
@@ -62,7 +62,7 @@ namespace AES.Identity.API.Controllers
 
             if (result.Succeeded)
             {
-                return Ok();
+                return Ok(await GenerateJwt(userLogin.Email));
             }
 
             return BadRequest();
