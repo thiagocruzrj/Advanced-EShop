@@ -40,7 +40,16 @@ namespace AES.Identity.API.Controllers
 
         public async Task<ActionResult> Login(UserLogin userLogin)
         {
+            if (!ModelState.IsValid) return BadRequest();
 
+            var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, false, true);
+
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }
