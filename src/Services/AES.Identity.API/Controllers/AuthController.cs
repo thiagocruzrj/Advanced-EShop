@@ -27,6 +27,15 @@ namespace AES.Identity.API.Controllers
                 Email = userRegister.Email,
                 EmailConfirmed = true
             };
+
+            var result = await _userManager.CreateAsync(user, userRegister.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, false);
+                return Ok(); 
+            }
+
+            return BadRequest();
         }
 
         public async Task<ActionResult> Login(UserLogin userLogin)
