@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AES.Identity.API.Controllers
 {
@@ -86,7 +87,7 @@ namespace AES.Identity.API.Controllers
             }
 
             var identityClaims = new ClaimsIdentity();
-            identityClaims.AddClaim(claims);
+            identityClaims.AddClaims(claims);
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
