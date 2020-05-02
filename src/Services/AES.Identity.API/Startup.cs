@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace AES.Identity.API
 {
@@ -28,6 +30,17 @@ namespace AES.Identity.API
                 .AddDefaultTokenProviders();
 
             services.AddControllers();
+
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo 
+                {
+                    Title = "Advanced Enterprise Shop Api",
+                    Description = "Api created to increase base microservices communication skills",
+                    Contact = new OpenApiContact() { Name = "Thiago Cruz", Email = "thagocruz@gmail.com"},
+                    License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensourse.org/licenses/MIT")}
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
