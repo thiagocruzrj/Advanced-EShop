@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AES.Identity.API.Models
 {
@@ -27,5 +29,10 @@ namespace AES.Identity.API.Models
         public string Password { get; set; }
     }
 
-    public class UserLoginResponse { }
+    public class UserLoginResponse
+    {
+        public string AccessToken { get; set; }
+        public double ExpiresIn { get; set; }
+        public UserToken UserToken { get; set; }
+    }
 }
