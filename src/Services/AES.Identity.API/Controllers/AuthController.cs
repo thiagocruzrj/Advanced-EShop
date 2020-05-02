@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace AES.Identity.API.Controllers
 {
+    [Route("api/identity")]
     public class AuthController : Controller
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -17,6 +18,7 @@ namespace AES.Identity.API.Controllers
             _userManager = userManager;
         }
 
+        [HttpPost("new-account")]
         public async Task<ActionResult> Register(UserRegister userRegister) 
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -38,6 +40,7 @@ namespace AES.Identity.API.Controllers
             return BadRequest();
         }
 
+        [HttpPost("authenticate")]
         public async Task<ActionResult> Login(UserLogin userLogin)
         {
             if (!ModelState.IsValid) return BadRequest();
