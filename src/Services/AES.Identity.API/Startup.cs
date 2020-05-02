@@ -7,8 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Text;
 
 namespace AES.Identity.API
 {
@@ -34,12 +36,12 @@ namespace AES.Identity.API
 
             services.AddSwaggerGen(c => 
             {
-                c.SwaggerDoc("v1", new OpenApiInfo 
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Advanced Enterprise Shop Api",
                     Description = "Api created to increase base microservices communication skills",
-                    Contact = new OpenApiContact() { Name = "Thiago Cruz", Email = "thagocruz@gmail.com"},
-                    License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensourse.org/licenses/MIT")}
+                    Contact = new OpenApiContact() { Name = "Thiago Cruz", Email = "thagocruz@gmail.com" },
+                    License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensourse.org/licenses/MIT") }
                 });
             });
 
@@ -47,6 +49,19 @@ namespace AES.Identity.API
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(baererOptions => 
+            {
+                baererOptions.RequireHttpsMetadata = true;
+                baererOptions.SaveToken = true;
+                baererOptions.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("x")),
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = "x",
+                    ValidIssuer = "x"
+                };
             });
         }
 
