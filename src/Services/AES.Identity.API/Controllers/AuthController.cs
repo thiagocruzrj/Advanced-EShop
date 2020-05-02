@@ -55,5 +55,10 @@ namespace AES.Identity.API.Controllers
 
             return BadRequest();
         }
+
+        private async Task<UserLoginResponse> GenerateJwt(string email)
+        {
+
+        }
     }
 }

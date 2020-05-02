@@ -26,4 +26,6 @@ namespace AES.Identity.API.Models
         [StringLength(25, ErrorMessage = "The field {0} must be between {2} and {1} characters", MinimumLength = 6)]
         public string Password { get; set; }
     }
+
+    public class UserLoginResponse { }
 }

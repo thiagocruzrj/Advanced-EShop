@@ -46,6 +46,8 @@ namespace AES.Identity.API
                 });
             });
 
+            // JWT
+
             var appSettingSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingSection);
 
