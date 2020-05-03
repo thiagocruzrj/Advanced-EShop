@@ -32,7 +32,7 @@ namespace AES.Identity.API.Controllers
         [HttpPost("new-account")]
         public async Task<ActionResult> Register(UserRegister userRegister) 
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var user = new IdentityUser
             {
@@ -44,11 +44,15 @@ namespace AES.Identity.API.Controllers
             var result = await _userManager.CreateAsync(user, userRegister.Password);
             if (result.Succeeded)
             {
-                await _signInManager.SignInAsync(user, false);
-                return Ok(await GenerateJwt(userRegister.Email));
+                return CustomResponse(await GenerateJwt(userRegister.Email));
             }
 
-            return BadRequest();
+            foreach (var error in result.Errors)
+            {
+                AddProcessingError(error.Description);
+            }
+
+            return CustomResponse();
         }
 
         [HttpPost("authenticate")]
