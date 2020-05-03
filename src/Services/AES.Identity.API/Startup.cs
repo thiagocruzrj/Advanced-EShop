@@ -31,13 +31,12 @@ namespace AES.Identity.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration(Configuration);
-            services.AddSwaggerConfiguration();
             services.AddApiConfiguration();
+            services.AddSwaggerConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseIdentityConfiguration();
             app.UseSwaggerConfiguration();
             app.UseApiConfiguration(env);
         }
