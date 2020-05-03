@@ -23,6 +23,8 @@ namespace AES.Identity.API.Configuration
 
             app.UseRouting();
 
+            app.UseIdentityConfiguration();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
