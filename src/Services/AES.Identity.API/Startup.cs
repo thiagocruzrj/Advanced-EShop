@@ -1,3 +1,4 @@
+using AES.Identity.API.Configuration;
 using AES.Identity.API.Data;
 using AES.Identity.API.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -45,8 +46,6 @@ namespace AES.Identity.API
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddControllers();
-
             services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -57,6 +56,8 @@ namespace AES.Identity.API
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensourse.org/licenses/MIT") }
                 });
             });
+
+            services.AddApiConfiguration();
 
             // JWT
 
