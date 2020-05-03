@@ -27,7 +27,6 @@ namespace AES.Identity.API
             Configuration = buider.Build();
         }
 
-
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration(Configuration);
