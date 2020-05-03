@@ -1,18 +1,9 @@
 using AES.Identity.API.Configuration;
-using AES.Identity.API.Data;
-using AES.Identity.API.Extensions;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System;
-using System.Text;
 
 namespace AES.Identity.API
 {
@@ -40,12 +31,14 @@ namespace AES.Identity.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration(Configuration);
+            services.AddSwaggerConfiguration();
             services.AddApiConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseIdentityConfiguration();
+            app.UseSwaggerConfiguration();
             app.UseApiConfiguration(env);
         }
     }
