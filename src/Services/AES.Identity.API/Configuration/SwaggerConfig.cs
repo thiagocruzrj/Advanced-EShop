@@ -23,6 +23,11 @@ namespace AES.Identity.API.Configuration
 
         public static void UseSwaggerConfiguration(this IApplicationBuilder app)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(o =>
+            {
+                o.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+            });
         }
     }
 }
