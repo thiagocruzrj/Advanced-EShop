@@ -25,5 +25,15 @@ namespace AES.Identity.API.Controllers
         {
             return !Errors.Any();
         }
+
+        protected void AddProcessingError(string error)
+        {
+            Errors.Add(error);
+        }
+
+        protected void CleanProcessingErrors()
+        {
+            Errors.Clear();
+        }
     }
 }
