@@ -97,7 +97,10 @@ namespace AES.Identity.API.Controllers
 
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(claims);
+        }
 
+        private string EncodeToken(ClaimsIdentity identityClaims)
+        {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
 
@@ -110,8 +113,7 @@ namespace AES.Identity.API.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             });
 
-            var encodedToken = tokenHandler.WriteToken(token);
-
+            return tokenHandler.WriteToken(token);
         }
 
         private UserLoginResponse GetTokenResponse(string encodedToken, IdentityUser user, IEnumerable<Claim> claims)
