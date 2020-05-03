@@ -58,16 +58,23 @@ namespace AES.Identity.API.Controllers
         [HttpPost("authenticate")]
         public async Task<ActionResult> Login(UserLogin userLogin)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            if (!ModelState.IsValid) return CustomResponse(ModelState);
 
             var result = await _signInManager.PasswordSignInAsync(userLogin.Email, userLogin.Password, false, true);
 
             if (result.Succeeded)
             {
-                return Ok(await GenerateJwt(userLogin.Email));
+                return CustomResponse(await GenerateJwt(userLogin.Email));
             }
 
-            return BadRequest();
+            if (result.IsLockedOut)
+            {
+                AddProcessingError("User Locked out by invalid tries");
+                return CustomResponse();
+            }
+
+            AddProcessingError("User or Password incorrect");
+            return CustomResponse();
         }
 
         private async Task<UserLoginResponse> GenerateJwt(string email)
