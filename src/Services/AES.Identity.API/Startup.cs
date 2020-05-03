@@ -45,12 +45,6 @@ namespace AES.Identity.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(o => 
-            {
-                o.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-            });
-
             app.UseIdentityConfiguration();
             app.UseApiConfiguration(env);
         }
