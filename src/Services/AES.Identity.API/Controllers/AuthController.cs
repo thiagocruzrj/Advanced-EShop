@@ -82,6 +82,13 @@ namespace AES.Identity.API.Controllers
         {
             var user = await _userManager.FindByEmailAsync(email);
             var claims = await _userManager.GetClaimsAsync(user);
+            
+
+
+        }
+
+        private async Task<ClaimsIdentity> GetUserClaims(ICollection<Claim> claims, IdentityUser user)
+        {
             var userRoles = await _userManager.GetRolesAsync(user);
 
             claims.Add(new Claim(JwtRegisteredClaimNames.Sub, user.Id));
@@ -97,6 +104,8 @@ namespace AES.Identity.API.Controllers
 
             var identityClaims = new ClaimsIdentity();
             identityClaims.AddClaims(claims);
+
+            return identityClaims;
         }
 
         private string EncodeToken(ClaimsIdentity identityClaims)
