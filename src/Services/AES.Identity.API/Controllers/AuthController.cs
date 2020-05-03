@@ -13,9 +13,8 @@ using System.Linq;
 
 namespace AES.Identity.API.Controllers
 {
-    [ApiController]
     [Route("api/identity")]
-    public class AuthController : Controller
+    public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
