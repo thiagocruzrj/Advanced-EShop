@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace AES.Identity.API.Controllers
 {
@@ -111,7 +112,11 @@ namespace AES.Identity.API.Controllers
 
             var encodedToken = tokenHandler.WriteToken(token);
 
-            var response = new UserLoginResponse
+        }
+
+        private UserLoginResponse GetTokenResponse(string encodedToken, IdentityUser user, IEnumerable<Claim> claims)
+        {
+            return new UserLoginResponse
             {
                 AccessToken = encodedToken,
                 ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiryHours).TotalSeconds,
@@ -122,8 +127,6 @@ namespace AES.Identity.API.Controllers
                     Claims = claims.Select(c => new UserClaim { Type = c.Type, Value = c.Value })
                 }
             };
-
-            return response;
         }
 
         private static long ToUnixEpochDate(DateTime date)

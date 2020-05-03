@@ -18,7 +18,7 @@ namespace AES.Identity.API.Controllers
 
             return BadRequest(new ValidationProblemDetails(new Dictionary<string, string[]>
             {
-                { "Mesages", Errors.ToArray() }
+                { "Messages", Errors.ToArray() }
             }));
         }
 
