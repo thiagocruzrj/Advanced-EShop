@@ -16,10 +16,10 @@ namespace AES.WebApp.MVC.Controllers
         {
             if (!ModelState.IsValid) return View(userRegister);
 
-            // API - REGISTER
+            // API - Register
             if (false) return View(userRegister);
 
-            // Login app
+            // Register app
             return RedirectToAction("Index", "Home");
         }
 
@@ -29,7 +29,16 @@ namespace AES.WebApp.MVC.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UserLogin userLogin) { }
+        public async Task<IActionResult> Login(UserLogin userLogin) 
+        {
+            if (!ModelState.IsValid) return View(userLogin);
+
+            // API - Login
+            if (false) return View(userLogin);
+
+            // Login app
+            return RedirectToAction("Index", "Home");
+        }
 
         [HttpGet]
         [Route("exit")]
