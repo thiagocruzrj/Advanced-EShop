@@ -8,6 +8,10 @@ namespace AES.WebApp.MVC.Controllers
     {
         [HttpPost]
         [Route("new-account")]
+        public IActionResult Register() { return View(); }
+
+        [HttpPost]
+        [Route("new-account")]
         public async Task<ActionResult> Register(UserRegister userRegister) { }
 
         [HttpGet]
