@@ -12,7 +12,16 @@ namespace AES.WebApp.MVC.Controllers
 
         [HttpPost]
         [Route("new-account")]
-        public async Task<ActionResult> Register(UserRegister userRegister) { }
+        public async Task<IActionResult> Register(UserRegister userRegister) 
+        {
+            if (!ModelState.IsValid) return View(userRegister);
+
+            // API - REGISTER
+            if (false) return View(userRegister);
+
+            // Login app
+            return RedirectToAction("Index", "Home");
+        }
 
         [HttpGet]
         [Route("login")]
