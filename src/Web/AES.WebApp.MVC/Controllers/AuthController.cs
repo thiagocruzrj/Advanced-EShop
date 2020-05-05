@@ -42,6 +42,9 @@ namespace AES.WebApp.MVC.Controllers
 
         [HttpGet]
         [Route("exit")]
-        public async Task<IActionResult> Logout() { }
+        public async Task<IActionResult> Logout() 
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
