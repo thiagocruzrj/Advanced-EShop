@@ -26,9 +26,15 @@ namespace AES.WebApp.MVC.Service
             return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
         }
 
-        public Task<string> Register(UserRegister userRegister)
+        public async Task<string> Register(UserRegister userRegister)
         {
-            throw new System.NotImplementedException();
+            var registerContent = new StringContent(
+                JsonSerializer.Serialize(userRegister),
+                Encoding.UTF8,
+                "application/json");
+            var response = await _httpClient.PostAsync("https://localhost:5001/api/identity//api/identity/new-account", registerContent);
+
+            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
         }
     }
 }
