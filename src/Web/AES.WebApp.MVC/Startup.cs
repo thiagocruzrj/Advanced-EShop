@@ -20,6 +20,7 @@ namespace AES.WebApp.MVC
         {
             services.AddAuthConfig();
             services.AddMvcConfig();
+            services.RegisterServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
 ﻿using AES.WebApp.MVC.Models;
+using AES.WebApp.MVC.Service;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -6,6 +7,13 @@ namespace AES.WebApp.MVC.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly IAuthService _authService;
+
+        public AuthController(IAuthService authService)
+        {
+            _authService = authService;
+        }
+
         [HttpPost]
         [Route("new-account")]
         public IActionResult Register() { return View(); }
