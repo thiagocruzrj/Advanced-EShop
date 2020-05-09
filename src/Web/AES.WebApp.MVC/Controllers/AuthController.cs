@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Controllers
 {
-    public class AuthController : Controller
+    public class AuthController : MainController
     {
         private readonly IAuthService _authService;
 
@@ -33,6 +33,8 @@ namespace AES.WebApp.MVC.Controllers
             // API - Register
             var response = await _authService.Register(userRegister);
 
+            if (ResponseHasErrors(response.ResponseResult)) return View(userRegister);
+
             // Register app
             await LogIn(response);
             return RedirectToAction("Index", "Home");
@@ -50,6 +52,8 @@ namespace AES.WebApp.MVC.Controllers
 
             // API - Login
             var response = await _authService.Login(userLogin);
+
+            if (ResponseHasErrors(response.ResponseResult)) return View(userLogin);
 
             // Login app
             await LogIn(response);

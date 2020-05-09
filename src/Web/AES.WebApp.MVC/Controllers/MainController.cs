@@ -12,6 +12,7 @@ namespace AES.WebApp.MVC.Controllers
             {
                 return true;
             }
+
             return false;
         }
     }
