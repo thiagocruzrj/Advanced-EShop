@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AES.WebApp.MVC.Models
 {
@@ -26,5 +28,11 @@ namespace AES.WebApp.MVC.Models
         [Required(ErrorMessage = "The field {0} is required")]
         [StringLength(20, ErrorMessage = "The field {0} must be between {2} and {1} characteres", MinimumLength = 6)]
         public string Password { get; set; }
+    }
+
+    public class UserClaim
+    {
+        public string Value { get; set; }
+        public string Type { get; set; }
     }
 }
