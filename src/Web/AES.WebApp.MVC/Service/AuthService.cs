@@ -15,7 +15,7 @@ namespace AES.WebApp.MVC.Service
             _httpClient = httpClient;
         }
 
-        public async Task<string> Login(UserLogin userLogin)
+        public async Task<UserLoginResponse> Login(UserLogin userLogin)
         {
             var loginContent = new StringContent(
                 JsonSerializer.Serialize(userLogin),
@@ -23,10 +23,10 @@ namespace AES.WebApp.MVC.Service
                 "application/json");
             var response = await _httpClient.PostAsync("https://localhost:5001/api/identity/authenticate", loginContent);
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<string> Register(UserRegister userRegister)
+        public async Task<UserLoginResponse> Register(UserRegister userRegister)
         {
             var registerContent = new StringContent(
                 JsonSerializer.Serialize(userRegister),
@@ -34,7 +34,7 @@ namespace AES.WebApp.MVC.Service
                 "application/json");
             var response = await _httpClient.PostAsync("https://localhost:5001/api/identity//api/identity/new-account", registerContent);
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync());
         }
     }
 }

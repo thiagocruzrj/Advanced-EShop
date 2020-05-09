@@ -5,7 +5,7 @@ namespace AES.WebApp.MVC.Service
 {
     public interface IAuthService
     {
-        Task<string> Login(UserLogin userLogin);
-        Task<string> Register(UserRegister userRegister);
+        Task<UserLoginResponse> Login(UserLogin userLogin);
+        Task<UserLoginResponse> Register(UserRegister userRegister);
     }
 }
