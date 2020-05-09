@@ -1,6 +1,10 @@
 ﻿using AES.WebApp.MVC.Models;
 using AES.WebApp.MVC.Service;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Controllers
@@ -56,6 +60,18 @@ namespace AES.WebApp.MVC.Controllers
         public async Task<IActionResult> Logout() 
         {
             return RedirectToAction("Index", "Home");
+        }
+
+        private async Task LogIn(UserLoginResponse response)
+        {
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal());
+        }
+
+        private static JwtSecurityToken GetFormattedToken(string jwtToken)
+        {
+            return new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
         }
     }
 }
