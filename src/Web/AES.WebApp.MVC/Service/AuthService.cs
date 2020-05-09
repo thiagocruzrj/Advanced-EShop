@@ -23,7 +23,12 @@ namespace AES.WebApp.MVC.Service
                 "application/json");
             var response = await _httpClient.PostAsync("https://localhost:5001/api/identity/authenticate", loginContent);
 
-            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync());
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync(), options);
         }
 
         public async Task<UserLoginResponse> Register(UserRegister userRegister)
