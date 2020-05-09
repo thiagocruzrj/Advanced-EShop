@@ -60,6 +60,7 @@ namespace AES.WebApp.MVC.Controllers
         [Route("exit")]
         public async Task<IActionResult> Logout() 
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
 
