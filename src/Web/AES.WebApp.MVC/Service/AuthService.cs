@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Service
 {
-    public class AuthService : IAuthService
+    public class AuthService : Service, IAuthService
     {
         private readonly HttpClient _httpClient;
 
@@ -28,6 +28,14 @@ namespace AES.WebApp.MVC.Service
                 PropertyNameCaseInsensitive = true
             };
 
+            if (!HandlingErrorsReponse(response))
+            {
+                return new UserLoginResponse
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
+            }
+
             return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync(), options);
         }
 
@@ -39,7 +47,20 @@ namespace AES.WebApp.MVC.Service
                 "application/json");
             var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/new-account", registerContent);
 
-            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync());
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            if (!HandlingErrorsReponse(response))
+            {
+                return new UserLoginResponse
+                {
+                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                };
+            }
+
+            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync(), options);
         }
     }
 }
