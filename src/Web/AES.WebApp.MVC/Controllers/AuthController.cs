@@ -30,12 +30,10 @@ namespace AES.WebApp.MVC.Controllers
         {
             if (!ModelState.IsValid) return View(userRegister);
 
-            // API - Register
             var response = await _authService.Register(userRegister);
 
             if (ResponseHasErrors(response.ResponseResult)) return View(userRegister);
 
-            // Register app
             await LogIn(response);
             return RedirectToAction("Index", "Home");
         }
@@ -50,12 +48,10 @@ namespace AES.WebApp.MVC.Controllers
         {
             if (!ModelState.IsValid) return View(userLogin);
 
-            // API - Login
             var response = await _authService.Login(userLogin);
 
             if (ResponseHasErrors(response.ResponseResult)) return View(userLogin);
 
-            // Login app
             await LogIn(response);
             return RedirectToAction("Index", "Home");
         }

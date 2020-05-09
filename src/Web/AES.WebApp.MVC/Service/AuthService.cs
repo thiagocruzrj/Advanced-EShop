@@ -21,7 +21,7 @@ namespace AES.WebApp.MVC.Service
                 JsonSerializer.Serialize(userLogin),
                 Encoding.UTF8,
                 "application/json");
-            var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/authenticate", loginContent);
+            var response = await _httpClient.PostAsync("http://localhost:44398/api/identity/authenticate", loginContent);
 
             var options = new JsonSerializerOptions
             {
@@ -45,7 +45,7 @@ namespace AES.WebApp.MVC.Service
                 JsonSerializer.Serialize(userRegister),
                 Encoding.UTF8,
                 "application/json");
-            var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/new-account", registerContent);
+            var response = await _httpClient.PostAsync("http://localhost:44398/api/identity/new-account", registerContent);
 
             var options = new JsonSerializerOptions
             {
