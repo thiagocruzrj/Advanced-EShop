@@ -31,10 +31,10 @@ namespace AES.WebApp.MVC.Controllers
             if (!ModelState.IsValid) return View(userRegister);
 
             // API - Register
-            var response = await _authService.Register(userRegister); 
-            if (false) return View(userRegister);
+            var response = await _authService.Register(userRegister);
 
             // Register app
+            await LogIn(response);
             return RedirectToAction("Index", "Home");
         }
 
@@ -51,9 +51,8 @@ namespace AES.WebApp.MVC.Controllers
             // API - Login
             var response = await _authService.Login(userLogin);
 
-            if (false) return View(userLogin);
-
             // Login app
+            await LogIn(response);
             return RedirectToAction("Index", "Home");
         }
 
@@ -82,7 +81,8 @@ namespace AES.WebApp.MVC.Controllers
 
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal());
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
         }
 
         private static JwtSecurityToken GetFormattedToken(string jwtToken)
