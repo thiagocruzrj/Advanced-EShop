@@ -15,13 +15,15 @@ namespace AES.WebApp.MVC.Service
             _httpClient = httpClient;
         }
 
-        public Task<string> Login(UserLogin userLogin)
+        public async Task<string> Login(UserLogin userLogin)
         {
             var loginContent = new StringContent(
                 JsonSerializer.Serialize(userLogin),
                 Encoding.UTF8,
                 "application/json");
-            var response = _httpClient.PostAsync("", loginContent);
+            var response = await _httpClient.PostAsync("https://localhost:5001/api/identity/authenticate", loginContent);
+
+            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
         }
 
         public Task<string> Register(UserRegister userRegister)
