@@ -31,7 +31,7 @@ namespace AES.WebApp.MVC.Controllers
             else if (id == 404)
             {
                 modelErro.Message =
-                    "The page you are looking for does not exist! <br /> If you have any questions please contact our support";
+                    "The page you are looking for does not exist! <br /> If you have any questions please contact our support.";
                 modelErro.Title = "Ops! Page not found!";
                 modelErro.ErrorCode = id;
             }
