@@ -7,13 +7,6 @@ namespace AES.WebApp.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -24,10 +17,36 @@ namespace AES.WebApp.MVC.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [Route("erro/{id:length(3,3)}")]
+        public IActionResult Error(int id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var modelErro = new ErrorViewModel();
+
+            if (id == 500)
+            {
+                modelErro.Message = "An error has occurred! Please try again later or contact our support.";
+                modelErro.Title = "An error has occurred!";
+                modelErro.ErrorCode = id;
+            }
+            else if (id == 404)
+            {
+                modelErro.Message =
+                    "The page you are looking for does not exist! <br /> If you have any questions please contact our support";
+                modelErro.Title = "Ops! Page not found!";
+                modelErro.ErrorCode = id;
+            }
+            else if (id == 403)
+            {
+                modelErro.Message = "You are not allowed to do this.";
+                modelErro.Title = "Access Denied";
+                modelErro.ErrorCode = id;
+            }
+            else
+            {
+                return StatusCode(404);
+            }
+
+            return View("Error", modelErro);
         }
     }
 }
