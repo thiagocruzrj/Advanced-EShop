@@ -30,7 +30,7 @@ namespace AES.Identity.API.Extensions
         {
             if (httpResponseException.StatusCode == HttpStatusCode.Unauthorized)
             {
-                context.Response.Redirect("/login");
+                context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }
 

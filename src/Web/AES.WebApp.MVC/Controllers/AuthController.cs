@@ -40,12 +40,17 @@ namespace AES.WebApp.MVC.Controllers
 
         [HttpGet]
         [Route("login")]
-        public IActionResult Login() { return View(); }
+        public IActionResult Login(string returnUrl = null) 
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View(); 
+        }
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UserLogin userLogin) 
+        public async Task<IActionResult> Login(UserLogin userLogin, string returnUrl = null) 
         {
+            ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return View(userLogin);
 
             var response = await _authService.Login(userLogin);
