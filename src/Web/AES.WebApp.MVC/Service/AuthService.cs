@@ -17,10 +17,8 @@ namespace AES.WebApp.MVC.Service
 
         public async Task<UserLoginResponse> Login(UserLogin userLogin)
         {
-            var loginContent = new StringContent(
-                JsonSerializer.Serialize(userLogin),
-                Encoding.UTF8,
-                "application/json");
+            var loginContent = GetContent(userLogin);
+
             var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/authenticate", loginContent);
 
             var options = new JsonSerializerOptions
@@ -41,10 +39,7 @@ namespace AES.WebApp.MVC.Service
 
         public async Task<UserLoginResponse> Register(UserRegister userRegister)
         {
-            var registerContent = new StringContent(
-                JsonSerializer.Serialize(userRegister),
-                Encoding.UTF8,
-                "application/json");
+            var registerContent = GetContent(userRegister);
             var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/new-account", registerContent);
 
             var options = new JsonSerializerOptions
