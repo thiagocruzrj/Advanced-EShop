@@ -1,6 +1,7 @@
 ﻿using AES.WebApp.MVC.Extensions;
 using AES.WebApp.MVC.Models;
 using Microsoft.Extensions.Options;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -11,8 +12,10 @@ namespace AES.WebApp.MVC.Service
         private readonly HttpClient _httpClient;
         private readonly AppSettings _settings;
 
-        public AuthService(HttpClient httpClient, IOptions<AppSettings> settings)
+        public AuthService(HttpClient httpClient,
+                           IOptions<AppSettings> settings)
         {
+            httpClient.BaseAddress = new Uri(_settings.AuthUrl);
             _httpClient = httpClient;
             _settings = settings.Value;
         }
@@ -21,7 +24,7 @@ namespace AES.WebApp.MVC.Service
         {
             var loginContent = GetContent(userLogin);
 
-            var response = await _httpClient.PostAsync($"{_settings}/api/identity/authenticate", loginContent);
+            var response = await _httpClient.PostAsync("/api/identity/authenticate", loginContent);
 
             if (!HandlingErrorsReponse(response))
             {
@@ -38,7 +41,7 @@ namespace AES.WebApp.MVC.Service
         {
             var registerContent = GetContent(userRegister);
 
-            var response = await _httpClient.PostAsync($"{_settings}/api/identity/new-account", registerContent);
+            var response = await _httpClient.PostAsync("/api/identity/new-account", registerContent);
 
             if (!HandlingErrorsReponse(response))
             {
