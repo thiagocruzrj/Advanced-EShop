@@ -10,14 +10,12 @@ namespace AES.WebApp.MVC.Service
     public class AuthService : Service, IAuthService
     {
         private readonly HttpClient _httpClient;
-        private readonly AppSettings _settings;
 
         public AuthService(HttpClient httpClient,
                            IOptions<AppSettings> settings)
         {
-            httpClient.BaseAddress = new Uri(_settings.AuthUrl);
+            httpClient.BaseAddress = new Uri(settings.Value.AuthUrl);
             _httpClient = httpClient;
-            _settings = settings.Value;
         }
 
         public async Task<UserLoginResponse> Login(UserLogin userLogin)
