@@ -29,7 +29,7 @@ namespace AES.WebApp.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthConfig();
-            services.AddMvcConfig();
+            services.AddMvcConfig(Configuration);
             services.RegisterServices();
         }
 
