@@ -1,10 +1,20 @@
 ﻿using AES.WebApp.MVC.Extensions;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace AES.WebApp.MVC.Service
 {
     public abstract class Service
     {
+        protected StringContent GetContent(object data)
+        {
+            return new StringContent(
+                JsonSerializer.Serialize(data),
+                Encoding.UTF8,
+                "application/json");
+        }
+
         protected bool HandlingErrorsReponse(HttpResponseMessage response)
         {
             switch ((int)response.StatusCode)
