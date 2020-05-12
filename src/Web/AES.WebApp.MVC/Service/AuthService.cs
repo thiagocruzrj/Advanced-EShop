@@ -1,6 +1,5 @@
 ﻿using AES.WebApp.MVC.Models;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Service
@@ -36,11 +35,6 @@ namespace AES.WebApp.MVC.Service
             var registerContent = GetContent(userRegister);
 
             var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/new-account", registerContent);
-
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
 
             if (!HandlingErrorsReponse(response))
             {

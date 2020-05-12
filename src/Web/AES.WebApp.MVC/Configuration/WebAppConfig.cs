@@ -1,16 +1,18 @@
 ﻿using AES.Identity.API.Extensions;
+using AES.WebApp.MVC.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace AES.WebApp.MVC.Configuration
 {
     public static class WebAppConfig
     {
-        public static void AddMvcConfig(this IServiceCollection services)
+        public static void AddMvcConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllersWithViews();
+            services.Configure<AppSettings>(configuration);
         }
 
         public static void UseMvcConfig(this IApplicationBuilder app, IWebHostEnvironment env)
