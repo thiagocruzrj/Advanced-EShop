@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Service
 {
@@ -13,6 +14,16 @@ namespace AES.WebApp.MVC.Service
                 JsonSerializer.Serialize(data),
                 Encoding.UTF8,
                 "application/json");
+        }
+
+        protected async Task<T> DeserializeObjectResponse<T>(HttpResponseMessage requestMessage)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            return JsonSerializer.Deserialize<T>(await requestMessage.Content.ReadAsStringAsync(), options);
         }
 
         protected bool HandlingErrorsReponse(HttpResponseMessage response)

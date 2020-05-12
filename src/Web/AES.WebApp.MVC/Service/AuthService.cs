@@ -1,6 +1,5 @@
 ﻿using AES.WebApp.MVC.Models;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -21,25 +20,21 @@ namespace AES.WebApp.MVC.Service
 
             var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/authenticate", loginContent);
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
-
             if (!HandlingErrorsReponse(response))
             {
                 return new UserLoginResponse
                 {
-                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ResponseResult = await DeserializeObjectResponse<ResponseResult>(response)
                 };
             }
 
-            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync(), options);
+            return await DeserializeObjectResponse<UserLoginResponse>(response);
         }
 
         public async Task<UserLoginResponse> Register(UserRegister userRegister)
         {
             var registerContent = GetContent(userRegister);
+
             var response = await _httpClient.PostAsync("https://localhost:44398/api/identity/new-account", registerContent);
 
             var options = new JsonSerializerOptions
@@ -51,11 +46,11 @@ namespace AES.WebApp.MVC.Service
             {
                 return new UserLoginResponse
                 {
-                    ResponseResult = JsonSerializer.Deserialize<ResponseResult>(await response.Content.ReadAsStringAsync(), options)
+                    ResponseResult = await DeserializeObjectResponse<ResponseResult>(response)
                 };
             }
 
-            return JsonSerializer.Deserialize<UserLoginResponse>(await response.Content.ReadAsStringAsync(), options);
+            return await DeserializeObjectResponse<UserLoginResponse>(response);
         }
     }
 }
