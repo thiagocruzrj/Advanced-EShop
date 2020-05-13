@@ -15,5 +15,10 @@ namespace AES.Core.DomainObjects
 
             return Id.Equals(compareTo.Id);
         }
+
+        public override int GetHashCode()
+        {
+            return (GetType().GetHashCode() * 907) + Id.GetHashCode();
+        }
     }
 }
