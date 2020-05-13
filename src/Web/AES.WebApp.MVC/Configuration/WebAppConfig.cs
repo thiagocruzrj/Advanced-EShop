@@ -17,10 +17,16 @@ namespace AES.WebApp.MVC.Configuration
 
         public static void UseMvcConfig(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-
-            app.UseExceptionHandler("/error/500");
-            app.UseStatusCodePagesWithRedirects("/error/{0}");
-            app.UseHsts();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/erro/500");
+                app.UseStatusCodePagesWithRedirects("/erro/{0}");
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

@@ -31,7 +31,6 @@ namespace AES.WebApp.MVC.Service
                     ResponseResult = await DeserializeObjectResponse<ResponseResult>(response)
                 };
             }
-
             return await DeserializeObjectResponse<UserLoginResponse>(response);
         }
 
@@ -48,7 +47,6 @@ namespace AES.WebApp.MVC.Service
                     ResponseResult = await DeserializeObjectResponse<ResponseResult>(response)
                 };
             }
-
             return await DeserializeObjectResponse<UserLoginResponse>(response);
         }
     }

@@ -12,7 +12,7 @@ namespace AES.WebApp.MVC.Configuration
                 .AddCookie(o =>
                 {
                     o.LoginPath = "/login";
-                    o.AccessDeniedPath = "/access-denied";
+                    o.AccessDeniedPath = "/error/403";
                 });
         }
 
