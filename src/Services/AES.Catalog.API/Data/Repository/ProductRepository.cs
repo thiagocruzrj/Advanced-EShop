@@ -1,4 +1,5 @@
 ﻿using AES.Catalog.API.Models;
+using AES.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace AES.Catalog.API.Data.Repository
     public class ProductRepository : IProductRepository
     {
         private readonly CatalogContext _context;
+        public IUnitOfWork UnitOfWork => _context;
 
         public ProductRepository(CatalogContext context)
         {
