@@ -1,5 +1,7 @@
 ﻿using AES.Catalog.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace AES.Catalog.API.Controllers
 {
@@ -11,6 +13,12 @@ namespace AES.Catalog.API.Controllers
         public CatalogController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<Product>> Index()
+        {
+            return await _productRepository.GetAll();
         }
     }
 }
