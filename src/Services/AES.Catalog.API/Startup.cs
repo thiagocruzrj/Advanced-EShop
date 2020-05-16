@@ -1,4 +1,6 @@
 using AES.Catalog.API.Data;
+using AES.Catalog.API.Data.Repository;
+using AES.Catalog.API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +26,9 @@ namespace AES.Catalog.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<CatalogContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
