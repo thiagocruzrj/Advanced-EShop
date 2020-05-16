@@ -1,3 +1,4 @@
+using AES.Catalog.API.Configuration;
 using AES.Catalog.API.Data;
 using AES.Catalog.API.Data.Repository;
 using AES.Catalog.API.Models;
@@ -28,17 +29,10 @@ namespace AES.Catalog.API
             Configuration = builder.Build();
         }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CatalogContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddControllers();
-
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<CatalogContext>();
+            services.AddApiConfiguration(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
