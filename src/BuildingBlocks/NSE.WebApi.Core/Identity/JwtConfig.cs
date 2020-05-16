@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -8,7 +9,7 @@ namespace NSE.WebApi.Core.Identity
 {
     public static class JwtConfig
     {
-        public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        public static void AddAuthConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             var appSettingSection = configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingSection);
@@ -34,6 +35,12 @@ namespace NSE.WebApi.Core.Identity
                     ValidIssuer = appSettings.Issuer
                 };
             });
+        }
+
+        public static void UseAuthConfiguration(this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            app.UseAuthorization();
         }
     }
 }
