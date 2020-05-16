@@ -27,17 +27,17 @@ namespace AES.Catalog.API.Data.Repository
 
         public void Add(Product product)
         {
-            throw new NotImplementedException();
+            _context.Products.Add(product);
         }
 
         public void Update(Product product)
         {
-            throw new NotImplementedException();
+            _context.Products.Update(product);
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _context?.Dispose();
         }
 
     }
