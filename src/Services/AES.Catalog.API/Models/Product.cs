@@ -11,6 +11,6 @@ namespace AES.Catalog.API.Models
         public decimal Price { get; set; }
         public DateTime RegisterDate { get; set; }
         public string Image { get; set; }
-        public int Amount { get; set; }
+        public int StockQuantity { get; set; }
     }
 }
