@@ -7,6 +7,13 @@ namespace AES.Catalog.API.Data.Repository
 {
     public class ProductRepository : IProductRepository
     {
+        private readonly CatalogContext _context;
+
+        public ProductRepository(CatalogContext context)
+        {
+            _context = context;
+        }
+
         public Task<IEnumerable<Product>> GetAll()
         {
             throw new NotImplementedException();
