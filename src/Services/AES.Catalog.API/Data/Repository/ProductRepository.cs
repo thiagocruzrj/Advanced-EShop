@@ -20,9 +20,9 @@ namespace AES.Catalog.API.Data.Repository
             return await _context.Products.AsNoTracking().ToListAsync();
         }
 
-        public Task<Product> GetById(Guid id)
+        public async Task<Product> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Products.FindAsync(id);
         }
 
         public void Add(Product product)
