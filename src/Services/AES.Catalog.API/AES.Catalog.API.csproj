@@ -18,7 +18,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\AES.Core\AES.Core.csproj" />
   </ItemGroup>
 
 
