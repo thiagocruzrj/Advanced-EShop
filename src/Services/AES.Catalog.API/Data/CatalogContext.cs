@@ -1,5 +1,6 @@
 ﻿using AES.Catalog.API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace AES.Catalog.API.Data
 {
@@ -11,6 +12,10 @@ namespace AES.Catalog.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
+                e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
+                property.SetColumnType("varchar(250)");
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogContext).Assembly);
         }
     }
