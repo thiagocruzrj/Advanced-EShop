@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NSE.WebApi.Core.Identity;
 
 namespace AES.Catalog.API
 {
@@ -29,6 +30,8 @@ namespace AES.Catalog.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApiConfiguration(Configuration);
+
+            services.AddAuthConfiguration(Configuration);
 
             services.AddSwaggerConfiguration();
 
