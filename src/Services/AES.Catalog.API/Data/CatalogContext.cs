@@ -1,10 +1,12 @@
 ﻿using AES.Catalog.API.Models;
+using AES.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AES.Catalog.API.Data
 {
-    public class CatalogContext : DbContext
+    public class CatalogContext : DbContext, IUnitOfWork
     {
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options) { }
 
@@ -17,6 +19,11 @@ namespace AES.Catalog.API.Data
                 property.SetColumnType("varchar(250)");
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogContext).Assembly);
+        }
+
+        public async Task<bool> Commit()
+        {
+            return await base.SaveChangesAsync() > 0;
         }
     }
 }
