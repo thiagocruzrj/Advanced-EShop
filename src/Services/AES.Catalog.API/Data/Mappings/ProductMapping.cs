@@ -1,7 +1,6 @@
 ﻿using AES.Catalog.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 
 namespace AES.Catalog.API.Data.Mappings
 {
@@ -9,7 +8,21 @@ namespace AES.Catalog.API.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            throw new NotImplementedException();
+            builder.HasKey(c => c.Id);
+
+            builder.Property(c => c.Name)
+                .IsRequired()
+                .HasColumnType("varchar(250)");
+
+            builder.Property(c => c.Description)
+                .IsRequired()
+                .HasColumnType("varchar(500)");
+
+            builder.Property(c => c.Image)
+                .IsRequired()
+                .HasColumnType("varchar(250)");
+
+            builder.ToTable("Products");
         }
     }
 }
