@@ -1,5 +1,4 @@
 ﻿using System;
-using AES.Identity.API.Extensions;
 using AES.Identity.API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
+using NSE.WebApi.Core.Identity;
 
 namespace AES.Identity.API.Controllers
 {
