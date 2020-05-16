@@ -1,4 +1,5 @@
 ﻿using AES.Catalog.API.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,9 +15,9 @@ namespace AES.Catalog.API.Data.Repository
             _context = context;
         }
 
-        public Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<Product>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.Products.AsNoTracking().ToListAsync();
         }
 
         public Task<Product> GetById(Guid id)
