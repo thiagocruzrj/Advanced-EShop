@@ -21,6 +21,16 @@ namespace AES.Catalog.API.Configuration
                     Contact = new OpenApiContact() { Name = "Thiago Cruz", Email = "thagocruz@gmail.com"},
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT")}
                 });
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Insert the JWT token in this way: Bearer {your token}",
+                    Name = "Authorization",
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
             });
         }
 
