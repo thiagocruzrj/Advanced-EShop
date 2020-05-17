@@ -16,9 +16,9 @@ namespace NSE.WebApi.Core.Identity
         }
     }
 
-    public class ClaimsAuthozireAttibute : TypeFilterAttribute
+    public class ClaimsAuthorizeAttribute : TypeFilterAttribute
     {
-        public ClaimsAuthozireAttibute(string claimName, string claimValue) : base(typeof(RequirementClaimFilter))
+        public ClaimsAuthorizeAttribute(string claimName, string claimValue) : base(typeof(RequirementClaimFilter))
         {
             Arguments = new object[] { new Claim(claimName, claimValue) };
         }

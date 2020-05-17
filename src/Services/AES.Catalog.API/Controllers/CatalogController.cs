@@ -26,7 +26,7 @@ namespace AES.Catalog.API.Controllers
             return await _productRepository.GetAll();
         }
 
-        [ClaimsAuthozireAttibute("Catalog", "Read")]
+        [ClaimsAuthorize("Catalog", "Read")]
         [HttpGet("catalog/products/{id}")]
         public async Task<Product> ProductDetail(Guid id)
         {
