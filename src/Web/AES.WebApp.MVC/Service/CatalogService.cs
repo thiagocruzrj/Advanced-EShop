@@ -21,12 +21,14 @@ namespace AES.WebApp.MVC.Service
 
         public async Task<IEnumerable<ProductViewModel>> GetAll()
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync($"/catalog/products/");
+            HandlingErrorsReponse(response);
+            return await DeserializeObjectResponse<IEnumerable<ProductViewModel>>(response);
         }
 
         public async Task<ProductViewModel> GetById(Guid id)
         {
-            var response = await _httpClient.GetAsync("/catalog/products");
+            var response = await _httpClient.GetAsync($"/catalog/products/{id}");
             HandlingErrorsReponse(response);
             return await DeserializeObjectResponse<ProductViewModel>(response);
         }
