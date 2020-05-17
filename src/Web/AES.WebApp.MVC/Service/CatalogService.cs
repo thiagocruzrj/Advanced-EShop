@@ -15,13 +15,13 @@ namespace AES.WebApp.MVC.Service
         public CatalogService(HttpClient httpClient,
                            IOptions<AppSettings> settings)
         {
-            httpClient.BaseAddress = new Uri(settings.Value.AuthUrl);
+            httpClient.BaseAddress = new Uri(settings.Value.CatalogUrl);
             _httpClient = httpClient;
         }
 
         public async Task<IEnumerable<ProductViewModel>> GetAll()
         {
-            var response = await _httpClient.GetAsync($"/catalog/products/");
+            var response = await _httpClient.GetAsync("/catalog/products/");
             HandlingErrorsReponse(response);
             return await DeserializeObjectResponse<IEnumerable<ProductViewModel>>(response);
         }
