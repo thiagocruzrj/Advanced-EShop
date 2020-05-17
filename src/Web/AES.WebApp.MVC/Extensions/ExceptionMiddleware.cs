@@ -1,5 +1,6 @@
 ﻿using AES.WebApp.MVC.Extensions;
 using Microsoft.AspNetCore.Http;
+using Refit;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -22,19 +23,27 @@ namespace AES.Identity.API.Extensions
             }
             catch (CustomHttpResponseException ex)
             {
-                HandleRequestExceptionAsync(httpContext, ex);
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
+            }
+            catch (ValidationApiException ex)
+            {
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
+            }
+            catch (ApiException ex)
+            {
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
         }
 
-        private static void HandleRequestExceptionAsync(HttpContext context, CustomHttpResponseException httpResponseException)
+        private static void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCodes)
         {
-            if (httpResponseException.StatusCode == HttpStatusCode.Unauthorized)
+            if (statusCodes == HttpStatusCode.Unauthorized)
             {
                 context.Response.Redirect($"/login?ReturnUrl={context.Request.Path}");
                 return;
             }
 
-            context.Response.StatusCode = (int)httpResponseException.StatusCode;
+            context.Response.StatusCode = (int)statusCodes;
         }
     }
 }

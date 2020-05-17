@@ -20,7 +20,7 @@ namespace AES.WebApp.MVC.Controllers
             _authService = authService;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("new-account")]
         public IActionResult Register() { return View(); }
 
