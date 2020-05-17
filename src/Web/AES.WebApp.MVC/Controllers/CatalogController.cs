@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace AES.Identity.API.Controllers
+namespace AES.WebApp.MVC.Controllers
 {
     public class CatalogController : MainController
     {

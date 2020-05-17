@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AES.Identity.API.Models
+namespace AES.WebApp.MVC.Models
 {
     public class ProductViewModel
     {
