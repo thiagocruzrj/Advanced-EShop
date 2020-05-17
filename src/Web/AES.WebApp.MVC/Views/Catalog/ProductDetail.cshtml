@@ -1,5 +1,4 @@
-﻿@using AES.WebApp.MVC.Extensions
-@model AES.WebApp.MVC.Models.ProductViewModel
+﻿@model AES.WebApp.MVC.Models.ProductViewModel
 @{
     ViewData["Title"] = Model.Name;
 }
@@ -36,11 +35,11 @@
                     </div>
 
                     <div class="mb-3">
-                        <var class="price h4">@this.CoinFormat(Model.Price)</var>
+                        <var class="price h4">@Model.Price</var>
                     </div>
 
                     <h5>@Model.Description</h5><br />
-                    <p> @this.StockMessage(Model.StockQuantity)</p>
+                    <p> @Model.StockQuantity</p>
 
                     <hr>
 
