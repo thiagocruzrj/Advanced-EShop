@@ -22,4 +22,14 @@ namespace NSE.WebApi.Core.Identity
             Arguments = new object[] { new Claim(claimName, claimValue) };
         }
     }
+
+    public class RequirementClaimFilter
+    {
+        private readonly Claim _claim;
+
+        public RequirementClaimFilter(Claim claim)
+        {
+            _claim = claim;
+        }
+    }
 }
