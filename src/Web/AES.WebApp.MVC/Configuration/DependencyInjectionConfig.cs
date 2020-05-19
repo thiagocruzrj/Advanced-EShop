@@ -23,7 +23,7 @@ namespace AES.WebApp.MVC.Configuration
                     TimeSpan.FromSeconds(10)
                 }, (outcome, timespan, retrycount, context) => {
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"Trying for {retrycount} time!");
+                    Console.WriteLine($"Trying for the {retrycount} time!");
                     Console.ForegroundColor = ConsoleColor.White;
                 });
 
@@ -31,7 +31,7 @@ namespace AES.WebApp.MVC.Configuration
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                     //.AddTransientHttpErrorPolicy(
                     //p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
-                    .AddPolicyHandler();
+                    .AddPolicyHandler(retryWaitPolicy);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUser, AspNetUser>();
