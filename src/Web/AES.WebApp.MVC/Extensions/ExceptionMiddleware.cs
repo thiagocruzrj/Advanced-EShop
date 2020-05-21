@@ -1,5 +1,6 @@
 ﻿using AES.WebApp.MVC.Extensions;
 using Microsoft.AspNetCore.Http;
+using Polly.CircuitBreaker;
 using Refit;
 using System.Net;
 using System.Threading.Tasks;
@@ -33,6 +34,10 @@ namespace AES.Identity.API.Extensions
             {
                 HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }
+            catch (BrokenCircuitException)
+            {
+                BrokenCircuitExceptionAsync(httpContext);
+            }
         }
 
         private static void HandleRequestExceptionAsync(HttpContext context, HttpStatusCode statusCodes)
@@ -44,6 +49,11 @@ namespace AES.Identity.API.Extensions
             }
 
             context.Response.StatusCode = (int)statusCodes;
+        }
+
+        private static void BrokenCircuitExceptionAsync(HttpContext context)
+        {
+            context.Response.Redirect("/system-unavailable");
         }
     }
 }
