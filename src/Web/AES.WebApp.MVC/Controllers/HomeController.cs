@@ -1,12 +1,22 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using AES.WebApp.MVC.Models;
 
 namespace AES.WebApp.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        [Route("system-unavailable")]
+        public IActionResult SystemUnavailable()
+        {
+            var modelError = new ErrorViewModel
+            {
+                Message = "System temporarily unavailable, this can be happen when has an users overload.",
+                Title = "System unavailable",
+                ErrorCode = 500
+            };
+            return View("Error", modelError);
+        }
+
         public IActionResult Index()
         {
             return View();

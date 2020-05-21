@@ -3,6 +3,8 @@ using AES.WebApp.MVC.Service;
 using AES.WebApp.MVC.Service.Handlers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
+using System;
 
 namespace AES.WebApp.MVC.Configuration
 {
@@ -16,7 +18,9 @@ namespace AES.WebApp.MVC.Configuration
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                     //.AddTransientHttpErrorPolicy(
                     //p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
-                    .AddPolicyHandler(PollyExtentions.WaitTry());
+                    .AddPolicyHandler(PollyExtentions.WaitTry())
+                    .AddTransientHttpErrorPolicy(
+                        p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUser, AspNetUser>();
