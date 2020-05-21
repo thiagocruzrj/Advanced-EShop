@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
 using Polly.Extensions.Http;
+using Polly.Retry;
 using System;
+using System.Net.Http;
 
 namespace AES.WebApp.MVC.Configuration
 {
@@ -15,26 +17,36 @@ namespace AES.WebApp.MVC.Configuration
         {
             services.AddHttpClient<IAuthService, AuthService>();
 
-            var retryWaitPolicy = HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[] {
-                    TimeSpan.FromSeconds(1),
-                    TimeSpan.FromSeconds(5),
-                    TimeSpan.FromSeconds(10)
-                }, (outcome, timespan, retrycount, context) => {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"Trying for the {retrycount} time!");
-                    Console.ForegroundColor = ConsoleColor.White;
-                });
-
             services.AddHttpClient<ICatalogService, CatalogService>()
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                     //.AddTransientHttpErrorPolicy(
                     //p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
-                    .AddPolicyHandler(retryWaitPolicy);
+                    .AddPolicyHandler(PollyExtentions.WaitTry());
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IUser, AspNetUser>();
+        }
+    }
+
+    public class PollyExtentions
+    {
+        public static AsyncRetryPolicy<HttpResponseMessage> WaitTry()
+        {
+            var retry = HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(new[]
+                {
+                    TimeSpan.FromSeconds(1),
+                    TimeSpan.FromSeconds(5),
+                    TimeSpan.FromSeconds(10),
+                }, (outcome, timespan, retryCount, context) =>
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine($"Trying for the {retryCount} time!");
+                    Console.ForegroundColor = ConsoleColor.White;
+                });
+
+            return retry;
         }
     }
 }
