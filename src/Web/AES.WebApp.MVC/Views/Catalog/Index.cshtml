@@ -1,4 +1,5 @@
-﻿@model IEnumerable<AES.WebApp.MVC.Models.ProductViewModel>
+﻿@using AES.WebApp.MVC.Extensions
+@model IEnumerable<AES.WebApp.MVC.Models.ProductViewModel>
 
 @{
     ViewData["Title"] = "All products";
@@ -27,12 +28,12 @@
                                     </a>
 
                                     <small class="card-text">
-                                        @product.StockQuantity<br /><br />
+                                        @this.StockMessage(product.StockQuantity) <br /><br />
                                         @product.Description
                                     </small>
                                 </figcaption>
                                 <div class="card-footer price mt-1">
-                                    <h3>@product.Price</h3>
+                                    <h3>@this.CoinFormat(product.Price)</h3>
                                 </div>
                             </div>
                         </div>
