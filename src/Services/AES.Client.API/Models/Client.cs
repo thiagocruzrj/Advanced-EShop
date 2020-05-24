@@ -1,7 +1,7 @@
 ﻿using AES.Core.DomainObjects;
 using System;
 
-namespace AES.Client.API.Models
+namespace AES.Clients.API.Models
 {
     public class Client : Entity, IAggregateRoot
     {
