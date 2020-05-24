@@ -22,5 +22,10 @@ namespace AES.Client.API.Models
             Cpf = new Cpf(cpf);
             Excluded = false;
         }
+
+        public void ChangeEmail(string email)
+        {
+            Email = new Email(email);
+        }
     }
 }
