@@ -1,3 +1,5 @@
+using AES.Clients.API.Configuration;
+using AES.WebApi.Core.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +19,13 @@ namespace AES.Clients.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddApiConfiguration(Configuration);
+
+            services.AddAuthConfiguration(Configuration);
+
+            services.AddSwaggerConfiguration();
+
+            services.RegisterServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
