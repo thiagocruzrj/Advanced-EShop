@@ -1,4 +1,6 @@
-﻿namespace AES.Core.DomainObjects
+﻿using AES.Core.Tools;
+
+namespace AES.Core.DomainObjects
 {
     public class Cpf
     {
@@ -17,6 +19,8 @@
 
         public static bool Validate(string cpf)
         {
+            cpf = cpf.OnlyNumbers(cpf);
+
             if (cpf.Length > 11)
                 return false;
 
