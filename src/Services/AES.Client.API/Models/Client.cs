@@ -27,5 +27,10 @@ namespace AES.Client.API.Models
         {
             Email = new Email(email);
         }
+
+        public void AssignAddress(Address address)
+        {
+            Address = address;
+        }
     }
 }
