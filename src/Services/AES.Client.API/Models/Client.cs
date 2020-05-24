@@ -1,4 +1,5 @@
 ﻿using AES.Core.DomainObjects;
+using System;
 
 namespace AES.Client.API.Models
 {
@@ -13,8 +14,9 @@ namespace AES.Client.API.Models
         // Ef relation
         protected Client() { }
 
-        public Client(string name, string email, string cpf)
+        public Client(Guid id, string name, string email, string cpf)
         {
+            Id = id;
             Name = name;
             Email = new Email(email);
             Cpf = new Cpf(cpf);
