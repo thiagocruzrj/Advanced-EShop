@@ -1,9 +1,9 @@
 ﻿using AES.Identity.API.Data;
+using AES.WebApi.Core.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NSE.WebApi.Core.Identity;
 
 namespace AES.Identity.API.Configuration
 {

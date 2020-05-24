@@ -1,4 +1,4 @@
-﻿namespace NSE.WebApi.Core.Identity
+﻿namespace AES.WebApi.Core.Identity
 {
     public class AppSettings
     {

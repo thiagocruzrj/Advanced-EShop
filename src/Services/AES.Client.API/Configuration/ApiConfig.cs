@@ -1,4 +1,5 @@
 ﻿using AES.Clients.API.Data;
+using AES.WebApi.Core.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

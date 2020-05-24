@@ -1,11 +1,11 @@
 ﻿using AES.Catalog.API.Data;
+using AES.WebApi.Core.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NSE.WebApi.Core.Identity;
 
 namespace AES.Catalog.API.Configuration
 {

@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Security.Claims;
 
-namespace NSE.WebApi.Core.Identity
+namespace AES.WebApi.Core.Identity
 {
     public class CustomAuthorization
     {
@@ -41,7 +41,7 @@ namespace NSE.WebApi.Core.Identity
                 return;
             }
 
-            if(!CustomAuthorization.ValidateUserClaims(context.HttpContext, _claim.Type, _claim.Value))
+            if (!CustomAuthorization.ValidateUserClaims(context.HttpContext, _claim.Type, _claim.Value))
             {
                 context.Result = new StatusCodeResult(403);
             }

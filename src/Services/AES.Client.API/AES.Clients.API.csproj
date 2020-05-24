@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BuildingBlocks\AES.Core\AES.Core.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\NSE.WebApi.Core\AES.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>

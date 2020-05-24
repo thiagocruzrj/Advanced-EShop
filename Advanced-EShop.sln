@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.ShopCart.API", "src\Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F963678D-7621-4F37-988A-292B7BA2AEC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.WebApi.Core", "src\BuildingBlocks\NSE.WebApi.Core\NSE.WebApi.Core.csproj", "{7EF3B0FE-4897-4CB6-B80D-E341E170DDD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.WebApi.Core", "src\BuildingBlocks\NSE.WebApi.Core\AES.WebApi.Core.csproj", "{7EF3B0FE-4897-4CB6-B80D-E341E170DDD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
