@@ -34,7 +34,6 @@ namespace AES.Clients.API.Data
         public async Task<bool> Commit()
         {
             var success = await SaveChangesAsync() > 0;
-
             return success;
         }
     }
