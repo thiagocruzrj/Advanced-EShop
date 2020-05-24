@@ -11,10 +11,11 @@
         public Cpf(string number)
         {
             // ex if cpf is invalid
+            if (!Validate(number)) throw new DomainException("Invalid CPF");
             Number = number;
         }
 
-        public static bool Validar(string cpf)
+        public static bool Validate(string cpf)
         {
             if (cpf.Length > 11)
                 return false;
