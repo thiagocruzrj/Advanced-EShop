@@ -1,10 +1,12 @@
 ﻿using AES.Clients.API.Models;
+using AES.Core.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace AES.Clients.API.Data
 {
-    public sealed class ClientesContext : DbContext
+    public sealed class ClientesContext : DbContext, IUnitOfWork
     {
 
         public ClientesContext(DbContextOptions<ClientesContext> options)
@@ -27,6 +29,13 @@ namespace AES.Clients.API.Data
                 .SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ClientesContext).Assembly);
+        }
+
+        public async Task<bool> Commit()
+        {
+            var success = await SaveChangesAsync() > 0;
+
+            return success;
         }
     }
 }
