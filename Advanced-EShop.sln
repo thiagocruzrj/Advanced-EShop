@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShopCart", "ShopCart", "{6A
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.Catalog.API", "src\Services\AES.Catalog.API\AES.Catalog.API.csproj", "{51CBF4BE-60DC-4A8C-8461-65987614595A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.Client.API", "src\Services\AES.Client.API\AES.Client.API.csproj", "{700F02DD-7D0E-4B8C-8671-84D33AC92B39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.Clients.API", "src\Services\AES.Client.API\AES.Clients.API.csproj", "{700F02DD-7D0E-4B8C-8671-84D33AC92B39}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.Order.API", "src\Services\AES.Order.API\AES.Order.API.csproj", "{33899273-71B8-486A-94E9-62AF0C09FD60}"
 EndProject
@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.ShopCart.API", "src\Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F963678D-7621-4F37-988A-292B7BA2AEC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.WebApi.Core", "src\BuildingBlocks\NSE.WebApi.Core\NSE.WebApi.Core.csproj", "{7EF3B0FE-4897-4CB6-B80D-E341E170DDD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.WebApi.Core", "src\BuildingBlocks\NSE.WebApi.Core\NSE.WebApi.Core.csproj", "{7EF3B0FE-4897-4CB6-B80D-E341E170DDD5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

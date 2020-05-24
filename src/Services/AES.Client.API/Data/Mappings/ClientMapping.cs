@@ -32,7 +32,7 @@ namespace AES.Clients.API.Data.Mappings
                     .HasColumnType($"varchar({Email.AddressMaxLength})");
             });
 
-            // 1 : 1 => Student : Address
+            // 1 : 1 => Client : Address
             builder.HasOne(c => c.Address)
                 .WithOne(c => c.Client);
 
