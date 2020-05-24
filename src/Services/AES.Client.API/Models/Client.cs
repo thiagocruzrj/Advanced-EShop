@@ -5,8 +5,8 @@ namespace AES.Client.API.Models
     public class Client : Entity, IAggregateRoot
     {
         public string Name { get; private set; }
-        public string Email { get; private set; }
-        public string Cpf { get; private set; }
+        public Email Email { get; private set; }
+        public Cpf Cpf { get; private set; }
         public bool Excluded { get; private set; }
         public Address Address { get; private set; }
 
@@ -16,8 +16,8 @@ namespace AES.Client.API.Models
         public Client(string name, string email, string cpf)
         {
             Name = name;
-            Email = email;
-            Cpf = cpf;
+            Email = new Email(email);
+            Cpf = new Cpf(cpf);
             Excluded = false;
         }
     }
