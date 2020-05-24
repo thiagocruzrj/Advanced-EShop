@@ -5,11 +5,12 @@
         public const int CpfMaxLenght = 11;
         public string Number { get; private set; }
 
-        // CTOR ofr entity
+        // CTOR for entity
         public Cpf() { }
 
         public Cpf(string number)
         {
+            // ex if cpf is invalid
             Number = number;
         }
 
