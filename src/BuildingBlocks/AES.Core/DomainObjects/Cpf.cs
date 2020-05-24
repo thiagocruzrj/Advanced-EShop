@@ -71,4 +71,19 @@ namespace AES.Core.DomainObjects
             return true;
         }
     }
+
+    public class Email
+    {
+        public const int AddressMaxLength = 254;
+        public const int AddressMinLength = 5;
+        public string Address { get; private set; }
+
+        // CTOR of EF
+        protected Email() { }
+
+        public Email(string address)
+        {
+            Address = address;
+        }
+    }
 }
