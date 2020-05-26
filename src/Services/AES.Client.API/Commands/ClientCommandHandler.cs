@@ -15,9 +15,11 @@ namespace AES.Clients.API.Commands
 
             var client = new Client(message.Id, message.Name, message.Email, message.Cpf);
 
-            // Business validations
-
-            // Persist on db
+            if (true)
+            {
+                AddError("This CPF already in use");
+                return ValidationResult;
+            }
 
             return message.ValidationResult;
         }
