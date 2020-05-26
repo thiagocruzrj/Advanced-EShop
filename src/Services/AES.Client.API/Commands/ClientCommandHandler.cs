@@ -7,11 +7,11 @@ namespace AES.Clients.API.Commands
 {
     public class ClientCommandHandler : IRequestHandler<RegisterClientCommand, ValidationResult>
     {
-        public Task<ValidationResult> Handle(RegisterClientCommand request, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(RegisterClientCommand message, CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
-        }
+            if (!message.IsValid()) return message.ValidationResult;
 
-        public void Handler(RegisterClientCommand message) { }
+            return message.ValidationResult;
+        }
     }
 }
