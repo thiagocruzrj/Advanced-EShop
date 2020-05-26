@@ -10,5 +10,10 @@ namespace AES.Core.Messages
         {
             ValidationResult = validationResult;
         }
+
+        protected void AddError(string message)
+        {
+            ValidationResult.Errors.Add(new ValidationFailure(string.Empty, message));
+        }
     }
 }
