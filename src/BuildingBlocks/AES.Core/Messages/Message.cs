@@ -4,8 +4,8 @@ namespace AES.Core.Messages
 {
     public abstract class Message
     {
-        public string MessageType { get; private set; }
-        public Guid AggregateId { get; private set; }
+        public string MessageType { get; set; }
+        public Guid AggregateId { get; set; }
 
         public Message()
         {
