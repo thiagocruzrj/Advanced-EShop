@@ -6,5 +6,10 @@ namespace AES.Core.Messages
     {
         public string MessageType { get; private set; }
         public Guid AggregateId { get; private set; }
+
+        public Message()
+        {
+            MessageType = GetType().Name;
+        }
     }
 }
