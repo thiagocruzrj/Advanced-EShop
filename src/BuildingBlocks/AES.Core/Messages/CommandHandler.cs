@@ -6,9 +6,9 @@ namespace AES.Core.Messages
     {
         protected ValidationResult ValidationResult;
 
-        protected CommandHandler(ValidationResult validationResult)
+        protected CommandHandler()
         {
-            ValidationResult = validationResult;
+            ValidationResult = new ValidationResult();
         }
 
         protected void AddError(string message)

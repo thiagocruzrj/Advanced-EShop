@@ -1,4 +1,5 @@
 ﻿using AES.Clients.API.Models;
+using AES.Core.Messages;
 using FluentValidation.Results;
 using MediatR;
 using System.Threading;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AES.Clients.API.Commands
 {
-    public class ClientCommandHandler : IRequestHandler<RegisterClientCommand, ValidationResult>
+    public class ClientCommandHandler : CommandHandler, IRequestHandler<RegisterClientCommand, ValidationResult>
     {
         public async Task<ValidationResult> Handle(RegisterClientCommand message, CancellationToken cancellationToken)
         {
