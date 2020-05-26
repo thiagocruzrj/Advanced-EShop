@@ -1,11 +1,17 @@
-﻿namespace AES.Clients.API.Commands
+﻿using FluentValidation.Results;
+using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace AES.Clients.API.Commands
 {
-    public class ClientCommandHandler
+    public class ClientCommandHandler : IRequestHandler<RegisterClientCommand, ValidationResult>
     {
-        public void Handler(RegisterClientCommand message)
+        public Task<ValidationResult> Handle(RegisterClientCommand request, CancellationToken cancellationToken)
         {
-            // Validation command
-            // persist in the base for example
+            throw new System.NotImplementedException();
         }
+
+        public void Handler(RegisterClientCommand message) { }
     }
 }
