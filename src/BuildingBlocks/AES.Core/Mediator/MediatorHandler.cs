@@ -1,7 +1,6 @@
 ﻿using AES.Core.Messages;
 using FluentValidation.Results;
 using MediatR;
-using System;
 using System.Threading.Tasks;
 
 namespace AES.Core.Mediator
@@ -17,7 +16,7 @@ namespace AES.Core.Mediator
 
         public async Task PublishEvent<T>(T evento) where T : Event
         {
-            throw new NotImplementedException();
+            await _mediator.Publish(evento);
         }
 
         public async Task<ValidationResult> SendCommand<T>(T command) where T : Command
