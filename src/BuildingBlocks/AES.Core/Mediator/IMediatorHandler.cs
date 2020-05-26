@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using AES.Core.Messages;
+using FluentValidation.Results;
+using System.Threading.Tasks;
 
 namespace AES.Core.Mediator
 {
-    interface IMediatorHandler
+    public interface IMediatorHandler
     {
+        Task PublishEvent<T>(T evento) where T : Event;
+        Task<ValidationResult> SendCommand<T>(T command) where T : Command;
     }
 }
