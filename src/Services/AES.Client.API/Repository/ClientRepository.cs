@@ -10,7 +10,7 @@ namespace AES.Clients.API.Repository
     public class ClientRepository : IClientRepository
     {
         private readonly ClientesContext _context;
-        public IUnitOfWork IUnitOfWork => _context; 
+        public IUnitOfWork UnitOfWork => _context;
 
         public ClientRepository(ClientesContext context)
         {
