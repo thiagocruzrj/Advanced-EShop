@@ -33,7 +33,7 @@ namespace AES.Clients.API.Commands
             _clientRepository.Add(client);
 
             if (!await _clientRepository.UnitOfWork.Commit())
-                AddError("An error occurred");
+                AddError("An error occurred when tried to persist data");
 
             return message.ValidationResult;
         }
