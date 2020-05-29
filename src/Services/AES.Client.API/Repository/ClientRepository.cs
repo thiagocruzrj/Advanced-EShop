@@ -1,6 +1,8 @@
-﻿namespace AES.Clients.API.Repository
+﻿using AES.Clients.API.Models;
+
+namespace AES.Clients.API.Repository
 {
-    public class ClientRepository
+    public class ClientRepository : IClientRepository
     {
     }
 }
