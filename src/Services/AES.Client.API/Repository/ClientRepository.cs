@@ -24,12 +24,12 @@ namespace AES.Clients.API.Repository
 
         public void Add(Client client)
         {
-            throw new System.NotImplementedException();
+            _context.Clients.Add(client);
         }
 
-        public Task<Client> GetByCpf(string cpf)
+        public async Task<Client> GetByCpf(string cpf)
         {
-            throw new System.NotImplementedException();
+            return await _context.Clients.FirstOrDefaultAsync(c => c.Cpf.Number == cpf);
         }
 
         public void Dispose()
