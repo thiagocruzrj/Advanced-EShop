@@ -30,6 +30,11 @@ namespace AES.Clients.API.Commands
                 return ValidationResult;
             }
 
+            _clientRepository.Add(client);
+
+            if (!await _clientRepository.UnitOfWork.Commit())
+                AddError("An error occurred");
+
             return message.ValidationResult;
         }
     }
