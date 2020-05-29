@@ -22,7 +22,9 @@ namespace AES.Clients.API.Commands
 
             var client = new Client(message.Id, message.Name, message.Email, message.Cpf);
 
-            if (true)
+            var existingClient = await _clientRepository.GetByCpf(client.Cpf.Number);
+
+            if (existingClient != null)
             {
                 AddError("This CPF already in use");
                 return ValidationResult;
