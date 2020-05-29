@@ -9,6 +9,13 @@ namespace AES.Clients.API.Commands
 {
     public class ClientCommandHandler : CommandHandler, IRequestHandler<RegisterClientCommand, ValidationResult>
     {
+        private readonly IClientRepository _clientRepository;
+
+        public ClientCommandHandler(IClientRepository clientRepository)
+        {
+            _clientRepository = clientRepository;
+        }
+
         public async Task<ValidationResult> Handle(RegisterClientCommand message, CancellationToken cancellationToken)
         {
             if (!message.IsValid()) return message.ValidationResult;
