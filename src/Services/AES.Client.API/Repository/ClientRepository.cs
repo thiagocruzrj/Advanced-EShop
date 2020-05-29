@@ -34,7 +34,7 @@ namespace AES.Clients.API.Repository
 
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            _context.Dispose();
         }
     }
 }
