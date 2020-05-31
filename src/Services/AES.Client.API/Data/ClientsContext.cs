@@ -55,6 +55,14 @@ namespace AES.Clients.API.Data
 
             domainEntities.ToList()
                 .ForEach(entity => entity.Entity.CleanEvents());
+
+            var tasks = domainEvents
+                .Select(async (domainEvent) =>
+                {
+                    await mediator.PublishEvent(domainEvent);
+                });
+
+            await Task.WhenAll(tasks);
         }
     }
 }
