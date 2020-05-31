@@ -32,6 +32,10 @@ namespace AES.Clients.API.Commands
             RuleFor(c => c.Cpf)
                 .Must(HasValidCpf)
                 .WithMessage("Invalid CPF");
+
+            RuleFor(c => c.Email)
+                .Must(HasValidEmail)
+                .WithMessage("Invalid Email");
         }
 
         protected static bool HasValidCpf(string cpf)
