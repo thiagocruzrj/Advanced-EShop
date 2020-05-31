@@ -1,5 +1,6 @@
 ﻿using AES.Clients.API.Models;
 using AES.Core.Data;
+using AES.Core.Mediator;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,12 +9,13 @@ namespace AES.Clients.API.Data
 {
     public sealed class ClientesContext : DbContext, IUnitOfWork
     {
-
-        public ClientesContext(DbContextOptions<ClientesContext> options)
+        private readonly IMediatorHandler _mediatorHandler;
+        public ClientesContext(DbContextOptions<ClientesContext> options, IMediatorHandler mediatorHandler)
             : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
+            _mediatorHandler = mediatorHandler;
         }
 
         public DbSet<Client> Clients { get; set; }
