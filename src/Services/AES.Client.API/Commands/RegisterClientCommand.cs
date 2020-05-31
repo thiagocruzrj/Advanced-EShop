@@ -1,4 +1,5 @@
 ﻿using AES.Core.Messages;
+using FluentValidation;
 using System;
 
 namespace AES.Clients.API.Commands
@@ -18,5 +19,10 @@ namespace AES.Clients.API.Commands
             Email = email;
             Cpf = cpf;
         }
+    }
+
+    public class RegisterClientValidation : AbstractValidator<RegisterClientCommand>
+    {
+
     }
 }
