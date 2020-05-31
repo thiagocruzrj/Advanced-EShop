@@ -1,5 +1,6 @@
 ﻿using AES.Clients.API.Models;
 using AES.Core.Data;
+using AES.Core.DomainObjects;
 using AES.Core.Mediator;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -44,7 +45,9 @@ namespace AES.Clients.API.Data
     {
         public static async Task PublishEvents<T>(this IMediatorHandler mediator, T ctx) where T : DbContext
         {
-
+            var domainEntities = ctx.ChangeTracker
+                .Entries<Entity>()
+                .Where(x => x.Entity.Notifications != null && x.Entity.Notifications.Any());
         }
     }
 }
