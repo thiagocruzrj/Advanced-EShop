@@ -48,6 +48,10 @@ namespace AES.Clients.API.Data
             var domainEntities = ctx.ChangeTracker
                 .Entries<Entity>()
                 .Where(x => x.Entity.Notifications != null && x.Entity.Notifications.Any());
+
+            var domainEvents = domainEntities
+                .SelectMany(x => x.Entity.Notifications)
+                .ToList();
         }
     }
 }
