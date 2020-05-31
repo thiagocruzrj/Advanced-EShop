@@ -23,6 +23,11 @@ namespace AES.Clients.API.Commands
 
     public class RegisterClientValidation : AbstractValidator<RegisterClientCommand>
     {
-
+        public RegisterClientValidation()
+        {
+            RuleFor(c => c.Id)
+                .NotEqual(Guid.Empty)
+                .WithMessage("Client Id invalid");
+        }
     }
 }
