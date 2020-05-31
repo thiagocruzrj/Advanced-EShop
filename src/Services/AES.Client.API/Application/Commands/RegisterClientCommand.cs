@@ -2,7 +2,7 @@
 using FluentValidation;
 using System;
 
-namespace AES.Clients.API.Commands
+namespace AES.Clients.API.Application.Commands
 {
     public class RegisterClientCommand : Command
     {
