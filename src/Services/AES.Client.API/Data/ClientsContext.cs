@@ -39,4 +39,12 @@ namespace AES.Clients.API.Data
             return success;
         }
     }
+
+    public static class MediatorExtension
+    {
+        public static async Task PublishEvents<T>(this IMediatorHandler mediator, T ctx) where T : DbContext
+        {
+
+        }
+    }
 }
