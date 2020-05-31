@@ -52,6 +52,9 @@ namespace AES.Clients.API.Data
             var domainEvents = domainEntities
                 .SelectMany(x => x.Entity.Notifications)
                 .ToList();
+
+            domainEntities.ToList()
+                .ForEach(entity => entity.Entity.CleanEvents());
         }
     }
 }
