@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AES.Core.Mediator;
+using System;
+using System.Collections.Generic;
 
 namespace AES.Core.DomainObjects
 {
@@ -9,6 +11,15 @@ namespace AES.Core.DomainObjects
         protected Entity()
         {
             Id = Guid.NewGuid();
+        }
+
+        private List<Event> _notifications;
+        public IReadOnlyCollection<Event> Notifications => _notifications?.AsReadOnly();
+
+        public void AddEvent(Event evento)
+        {
+            _notifications = _notifications ?? new List<Event>();
+            _notifications.Add(evento);
         }
 
         #region Comaparations
