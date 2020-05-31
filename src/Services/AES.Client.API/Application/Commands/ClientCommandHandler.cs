@@ -1,4 +1,5 @@
-﻿using AES.Clients.API.Models;
+﻿using AES.Clients.API.Application.Events;
+using AES.Clients.API.Models;
 using AES.Core.Messages;
 using FluentValidation.Results;
 using MediatR;
@@ -31,6 +32,8 @@ namespace AES.Clients.API.Application.Commands
             }
 
             _clientRepository.Add(client);
+
+            client.AddEvent(new ClientRegisteredEvent(message.Id, message.Name, message.Email, message.Cpf));
 
             return await PersistData(_clientRepository.UnitOfWork);
         }
