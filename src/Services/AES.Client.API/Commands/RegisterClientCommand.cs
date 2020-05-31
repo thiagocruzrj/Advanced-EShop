@@ -34,5 +34,10 @@ namespace AES.Clients.API.Commands
         {
             return Core.DomainObjects.Cpf.Validate(cpf);
         }
+
+        protected static bool HasInvalidEmail(string email)
+        {
+            return Core.DomainObjects.Email.Validate(email);
+        }
     }
 }
