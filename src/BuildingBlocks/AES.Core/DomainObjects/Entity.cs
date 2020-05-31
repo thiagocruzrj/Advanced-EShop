@@ -27,6 +27,11 @@ namespace AES.Core.DomainObjects
             _notifications?.Remove(eventItem);
         }
 
+        public void CleanEvents()
+        {
+            _notifications?.Clear();
+        }
+
         #region Comaparations
         public override bool Equals(object obj)
         {
