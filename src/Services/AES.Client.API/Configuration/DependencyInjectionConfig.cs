@@ -17,7 +17,7 @@ namespace AES.Clients.API.Configuration
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<RegisterClientCommand, ValidationResult>, ClientCommandHandler>();
 
-            services.AddScoped<INotificationHandler<ClientRegisteredEvent>, ClientEventHandler>()
+            services.AddScoped<INotificationHandler<ClientRegisteredEvent>, ClientEventHandler>();
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ClientesContext>();

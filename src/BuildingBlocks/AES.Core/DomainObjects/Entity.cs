@@ -6,6 +6,12 @@ namespace AES.Core.DomainObjects
     {
         public Guid Id { get; set; }
 
+        protected Entity()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        #region Comaparations
         public override bool Equals(object obj)
         {
             var compareTo = obj as Entity;
@@ -41,5 +47,6 @@ namespace AES.Core.DomainObjects
         {
             return $"{GetType().Name} [Id={Id}]";
         }
+        #endregion
     }
 }
