@@ -19,6 +19,12 @@ namespace AES.Clients.API.Commands
             Email = email;
             Cpf = cpf;
         }
+
+        public override bool IsValid()
+        {
+            ValidationResult = new RegisterClientValidation().Validate(this);
+            return ValidationResult.IsValid;
+        }
     }
 
     public class RegisterClientValidation : AbstractValidator<RegisterClientCommand>
@@ -29,6 +35,10 @@ namespace AES.Clients.API.Commands
                 .NotEqual(Guid.Empty)
                 .WithMessage("Client Id invalid");
 
+            RuleFor(c => c.Name)
+                .NotEmpty()
+                .WithMessage("The client name was not filled");
+
             RuleFor(c => c.Cpf)
                 .Must(HasValidCpf)
                 .WithMessage("Invalid CPF");
@@ -36,10 +46,6 @@ namespace AES.Clients.API.Commands
             RuleFor(c => c.Email)
                 .Must(HasValidEmail)
                 .WithMessage("Invalid Email");
-
-            RuleFor(c => c.Name)
-                .NotEmpty()
-                .WithMessage("The client name was not filled");
         }
 
         protected static bool HasValidCpf(string cpf)
