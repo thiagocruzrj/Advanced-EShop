@@ -37,6 +37,7 @@ namespace AES.Clients.API.Data
         public async Task<bool> Commit()
         {
             var success = await SaveChangesAsync() > 0;
+            if (success) await _mediatorHandler.PublishEvents(this);
             return success;
         }
     }
