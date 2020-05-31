@@ -29,5 +29,10 @@ namespace AES.Clients.API.Commands
                 .NotEqual(Guid.Empty)
                 .WithMessage("Client Id invalid");
         }
+
+        protected static bool HasInvalidCpf(string cpf)
+        {
+            return Core.DomainObjects.Cpf.Validate(cpf);
+        }
     }
 }
