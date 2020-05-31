@@ -28,14 +28,18 @@ namespace AES.Clients.API.Commands
             RuleFor(c => c.Id)
                 .NotEqual(Guid.Empty)
                 .WithMessage("Client Id invalid");
+
+            RuleFor(c => c.Cpf)
+                .Must(HasValidCpf)
+                .WithMessage("Invalid CPF");
         }
 
-        protected static bool HasInvalidCpf(string cpf)
+        protected static bool HasValidCpf(string cpf)
         {
             return Core.DomainObjects.Cpf.Validate(cpf);
         }
 
-        protected static bool HasInvalidEmail(string email)
+        protected static bool HasValidEmail(string email)
         {
             return Core.DomainObjects.Email.Validate(email);
         }
