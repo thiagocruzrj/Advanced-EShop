@@ -1,4 +1,5 @@
 ﻿using AES.Clients.API.Application.Commands;
+using AES.Clients.API.Application.Events;
 using AES.Clients.API.Data;
 using AES.Clients.API.Models;
 using AES.Clients.API.Repository;
@@ -15,6 +16,8 @@ namespace AES.Clients.API.Configuration
         {
             services.AddScoped<IMediatorHandler, MediatorHandler>();
             services.AddScoped<IRequestHandler<RegisterClientCommand, ValidationResult>, ClientCommandHandler>();
+
+            services.AddScoped<INotificationHandler<ClientRegisteredEvent>, ClientEventHandler>()
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ClientesContext>();
