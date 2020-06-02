@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AES.Identity.API.Controllers
+namespace AES.Core.Controllers
 {
     [ApiController]
     public abstract class MainController : Controller

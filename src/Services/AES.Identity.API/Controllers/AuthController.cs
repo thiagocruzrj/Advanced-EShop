@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections.Generic;
 using AES.WebApi.Core.Identity;
+using AES.Core.Controllers;
 
 namespace AES.Identity.API.Controllers
 {
