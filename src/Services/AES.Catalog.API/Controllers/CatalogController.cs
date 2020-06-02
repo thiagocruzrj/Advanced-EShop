@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace AES.Catalog.API.Controllers
 {
-    [ApiController]
     [Authorize]
     public class CatalogController : MainController
     {
