@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AES.Core.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AES.Clients.API.Controllers
 {
-    public class ClientController : Controller
+    public class ClientController : MainController
     {
         public IActionResult Index()
         {

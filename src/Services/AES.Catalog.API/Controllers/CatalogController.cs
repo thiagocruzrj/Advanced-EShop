@@ -1,4 +1,5 @@
 ﻿using AES.Catalog.API.Models;
+using AES.Core.Controllers;
 using AES.WebApi.Core.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,7 +11,7 @@ namespace AES.Catalog.API.Controllers
 {
     [ApiController]
     [Authorize]
-    public class CatalogController : Controller
+    public class CatalogController : MainController
     {
         private readonly IProductRepository _productRepository;
 
