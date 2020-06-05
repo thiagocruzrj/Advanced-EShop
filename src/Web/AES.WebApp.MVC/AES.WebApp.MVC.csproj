@@ -16,4 +16,8 @@
     <PackageReference Include="Refit" Version="5.1.67" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\AES.Core\AES.Core.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -35,4 +35,14 @@ namespace AES.WebApp.MVC.Extensions
             return "Invalid CPF format";
         }
     }
+
+    public class CpfValidationAttributeAdapterProvider : IValidationAttributeAdapterProvider
+    {
+        private readonly IValidationAttributeAdapterProvider _baseProvider = new ValidationAttributeAdapterProvider();
+
+        public IAttributeAdapter GetAttributeAdapter(ValidationAttribute attribute, IStringLocalizer stringLocalizer)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
