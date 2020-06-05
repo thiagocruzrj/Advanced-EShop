@@ -22,6 +22,8 @@ namespace AES.Clients.API.Controllers
             var result = await _mediatorHandler.SendCommand(
                 new RegisterClientCommand(Guid.NewGuid(), "Thiago", "thiago@gmail.com", "47842624070"));
 
+            //if (!result.IsValid) AddProcessingError();
+
             return CustomResponse(result);
         }
     }

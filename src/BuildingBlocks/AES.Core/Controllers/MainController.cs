@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,16 @@ namespace AES.Core.Controllers
         {
             var errors = modelState.Values.SelectMany(e => e.Errors);
             foreach (var error in errors)
+            {
+                AddProcessingError(error.ErrorMessage);
+            }
+
+            return CustomResponse();
+        }
+
+        protected ActionResult CustomResponse(ValidationResult validationResult)
+        {
+            foreach (var error in validationResult.Errors)
             {
                 AddProcessingError(error.ErrorMessage);
             }
