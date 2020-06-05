@@ -11,6 +11,11 @@ namespace AES.WebApp.MVC.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "The field {0} is required")]
+        [DisplayName("CPF")]
+        [Cpf]
+        public string Cpf { get; set; }
+
+        [Required(ErrorMessage = "The field {0} is required")]
         [EmailAddress(ErrorMessage = "The field {0} has an invalid format")]
         public string Email { get; set; }
 
