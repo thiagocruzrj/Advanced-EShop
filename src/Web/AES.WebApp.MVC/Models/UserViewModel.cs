@@ -12,11 +12,11 @@ namespace AES.WebApp.MVC.Models
 
         [Required(ErrorMessage = "The field {0} is required")]
         [DisplayName("CPF")]
-        [Cpf]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "The field {0} is required")]
         [EmailAddress(ErrorMessage = "The field {0} has an invalid format")]
+        [DisplayName("Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "The field {0} is required")]
