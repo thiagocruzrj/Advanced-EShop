@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.Localization;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace AES.WebApp.MVC.Extensions
@@ -20,7 +21,13 @@ namespace AES.WebApp.MVC.Extensions
 
         public override void AddValidation(ClientModelValidationContext context)
         {
-            throw new System.NotImplementedException();
+            if(context == null)
+            {
+                throw new ArgumentException(nameof(context));
+            }
+
+            MergeAttribute(context.Attributes, "data-val", "true");
+            MergeAttribute(context.Attributes, "data-val-cpf", GetErrorMessage(context));
         }
 
         public override string GetErrorMessage(ModelValidationContextBase validationContext)
