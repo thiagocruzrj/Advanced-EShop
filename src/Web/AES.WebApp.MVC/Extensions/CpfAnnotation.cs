@@ -42,7 +42,12 @@ namespace AES.WebApp.MVC.Extensions
 
         public IAttributeAdapter GetAttributeAdapter(ValidationAttribute attribute, IStringLocalizer stringLocalizer)
         {
-            throw new NotImplementedException();
+            if (attribute is CpfAttribute cpfAttribute)
+            {
+                return new CpfAttributeAdapter(cpfAttribute, stringLocalizer);
+            }
+
+            return _baseProvider.GetAttributeAdapter(attribute, stringLocalizer);
         }
     }
 }
