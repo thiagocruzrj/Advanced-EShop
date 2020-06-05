@@ -32,7 +32,7 @@ namespace AES.WebApp.MVC.Extensions
 
         public override string GetErrorMessage(ModelValidationContextBase validationContext)
         {
-            throw new System.NotImplementedException();
+            return "Invalid CPF format";
         }
     }
 }
