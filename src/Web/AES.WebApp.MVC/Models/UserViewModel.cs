@@ -1,11 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace AES.WebApp.MVC.Models
 {
     public class UserRegister
     {
+        [Required(ErrorMessage = "The field {0} is required")]
+        [DisplayName("Full Name")]
+        public string Name { get; set; }
+
         [Required(ErrorMessage = "The field {0} is required")]
         [EmailAddress(ErrorMessage = "The field {0} has an invalid format")]
         public string Email { get; set; }
