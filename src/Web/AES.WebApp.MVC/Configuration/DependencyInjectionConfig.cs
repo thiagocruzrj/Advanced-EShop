@@ -15,6 +15,8 @@ namespace AES.WebApp.MVC.Configuration
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
 
+            services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
+
             services.AddHttpClient<IAuthService, AuthService>();
 
             services.AddHttpClient<ICatalogService, CatalogService>()
