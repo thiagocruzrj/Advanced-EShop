@@ -1,6 +1,6 @@
 ﻿using AES.Catalog.API.Models;
 using AES.Core.Data;
-using AES.Core.Mediator;
+using AES.Core.Messages;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;

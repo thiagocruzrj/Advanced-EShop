@@ -1,4 +1,4 @@
-﻿using AES.Core.Mediator;
+﻿using AES.Core.Messages;
 using System;
 
 namespace AES.Clients.API.Application.Events
