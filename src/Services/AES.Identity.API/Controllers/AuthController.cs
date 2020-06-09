@@ -51,6 +51,7 @@ namespace AES.Identity.API.Controllers
             var result = await _userManager.CreateAsync(user, userRegister.Password);
             if (result.Succeeded)
             {
+                var success = await ClientRegister(userRegister);
                 return CustomResponse(await GenerateJwt(userRegister.Email));
             }
 
