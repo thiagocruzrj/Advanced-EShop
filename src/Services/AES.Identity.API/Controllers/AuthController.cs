@@ -12,6 +12,7 @@ using System.Linq;
 using System.Collections.Generic;
 using AES.WebApi.Core.Identity;
 using AES.Core.Controllers;
+using AES.Core.Messages.Integration;
 
 namespace AES.Identity.API.Controllers
 {
@@ -55,6 +56,11 @@ namespace AES.Identity.API.Controllers
             }
 
             return CustomResponse();
+        }
+
+        private async Task<ResponseMessage> ClientRegister(UserRegister userRegister)
+        {
+            var user = await _userManager.FindByEmailAsync(userRegister.Email);
         }
 
         [HttpPost("authenticate")]
