@@ -1,8 +1,8 @@
-﻿using AES.Core.Messages.Integration;
+﻿using AES.Clients.API.Application.Commands;
+using AES.Core.Messages.Integration;
 using EasyNetQ;
 using FluentValidation.Results;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +29,7 @@ namespace AES.Clients.API.Services
 
         private async Task<ValidationResult> RegisterClient(UserRegisteredIntegrationEvent message)
         {
-
+            var clientCommand = new RegisterClientCommand(message.Id, message.Name, message.Email, message.Cpf);
         }
     }
 }
