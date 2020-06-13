@@ -1,5 +1,6 @@
 ﻿using AES.Core.Messages.Integration;
 using EasyNetQ;
+using FluentValidation.Results;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Threading;
@@ -21,9 +22,14 @@ namespace AES.Clients.API.Services
             _bus = RabbitHutch.CreateBus("hostlocalhost:5672");
 
             _bus.RespondAsync<UserRegisteredIntegrationEvent, ResponseMessage>(async request =>
-                new ResponseMessage());
+                new ResponseMessage(await RegisterClient(request)));
 
             return Task.CompletedTask;
+        }
+
+        private async Task<ValidationResult> RegisterClient(UserRegisteredIntegrationEvent message)
+        {
+
         }
     }
 }
