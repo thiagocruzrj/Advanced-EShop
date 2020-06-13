@@ -12,9 +12,9 @@ namespace AES.Clients.API.Services
     {
         private IBus _bus;
 
-        public ClientRegisterIntegrationHandler(IBus bus)
+        public ClientRegisterIntegrationHandler()
         {
-            _bus = bus;
+
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
