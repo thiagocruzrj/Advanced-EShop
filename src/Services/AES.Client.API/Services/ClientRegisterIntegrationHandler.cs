@@ -3,6 +3,7 @@ using AES.Core.Messages.Integration;
 using EasyNetQ;
 using FluentValidation.Results;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,10 +12,11 @@ namespace AES.Clients.API.Services
     public class ClientRegisterIntegrationHandler : BackgroundService
     {
         private IBus _bus;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ClientRegisterIntegrationHandler()
+        public ClientRegisterIntegrationHandler(IServiceProvider serviceProvider)
         {
-
+            _serviceProvider = serviceProvider;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
