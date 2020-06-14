@@ -29,5 +29,13 @@ namespace AES.MessageBus
         Task<TResponse> RequestAsync<TRequest, TResponse>(TRequest request)
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage;
+
+        IDisposable Respond<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
+            where TRequest : IntegrationEvent
+            where TResponse : ResponseMessage;
+
+        Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
+            where TRequest : IntegrationEvent
+            where TResponse : ResponseMessage;
     }
 }
