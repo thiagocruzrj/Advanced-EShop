@@ -55,11 +55,12 @@ namespace AES.MessageBus
             return _bus.Respond(respond);
         }
 
-        public Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
+        public IDisposable RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage
         {
-            throw new NotImplementedException();
+            TryConnect();
+            return _bus.RespondAsync(respond);
         }
 
         public void Subscribe<T>(string subscriptionId, Action<T> onMessage) where T : class
@@ -106,7 +107,7 @@ namespace AES.MessageBus
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage;
 
-        Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
+        IDisposable RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage;
 
