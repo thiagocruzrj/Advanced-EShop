@@ -9,6 +9,13 @@ namespace AES.MessageBus
     {
         private IBus _bus;
 
+        private readonly string _connectionString;
+
+        public MessageBus(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public bool IsConnected => throw new NotImplementedException();
 
         public void Publish<T>(T message) where T : IntegrationEvent
@@ -57,6 +64,11 @@ namespace AES.MessageBus
         public void SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage) where T : class
         {
             throw new NotImplementedException();
+        }
+
+        private void TryConnect()
+        {
+
         }
 
         public void Dispose()
