@@ -1,4 +1,5 @@
-﻿using EasyNetQ;
+﻿using AES.Core.Messages.Integration;
+using EasyNetQ;
 using System;
 
 namespace AES.MessageBus
@@ -15,6 +16,6 @@ namespace AES.MessageBus
 
     public interface IMessageBus : IDisposable
     {
-
+        void Publish<T>(T message) where T : IntegrationEvent;
     }
 }
