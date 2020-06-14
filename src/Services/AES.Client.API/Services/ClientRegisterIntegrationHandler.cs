@@ -13,23 +13,26 @@ namespace AES.Clients.API.Services
 {
     public class ClientRegisterIntegrationHandler : BackgroundService
     {
-        private IMessageBus _bus;
+        private readonly IMessageBus _bus;
         private readonly IServiceProvider _serviceProvider;
 
-        public ClientRegisterIntegrationHandler(IServiceProvider serviceProvider)
+        public ClientRegisterIntegrationHandler(
+            IServiceProvider serviceProvider,
+            IMessageBus bus)
         {
             _serviceProvider = serviceProvider;
+            _bus = bus;
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             _bus.RespondAsync<UserRegisteredIntegrationEvent, ResponseMessage>(async request =>
-                new ResponseMessage(await RegisterClient(request)));
+                await RegisterClient(request));
 
             return Task.CompletedTask;
         }
 
-        private async Task<ValidationResult> RegisterClient(UserRegisteredIntegrationEvent message)
+        private async Task<ResponseMessage> RegisterClient(UserRegisteredIntegrationEvent message)
         {
             var clientCommand = new RegisterClientCommand(message.Id, message.Name, message.Email, message.Cpf);
             ValidationResult success;
@@ -40,7 +43,7 @@ namespace AES.Clients.API.Services
                 success = await mediator.SendCommand(clientCommand);
             }
 
-            return success;
+            return new ResponseMessage(success);
         }
     }
 }
