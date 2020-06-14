@@ -39,11 +39,12 @@ namespace AES.MessageBus
             return _bus.Request<TRequest, TResponse>(request);
         }
 
-        public Task<TResponse> RequestAsync<TRequest, TResponse>(TRequest request)
+        public async Task<TResponse> RequestAsync<TRequest, TResponse>(TRequest request)
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage
         {
-            throw new NotImplementedException();
+            TryConnect();
+            return await _bus.RequestAsync<TRequest, TResponse>(request);
         }
 
         public IDisposable Respond<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
