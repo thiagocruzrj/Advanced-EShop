@@ -84,7 +84,7 @@ namespace AES.MessageBus
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _bus.Dispose();
         }
     }
 
