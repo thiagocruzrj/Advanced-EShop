@@ -37,5 +37,7 @@ namespace AES.MessageBus
         Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage;
+
+        bool IsConnected { get; }
     }
 }
