@@ -86,7 +86,7 @@ namespace AES.MessageBus
                 .WaitAndRetry(3, retryAttempt =>
                     TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
 
-            _bus = RabbitHutch.CreateBus(_connectionString);
+            policy.Execute(() => { _bus = RabbitHutch.CreateBus(_connectionString); });
         }
 
         public void Dispose()
