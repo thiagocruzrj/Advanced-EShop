@@ -52,7 +52,14 @@ namespace AES.Identity.API.Controllers
             var result = await _userManager.CreateAsync(user, userRegister.Password);
             if (result.Succeeded)
             {
-                var success = await ClientRegister(userRegister);
+                var clientResult = await ClientRegister(userRegister);
+
+                if (!clientResult.ValidationResult.IsValid)
+                {
+                    await _userManager.DeleteAsync(user);
+                    return CustomResponse(clientResult.ValidationResult);
+                }
+
                 return CustomResponse(await GenerateJwt(userRegister.Email));
             }
 
@@ -64,16 +71,6 @@ namespace AES.Identity.API.Controllers
             return CustomResponse();
         }
 
-        private async Task<ResponseMessage> ClientRegister(UserRegister userRegister)
-        {
-            var user = await _userManager.FindByEmailAsync(userRegister.Email);
-            var userRegistered = new UserRegisteredIntegrationEvent(
-                Guid.Parse(user.Id), userRegister.Name, userRegister.Email, userRegister.Cpf);
-
-            var success = await _bus.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(userRegistered);
-
-            return success;
-        }
 
         [HttpPost("authenticate")]
         public async Task<ActionResult> Login(UserLogin userLogin)
@@ -95,6 +92,17 @@ namespace AES.Identity.API.Controllers
 
             AddProcessingError("User or Password incorrect");
             return CustomResponse();
+        }
+
+        private async Task<ResponseMessage> ClientRegister(UserRegister userRegister)
+        {
+            var user = await _userManager.FindByEmailAsync(userRegister.Email);
+            var userRegistered = new UserRegisteredIntegrationEvent(
+                Guid.Parse(user.Id), userRegister.Name, userRegister.Email, userRegister.Cpf);
+
+            var success = await _bus.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(userRegistered);
+
+            return success;
         }
 
         private async Task<UserLoginResponse> GenerateJwt(string email)
