@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using AES.WebApi.Core.Identity;
 using AES.Core.Controllers;
 using AES.Core.Messages.Integration;
-using EasyNetQ;
+using AES.MessageBus;
 
 namespace AES.Identity.API.Controllers
 {
@@ -24,15 +24,17 @@ namespace AES.Identity.API.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
 
-        private IBus _bus;
+        private readonly IMessageBus _bus;
 
         public AuthController(SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
-            IOptions<AppSettings> appSettings)
+            IOptions<AppSettings> appSettings,
+            IMessageBus bus)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _bus = bus;
         }
 
         [HttpPost("new-account")]
@@ -67,8 +69,6 @@ namespace AES.Identity.API.Controllers
             var user = await _userManager.FindByEmailAsync(userRegister.Email);
             var userRegistered = new UserRegisteredIntegrationEvent(
                 Guid.Parse(user.Id), userRegister.Name, userRegister.Email, userRegister.Cpf);
-
-            _bus = RabbitHutch.CreateBus("host=localhost:5672");
 
             var success = await _bus.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(userRegistered);
 
