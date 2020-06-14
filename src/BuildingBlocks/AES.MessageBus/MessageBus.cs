@@ -21,7 +21,8 @@ namespace AES.MessageBus
 
         public void Publish<T>(T message) where T : IntegrationEvent
         {
-            throw new NotImplementedException();
+            TryConnect();
+            _bus.Publish(message);
         }
 
         public Task PublishAsync<T>(T message) where T : IntegrationEvent
