@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="easynetq" Version="5.2.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.3" />
@@ -37,6 +36,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\BuildingBlocks\AES.Core\AES.Core.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\AES.MessageBus\AES.MessageBus.csproj" />
     <ProjectReference Include="..\..\BuildingBlocks\NSE.WebApi.Core\AES.WebApi.Core.csproj" />
   </ItemGroup>
 
