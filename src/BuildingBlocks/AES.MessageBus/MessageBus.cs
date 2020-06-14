@@ -14,9 +14,10 @@ namespace AES.MessageBus
         public MessageBus(string connectionString)
         {
             _connectionString = connectionString;
+            TryConnect();
         }
 
-        public bool IsConnected => throw new NotImplementedException();
+        public bool IsConnected { get; }
 
         public void Publish<T>(T message) where T : IntegrationEvent
         {
@@ -68,7 +69,9 @@ namespace AES.MessageBus
 
         private void TryConnect()
         {
+            if (IsConnected) return;
 
+            _bus = RabbitHutch.CreateBus(_connectionString);
         }
 
         public void Dispose()
