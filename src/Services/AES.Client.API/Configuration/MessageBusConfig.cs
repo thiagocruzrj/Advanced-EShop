@@ -1,4 +1,5 @@
-﻿using AES.Core.Tools;
+﻿using AES.Clients.API.Services;
+using AES.Core.Tools;
 using AES.MessageBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,7 +10,8 @@ namespace AES.Clients.API.Configuration
     {
         public static void AddMessageBusConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMessageBus(configuration.GetMessageQueueConnection("MessageBus"));
+            services.AddMessageBus(configuration.GetMessageQueueConnection("MessageBus"))
+                .AddHostedService<ClientRegisterIntegrationHandler>();
         }
     }
 }

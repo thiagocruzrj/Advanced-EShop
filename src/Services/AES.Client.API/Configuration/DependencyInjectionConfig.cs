@@ -3,7 +3,6 @@ using AES.Clients.API.Application.Events;
 using AES.Clients.API.Data;
 using AES.Clients.API.Models;
 using AES.Clients.API.Repository;
-using AES.Clients.API.Services;
 using AES.Core.Mediator;
 using FluentValidation.Results;
 using MediatR;
@@ -22,8 +21,6 @@ namespace AES.Clients.API.Configuration
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<ClientesContext>();
-
-            services.AddHostedService<ClientRegisterIntegrationHandler>();
         }
     }
 }
