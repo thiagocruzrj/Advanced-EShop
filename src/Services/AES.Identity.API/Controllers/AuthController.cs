@@ -100,9 +100,15 @@ namespace AES.Identity.API.Controllers
             var userRegistered = new UserRegisteredIntegrationEvent(
                 Guid.Parse(user.Id), userRegister.Name, userRegister.Email, userRegister.Cpf);
 
-            var success = await _bus.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(userRegistered);
-
-            return success;
+            try
+            {
+                return await _bus.RequestAsync<UserRegisteredIntegrationEvent, ResponseMessage>(userRegistered);
+            }
+            catch
+            {
+                await _userManager.DeleteAsync(user);
+                throw;
+            }
         }
 
         private async Task<UserLoginResponse> GenerateJwt(string email)
