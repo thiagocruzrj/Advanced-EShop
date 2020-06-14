@@ -65,10 +65,10 @@ namespace AES.MessageBus
             _bus.Subscribe(subscriptionId, onMessage);
         }
 
-        public async void SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage) where T : class
+        public void SubscribeAsync<T>(string subscriptionId, Func<T, Task> onMessage) where T : class
         {
             TryConnect();
-            await _bus.SubscribeAsync(subscriptionId, onMessage);
+            _bus.SubscribeAsync(subscriptionId, onMessage);
         }
 
         private void TryConnect()
