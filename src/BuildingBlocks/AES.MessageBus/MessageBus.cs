@@ -17,7 +17,7 @@ namespace AES.MessageBus
             TryConnect();
         }
 
-        public bool IsConnected { get; }
+        public bool IsConnected => _bus?.IsConnected ?? false;
 
         public void Publish<T>(T message) where T : IntegrationEvent
         {
@@ -25,9 +25,10 @@ namespace AES.MessageBus
             _bus.Publish(message);
         }
 
-        public Task PublishAsync<T>(T message) where T : IntegrationEvent
+        public async Task PublishAsync<T>(T message) where T : IntegrationEvent
         {
-            throw new NotImplementedException();
+            TryConnect();
+            await _bus.PublishAsync(message);
         }
 
         public TResponse Request<TRequest, TResponse>(TRequest request)
