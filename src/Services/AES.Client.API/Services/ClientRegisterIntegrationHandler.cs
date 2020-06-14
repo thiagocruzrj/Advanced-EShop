@@ -1,7 +1,7 @@
 ﻿using AES.Clients.API.Application.Commands;
 using AES.Core.Mediator;
 using AES.Core.Messages.Integration;
-using EasyNetQ;
+using AES.MessageBus;
 using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,7 +13,7 @@ namespace AES.Clients.API.Services
 {
     public class ClientRegisterIntegrationHandler : BackgroundService
     {
-        private IBus _bus;
+        private IMessageBus _bus;
         private readonly IServiceProvider _serviceProvider;
 
         public ClientRegisterIntegrationHandler(IServiceProvider serviceProvider)
@@ -23,8 +23,6 @@ namespace AES.Clients.API.Services
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _bus = RabbitHutch.CreateBus("host=localhost:5672");
-
             _bus.RespondAsync<UserRegisteredIntegrationEvent, ResponseMessage>(async request =>
                 new ResponseMessage(await RegisterClient(request)));
 
