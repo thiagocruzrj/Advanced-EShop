@@ -52,7 +52,7 @@ namespace AES.MessageBus
             where TResponse : ResponseMessage
         {
             TryConnect();
-            return _bus.Respond<TRequest, TResponse>(respond);
+            return _bus.Respond(respond);
         }
 
         public Task<IDisposable> RespondAsync<TRequest, TResponse>(Func<TRequest, Task<TResponse>> respond)
