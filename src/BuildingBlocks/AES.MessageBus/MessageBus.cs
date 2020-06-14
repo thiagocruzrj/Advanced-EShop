@@ -35,7 +35,8 @@ namespace AES.MessageBus
             where TRequest : IntegrationEvent
             where TResponse : ResponseMessage
         {
-            throw new NotImplementedException();
+            TryConnect();
+            return _bus.Request<TRequest, TResponse>(request);
         }
 
         public Task<TResponse> RequestAsync<TRequest, TResponse>(TRequest request)
