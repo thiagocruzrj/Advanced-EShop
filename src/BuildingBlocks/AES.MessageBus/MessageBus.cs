@@ -21,6 +21,8 @@ namespace AES.MessageBus
 
         public bool IsConnected => _bus?.IsConnected ?? false;
 
+        public IAdvancedBus AdvancedBus => _bus?.Advanced;
+
         public void Publish<T>(T message) where T : IntegrationEvent
         {
             TryConnect();
@@ -99,6 +101,8 @@ namespace AES.MessageBus
             var policy = Policy.Handle<EasyNetQException>()
                 .Or<BrokerUnreachableException>()
                 .RetryForever();
+
+            policy.Execute(TryConnect);
         }
 
         public void Dispose()
