@@ -90,7 +90,15 @@ namespace AES.MessageBus
             {
                 _bus = RabbitHutch.CreateBus(_connectionString);
                 _advancedBus = _bus.Advanced;
+                _advancedBus.Disconnected += OnDisconnect;
             });
+        }
+
+        private void OnDisconnect(object s, EventArgs e)
+        {
+            var policy = Policy.Handle<EasyNetQException>()
+                .Or<BrokerUnreachableException>()
+                .RetryForever();
         }
 
         public void Dispose()
