@@ -29,7 +29,15 @@ namespace AES.Clients.API.Services
             _bus.RespondAsync<UserRegisteredIntegrationEvent, ResponseMessage>(async request =>
                 await RegisterClient(request));
 
+            _bus.AdvancedBus.Connected += OnConnect;
+
             return Task.CompletedTask;
+        }
+
+        private void OnConnect(object s, EventArgs e)
+        {
+            _bus.RespondAsync<UserRegisteredIntegrationEvent, ResponseMessage>(async request =>
+                await RegisterClient(request));
         }
 
         private async Task<ResponseMessage> RegisterClient(UserRegisteredIntegrationEvent message)
