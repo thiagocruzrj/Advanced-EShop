@@ -29,6 +29,9 @@ namespace AES.ShopCart.API.Data
                 .HasMany(c => c.Items)
                 .WithOne(i => i.ShopCartClient)
                 .HasForeignKey(c => c.ShopCartId);
+
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+                relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
         }
     }
 }
