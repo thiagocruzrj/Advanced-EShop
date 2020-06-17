@@ -4,7 +4,7 @@ namespace AES.ShopCart.API.Model
 {
     public class ShopCartItem
     {
-        public ShopCartItem(Guid id)
+        public ShopCartItem()
         {
             Id = Guid.NewGuid();
         }
@@ -15,6 +15,7 @@ namespace AES.ShopCart.API.Model
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public string Image { get; set; }
+        // Foreach key
         public Guid ShopCartId { get; set; }
     }
 }
