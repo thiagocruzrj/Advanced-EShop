@@ -17,5 +17,6 @@ namespace AES.ShopCart.API.Model
         public string Image { get; set; }
         // Foreach key
         public Guid ShopCartId { get; set; }
+        public ShopCartClient ShopCartClient { get; set; }
     }
 }

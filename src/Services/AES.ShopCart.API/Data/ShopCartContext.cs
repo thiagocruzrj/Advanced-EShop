@@ -24,6 +24,11 @@ namespace AES.ShopCart.API.Data
             modelBuilder.Entity<ShopCartClient>()
                 .HasIndex(c => c.ClientId)
                 .HasName("IDX_Client");
+
+            modelBuilder.Entity<ShopCartClient>()
+                .HasMany(c => c.Items)
+                .WithOne(i => i.ShopCartClient)
+                .HasForeignKey(c => c.ShopCartId);
         }
     }
 }
