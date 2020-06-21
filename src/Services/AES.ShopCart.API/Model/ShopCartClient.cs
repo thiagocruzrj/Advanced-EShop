@@ -44,6 +44,10 @@ namespace AES.ShopCart.API.Model
             if (ShopCartItemExists(item))
             {
                 var shopCartItemExist = GetByProductId(item.ProductId);
+                shopCartItemExist.AddUnits(item.Quantity);
+
+                item = shopCartItemExist;
+                Items.Remove(item);
             }
 
             Items.Add(item);
