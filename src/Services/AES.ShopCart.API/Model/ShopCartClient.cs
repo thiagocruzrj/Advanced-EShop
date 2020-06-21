@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AES.ShopCart.API.Model
 {
@@ -18,6 +19,11 @@ namespace AES.ShopCart.API.Model
         public Guid ClientId { get; set; }
         public decimal TotalPrice { get; set; }
         public List<ShopCartItem> Items { get; set; } = new List<ShopCartItem>();
+
+        internal void CalculatingShopCartTotalPrice()
+        {
+            TotalPrice = Items.Sum(p => p.CalculatingQuantityPrice());
+        }
 
         internal void AddItem(ShopCartItem item)
         {
