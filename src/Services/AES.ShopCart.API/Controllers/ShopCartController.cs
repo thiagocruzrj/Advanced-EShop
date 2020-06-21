@@ -52,5 +52,12 @@ namespace AES.ShopCart.API.Controllers
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.ClientId == _user.GetUserId());
         }
+
+        private void HandleNewCartItem(ShopCartItem item)
+        {
+            var cartItem = new ShopCartClient(_user.GetUserId());
+
+            _context.ShopCartClients.Add(cartItem);
+        }
     }
 }
