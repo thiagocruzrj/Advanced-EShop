@@ -1,6 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using AES.WebApi.Core.Users;
 @using AES.WebApp.MVC.Extensions
-@inject IUser AppUser
+@inject IAspNetUser AppUser
 
 @if (AppUser.IsAuthenticated())
 {
