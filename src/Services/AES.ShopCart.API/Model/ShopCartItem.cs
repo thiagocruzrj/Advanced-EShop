@@ -18,5 +18,10 @@ namespace AES.ShopCart.API.Model
         // Foreach key
         public Guid ShopCartId { get; set; }
         public ShopCartClient ShopCartClient { get; set; }
+
+        internal void AssociatingCartItem(Guid shopCartId)
+        {
+            ShopCartId = shopCartId;
+        }
     }
 }
