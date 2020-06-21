@@ -41,6 +41,11 @@ namespace AES.ShopCart.API.Model
             // validating if item is ok
             item.AssociatingShopCart(Id);
 
+            if (ShopCartItemExists(item))
+            {
+                var shopCartItemExist = GetByProductId(item.ProductId);
+            }
+
             Items.Add(item);
             CalculatingShopCartTotalPrice();
         }

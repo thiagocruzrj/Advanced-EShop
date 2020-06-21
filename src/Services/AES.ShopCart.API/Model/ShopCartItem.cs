@@ -28,5 +28,10 @@ namespace AES.ShopCart.API.Model
         {
             return Quantity * Price;
         }
+
+        internal void AddUnits(int units)
+        {
+            Quantity += units;
+        }
     }
 }
