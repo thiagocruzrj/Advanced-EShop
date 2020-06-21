@@ -25,7 +25,7 @@ namespace AES.ShopCart.API.Controllers
         [HttpGet("shopCart")]
         public async Task<ShopCartClient> GetShopCart()
         {
-            return null;
+            return await GetCartClient() ?? new ShopCartClient();
         }
 
         [HttpPost("shopCart")]
