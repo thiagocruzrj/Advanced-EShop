@@ -31,6 +31,11 @@ namespace AES.ShopCart.API.Model
             return Items.Any(p => p.ProductId == item.ProductId);
         }
 
+        internal ShopCartItem GetByProductId(Guid productId)
+        {
+            return Items.FirstOrDefault(p => p.ProductId == productId);
+        }
+
         internal void AddItem(ShopCartItem item)
         {
             // validating if item is ok
