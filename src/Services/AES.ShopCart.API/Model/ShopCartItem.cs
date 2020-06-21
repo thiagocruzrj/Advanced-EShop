@@ -23,5 +23,10 @@ namespace AES.ShopCart.API.Model
         {
             ShopCartId = shopCartId;
         }
+
+        internal decimal CalculatingQuantityPrice()
+        {
+            return Quantity * Price;
+        }
     }
 }
