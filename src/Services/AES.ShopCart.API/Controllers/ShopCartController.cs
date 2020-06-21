@@ -22,13 +22,13 @@ namespace AES.ShopCart.API.Controllers
             return CustomResponse();
         }
 
-        [HttpPut("shopCart")]
+        [HttpPut("shopCart/{productId}")]
         public async Task<IActionResult> UpdateCartItem(Guid productId, ShopCartItem item)
         {
             return CustomResponse();
         }
 
-        [HttpDelete("shopCart")]
+        [HttpDelete("shopCart/{productId}")]
         public async Task<IActionResult> RemoveCartItem(Guid productId)
         {
             return CustomResponse();
