@@ -1,4 +1,5 @@
-﻿using AES.WebApp.MVC.Extensions;
+﻿using AES.WebApi.Core.Users;
+using AES.WebApp.MVC.Extensions;
 using AES.WebApp.MVC.Service;
 using AES.WebApp.MVC.Service.Handlers;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,7 @@ namespace AES.WebApp.MVC.Configuration
                         p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IUser, AspNetUser>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
         }
     }
 }
