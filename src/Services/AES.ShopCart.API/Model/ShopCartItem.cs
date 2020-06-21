@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
+using System.Data;
 
 namespace AES.ShopCart.API.Model
 {
@@ -32,6 +34,32 @@ namespace AES.ShopCart.API.Model
         internal void AddUnits(int units)
         {
             Quantity += units;
+        }
+
+        public class ShopCartItemOrderValidation : AbstractValidator<ShopCartItem>
+        {
+            public ShopCartItemOrderValidation()
+            {
+                RuleFor(c => c.ProductId)
+                    .NotEqual(Guid.Empty)
+                    .WithMessage("Product Id can't be invalid");
+
+                RuleFor(c => c.Name)
+                    .NotEmpty()
+                    .WithMessage("Product name wasn't informed");
+
+                RuleFor(c => c.Quantity)
+                    .GreaterThan(0)
+                    .WithMessage("Minimum Product quantity is 1");
+
+                RuleFor(c => c.Quantity)
+                    .LessThan(15)
+                    .WithMessage("Maximum Product quantity is 15");
+
+                RuleFor(c => c.Price)
+                    .GreaterThan(0)
+                    .WithMessage("Product price need to be greater than 0");
+            }
         }
     }
 }
