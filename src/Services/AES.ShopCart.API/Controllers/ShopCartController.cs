@@ -1,8 +1,10 @@
 ﻿using AES.Core.Controllers;
+using AES.ShopCart.API.Data;
 using AES.ShopCart.API.Model;
 using AES.WebApi.Core.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
@@ -12,10 +14,12 @@ namespace AES.ShopCart.API.Controllers
     public class ShopCartController : MainController
     {
         private readonly IAspNetUser _user;
+        private readonly ShopCartContext _context;
 
-        public ShopCartController(IAspNetUser user)
+        public ShopCartController(IAspNetUser user, ShopCartContext context)
         {
             _user = user;
+            _context = context;
         }
 
         [HttpGet("shopCart")]
@@ -40,6 +44,13 @@ namespace AES.ShopCart.API.Controllers
         public async Task<IActionResult> RemoveCartItem(Guid productId)
         {
             return CustomResponse();
+        }
+
+        private async Task<ShopCartClient> GetCartClient()
+        {
+            return await _context.ShopCartClients
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.ClientId == _user.GetUserId());
         }
     }
 }
