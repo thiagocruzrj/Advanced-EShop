@@ -7,6 +7,7 @@ namespace AES.ShopCart.API.Model
 {
     public class ShopCartClient
     {
+        internal const int MAX_QUANTITY_ITEM = 5;
         // EF ctor
         public ShopCartClient() { }
 
