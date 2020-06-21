@@ -18,5 +18,13 @@ namespace AES.ShopCart.API.Model
         public Guid ClientId { get; set; }
         public decimal TotalPrice { get; set; }
         public List<ShopCartItem> Items { get; set; } = new List<ShopCartItem>();
+
+        internal void AddItem(ShopCartItem item)
+        {
+            // validating if item is ok
+            item.AssociatingShopCart(Id);
+
+            Items.Add(item);
+        }
     }
 }
