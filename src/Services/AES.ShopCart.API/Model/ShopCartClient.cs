@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -25,12 +26,18 @@ namespace AES.ShopCart.API.Model
             TotalPrice = Items.Sum(p => p.CalculatingQuantityPrice());
         }
 
+        internal bool ShopCartItemExists(ShopCartItem item)
+        {
+            return Items.Any(p => p.ProductId == item.ProductId);
+        }
+
         internal void AddItem(ShopCartItem item)
         {
             // validating if item is ok
             item.AssociatingShopCart(Id);
 
             Items.Add(item);
+            CalculatingShopCartTotalPrice();
         }
     }
 }
