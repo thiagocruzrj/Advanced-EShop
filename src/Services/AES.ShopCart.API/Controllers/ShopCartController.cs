@@ -1,5 +1,6 @@
 ﻿using AES.Core.Controllers;
 using AES.ShopCart.API.Model;
+using AES.WebApi.Core.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,13 @@ namespace AES.ShopCart.API.Controllers
     [Authorize]
     public class ShopCartController : MainController
     {
+        private readonly IAspNetUser _user;
+
+        public ShopCartController(IAspNetUser user)
+        {
+            _user = user;
+        }
+
         [HttpGet("shopCart")]
         public async Task<ShopCartClient> GetShopCart()
         {
