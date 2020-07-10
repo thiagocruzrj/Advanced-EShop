@@ -31,7 +31,18 @@ namespace AES.ShopCart.API.Controllers
         [HttpPost("shopCart")]
         public async Task<IActionResult> AddCartItem(ShopCartItem item)
         {
-            return CustomResponse();
+            var shopCart = await GetCartClient();
+
+            if(shopCart == null)
+            {
+
+            }
+        }
+
+        private void HandleShopCart(ShopCartItem item)
+        {
+            var shopCart = new ShopCartClient(_user.GetUserId());
+            _context.ShopCartClients.Add(shopCart);
         }
 
         [HttpPut("shopCart/{productId}")]

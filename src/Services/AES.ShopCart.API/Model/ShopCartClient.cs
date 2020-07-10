@@ -39,7 +39,8 @@ namespace AES.ShopCart.API.Model
 
         internal void AddItem(ShopCartItem item)
         {
-            // validating if item is ok
+            if (!item.IsValid()) return;
+
             item.AssociatingShopCart(Id);
 
             if (ShopCartItemExists(item))

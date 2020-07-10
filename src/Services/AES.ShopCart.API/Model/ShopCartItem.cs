@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using System;
-using System.Data;
 
 namespace AES.ShopCart.API.Model
 {
@@ -34,6 +33,11 @@ namespace AES.ShopCart.API.Model
         internal void AddUnits(int units)
         {
             Quantity += units;
+        }
+
+        internal bool IsValid()
+        {
+            return new ShopCartItemOrderValidation().Validate(this).IsValid;
         }
 
         public class ShopCartItemOrderValidation : AbstractValidator<ShopCartItem>
