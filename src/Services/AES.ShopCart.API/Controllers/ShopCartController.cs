@@ -35,13 +35,25 @@ namespace AES.ShopCart.API.Controllers
 
             if(shopCart == null)
             {
+                HandleNewCartItem(item);
+            } else
+            {
 
             }
+
+            if (!ValidOperation()) return CustomResponse();
+
+            var result = await _context.SaveChangesAsync();
+            if (result <= 0) AddProcessingError("Isn't possible to persist data on db");
+
+            return CustomResponse();
         }
 
         private void HandleShopCart(ShopCartItem item)
         {
             var shopCart = new ShopCartClient(_user.GetUserId());
+            shopCart.AddItem(item);
+
             _context.ShopCartClients.Add(shopCart);
         }
 
