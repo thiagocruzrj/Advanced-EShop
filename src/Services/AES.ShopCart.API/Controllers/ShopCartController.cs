@@ -49,12 +49,28 @@ namespace AES.ShopCart.API.Controllers
             return CustomResponse();
         }
 
-        private void HandleShopCart(ShopCartItem item)
+        private void HandleNewCartItem(ShopCartItem item)
         {
-            var shopCart = new ShopCartClient(_user.GetUserId());
-            shopCart.AddItem(item);
+            var cartItem = new ShopCartClient(_user.GetUserId());
 
-            _context.ShopCartClients.Add(shopCart);
+            _context.ShopCartClients.Add(cartItem);
+        }
+
+        private void HandlerExistentShopCart(ShopCartClient cart, ShopCartItem item)
+        {
+            var productItemExistent = cart.ShopCartItemExists(item);
+
+            cart.AddItem(item);
+
+            if (productItemExistent)
+            {
+                _context.ShopCartItems.Update(cart.GetByProductId(item.ProductId));
+            } else
+            {
+                _context.ShopCartItems.Add(item);
+            }
+
+            _context.ShopCartClients.Update(cart);
         }
 
         [HttpPut("shopCart/{productId}")]
@@ -74,13 +90,6 @@ namespace AES.ShopCart.API.Controllers
             return await _context.ShopCartClients
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.ClientId == _user.GetUserId());
-        }
-
-        private void HandleNewCartItem(ShopCartItem item)
-        {
-            var cartItem = new ShopCartClient(_user.GetUserId());
-
-            _context.ShopCartClients.Add(cartItem);
         }
     }
 }
