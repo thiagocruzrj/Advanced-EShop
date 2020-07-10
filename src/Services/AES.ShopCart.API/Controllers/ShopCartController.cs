@@ -33,13 +33,10 @@ namespace AES.ShopCart.API.Controllers
         {
             var shopCart = await GetCartClient();
 
-            if(shopCart == null)
-            {
+            if (shopCart == null)
                 HandleNewCartItem(item);
-            } else
-            {
-
-            }
+            else
+                HandlerExistentShopCart(shopCart, item);
 
             if (!ValidOperation()) return CustomResponse();
 
