@@ -40,8 +40,7 @@ namespace AES.ShopCart.API.Controllers
 
             if (!ValidOperation()) return CustomResponse();
 
-            var result = await _context.SaveChangesAsync();
-            if (result <= 0) AddProcessingError("Isn't possible to persist data on db");
+            await PersistData();
 
             return CustomResponse();
         }
@@ -58,8 +57,7 @@ namespace AES.ShopCart.API.Controllers
             _context.ShopCartItems.Update(itemShopCart);
             _context.ShopCartClients.Update(shopCart);
 
-            var result = await _context.SaveChangesAsync();
-            if (result <= 0) AddProcessingError("Isn't possible to persist data on db");
+            await PersistData();
 
             return CustomResponse();
         }
@@ -126,6 +124,12 @@ namespace AES.ShopCart.API.Controllers
             }
 
             return shopCartItem;
+        }
+
+        private async Task PersistData()
+        {
+            var result = await _context.SaveChangesAsync();
+            if (result <= 0) AddProcessingError("Isn't possible to persist data on db");
         }
     }
 }
