@@ -25,13 +25,13 @@ namespace AES.ShopCart.API.Controllers
         [HttpGet("shopCart")]
         public async Task<ShopCartClient> GetShopCart()
         {
-            return await GetCartClient() ?? new ShopCartClient();
+            return await GetShopCartClient() ?? new ShopCartClient();
         }
 
         [HttpPost("shopCart")]
-        public async Task<IActionResult> AddCartItem(ShopCartItem item)
+        public async Task<IActionResult> AddShopCartItem(ShopCartItem item)
         {
-            var shopCart = await GetCartClient();
+            var shopCart = await GetShopCartClient();
 
             if (shopCart == null)
                 HandleNewCartItem(item);
@@ -44,6 +44,25 @@ namespace AES.ShopCart.API.Controllers
             if (result <= 0) AddProcessingError("Isn't possible to persist data on db");
 
             return CustomResponse();
+        }
+
+        [HttpPut("shopCart/{productId}")]
+        public async Task<IActionResult> UpdateShopCartItem(Guid productId, ShopCartItem item)
+        {
+            return CustomResponse();
+        }
+
+        [HttpDelete("shopCart/{productId}")]
+        public async Task<IActionResult> RemoveShopCartItem(Guid productId)
+        {
+            return CustomResponse();
+        }
+
+        private async Task<ShopCartClient> GetShopCartClient()
+        {
+            return await _context.ShopCartClients
+                .Include(c => c.Items)
+                .FirstOrDefaultAsync(c => c.ClientId == _user.GetUserId());
         }
 
         private void HandleNewCartItem(ShopCartItem item)
@@ -62,31 +81,13 @@ namespace AES.ShopCart.API.Controllers
             if (productItemExistent)
             {
                 _context.ShopCartItems.Update(cart.GetByProductId(item.ProductId));
-            } else
+            }
+            else
             {
                 _context.ShopCartItems.Add(item);
             }
 
             _context.ShopCartClients.Update(cart);
-        }
-
-        [HttpPut("shopCart/{productId}")]
-        public async Task<IActionResult> UpdateCartItem(Guid productId, ShopCartItem item)
-        {
-            return CustomResponse();
-        }
-
-        [HttpDelete("shopCart/{productId}")]
-        public async Task<IActionResult> RemoveCartItem(Guid productId)
-        {
-            return CustomResponse();
-        }
-
-        private async Task<ShopCartClient> GetCartClient()
-        {
-            return await _context.ShopCartClients
-                .Include(c => c.Items)
-                .FirstOrDefaultAsync(c => c.ClientId == _user.GetUserId());
         }
     }
 }
