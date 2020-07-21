@@ -55,5 +55,18 @@ namespace AES.ShopCart.API.Model
             Items.Add(item);
             CalculatingShopCartTotalPrice();
         }
+
+        internal void UpdateItem(ShopCartItem item)
+        {
+            if (!item.IsValid()) return;
+            item.AssociatingShopCart(Id);
+
+            var existentItem = GetByProductId(item.ProductId);
+
+            Items.Remove(existentItem);
+            Items.Add(item);
+
+            CalculatingShopCartTotalPrice();
+        }
     }
 }
