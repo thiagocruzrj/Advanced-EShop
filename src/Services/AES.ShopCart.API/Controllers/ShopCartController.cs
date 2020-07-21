@@ -68,6 +68,15 @@ namespace AES.ShopCart.API.Controllers
             var shopCart = await GetShopCartClient();
             var itemShopCart = await GetValidShopCartItem(productId, shopCart);
             if (itemShopCart == null) return CustomResponse();
+
+            shopCart.RemoveItem(itemShopCart);
+
+            _context.ShopCartItems.Remove(itemShopCart);
+            _context.ShopCartClients.Update(shopCart);
+
+            await PersistData();
+
+            return CustomResponse();
         }
 
         private async Task<ShopCartClient> GetShopCartClient()
