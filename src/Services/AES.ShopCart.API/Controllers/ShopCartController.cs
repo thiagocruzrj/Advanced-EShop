@@ -49,7 +49,9 @@ namespace AES.ShopCart.API.Controllers
         [HttpPut("shopCart/{productId}")]
         public async Task<IActionResult> UpdateShopCartItem(Guid productId, ShopCartItem item)
         {
-            return CustomResponse();
+            var shopCart = await GetShopCartClient();
+            var itemShopCart = await GetValidShopCartItem(productId, item, shopCart);
+            if(itemShopCart == null) return CustomResponse();
         }
 
         [HttpDelete("shopCart/{productId}")]
