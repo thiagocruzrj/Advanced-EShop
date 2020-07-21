@@ -52,6 +52,16 @@ namespace AES.ShopCart.API.Controllers
             var shopCart = await GetShopCartClient();
             var itemShopCart = await GetValidShopCartItem(productId, item, shopCart);
             if(itemShopCart == null) return CustomResponse();
+
+            shopCart.UpdateUnits(item, item.Quantity);
+
+            _context.ShopCartItems.Update(itemShopCart);
+            _context.ShopCartClients.Update(shopCart);
+
+            var result = await _context.SaveChangesAsync();
+            if (result <= 0) AddProcessingError("Isn't possible to persist data on db");
+
+            return CustomResponse();
         }
 
         [HttpDelete("shopCart/{productId}")]
