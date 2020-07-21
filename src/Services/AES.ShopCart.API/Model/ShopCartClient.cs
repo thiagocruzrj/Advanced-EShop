@@ -68,5 +68,11 @@ namespace AES.ShopCart.API.Model
 
             CalculatingShopCartTotalPrice();
         }
+
+        internal void UpdateUnits(ShopCartItem item, int units)
+        {
+            item.UpdateUnits(units);
+            UpdateItem(item);
+        }
     }
 }
