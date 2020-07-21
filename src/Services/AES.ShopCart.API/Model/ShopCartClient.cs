@@ -77,13 +77,7 @@ namespace AES.ShopCart.API.Model
 
         internal void RemoveItem(ShopCartItem item)
         {
-            if (!item.IsValid()) return;
-
-            var existentItem = GetByProductId(item.ProductId);
-
-            if (existentItem == null) throw new Exception("Item doesn't belong to order");
-            Items.Remove(existentItem);
-
+            Items.Remove(GetByProductId(item.ProductId));
             CalculatingShopCartTotalPrice();
         }
     }
