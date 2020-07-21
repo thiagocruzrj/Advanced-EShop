@@ -49,7 +49,7 @@ namespace AES.ShopCart.API.Controllers
         public async Task<IActionResult> UpdateShopCartItem(Guid productId, ShopCartItem item)
         {
             var shopCart = await GetShopCartClient();
-            var itemShopCart = await GetValidShopCartItem(productId, item, shopCart);
+            var itemShopCart = await GetValidShopCartItem(productId, shopCart, item);
             if(itemShopCart == null) return CustomResponse();
 
             shopCart.UpdateUnits(item, item.Quantity);
@@ -65,6 +65,7 @@ namespace AES.ShopCart.API.Controllers
         [HttpDelete("shopCart/{productId}")]
         public async Task<IActionResult> RemoveShopCartItem(Guid productId)
         {
+            var shopCart = await GetShopCartClient();
             return CustomResponse();
         }
 
@@ -100,9 +101,9 @@ namespace AES.ShopCart.API.Controllers
             _context.ShopCartClients.Update(cart);
         }
 
-        private async Task<ShopCartItem> GetValidShopCartItem(Guid productId, ShopCartItem item, ShopCartClient shopCart)
+        private async Task<ShopCartItem> GetValidShopCartItem(Guid productId, ShopCartClient shopCart, ShopCartItem item = null)
         {
-            if(productId != item.ProductId)
+            if(item != null && productId != item.ProductId)
             {
                 AddProcessingError("Item doesn't match with to the informed");
                 return null;
