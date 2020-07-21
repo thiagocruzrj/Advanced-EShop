@@ -35,6 +35,11 @@ namespace AES.ShopCart.API.Model
             Quantity += units;
         }
 
+        internal void UpdateUnits(int units)
+        {
+            Quantity = units;
+        }
+
         internal bool IsValid()
         {
             return new ShopCartItemOrderValidation().Validate(this).IsValid;
