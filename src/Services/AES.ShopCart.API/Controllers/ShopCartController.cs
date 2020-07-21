@@ -89,5 +89,31 @@ namespace AES.ShopCart.API.Controllers
 
             _context.ShopCartClients.Update(cart);
         }
+
+        private async Task<ShopCartItem> GetValidShopCartItem(Guid productId, ShopCartItem item, ShopCartClient shopCart)
+        {
+            if(productId != item.ProductId)
+            {
+                AddProcessingError("Item doesn't match with to the informed");
+                return null;
+            }
+
+            if(shopCart == null)
+            {
+                AddProcessingError("Shop cart not found");
+                return null;
+            }
+
+            var shopCartItem = await _context.ShopCartItems
+                .FirstOrDefaultAsync(i => i.ShopCartId == shopCart.Id && i.ProductId == productId);
+
+            if(shopCartItem == null || !shopCart.ShopCartItemExists(shopCartItem))
+            {
+                AddProcessingError("Item isn't on shop cart");
+                return null;
+            }
+
+            return shopCartItem;
+        }
     }
 }
