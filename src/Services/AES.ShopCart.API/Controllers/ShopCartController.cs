@@ -66,7 +66,8 @@ namespace AES.ShopCart.API.Controllers
         public async Task<IActionResult> RemoveShopCartItem(Guid productId)
         {
             var shopCart = await GetShopCartClient();
-            return CustomResponse();
+            var itemShopCart = await GetValidShopCartItem(productId, shopCart);
+            if (itemShopCart == null) return CustomResponse();
         }
 
         private async Task<ShopCartClient> GetShopCartClient()
