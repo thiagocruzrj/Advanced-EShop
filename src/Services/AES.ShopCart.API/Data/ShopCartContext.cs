@@ -1,4 +1,5 @@
 ﻿using AES.ShopCart.API.Model;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -20,6 +21,8 @@ namespace AES.ShopCart.API.Data
             foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
+
+            modelBuilder.Ignore<ValidationResult>();
 
             modelBuilder.Entity<ShopCartClient>()
                 .HasIndex(c => c.ClientId)

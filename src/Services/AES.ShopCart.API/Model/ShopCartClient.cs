@@ -82,7 +82,9 @@ namespace AES.ShopCart.API.Model
         }
 
         internal bool IsValid()
-        { }
+        {
+
+        }
 
         public class ShopCartClientValidation : AbstractValidator<ShopCartClient>
         {
