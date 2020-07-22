@@ -84,6 +84,10 @@ namespace AES.ShopCart.API.Model
         internal bool IsValid()
         {
             var errors = Items.SelectMany(i => new ShopCartItem.ShopCartItemValidation().Validate(i).Errors).ToList();
+            errors.AddRange(new ShopCartClientValidation().Validate(this).Errors);
+            ValidationResult = new ValidationResult(errors);
+
+            return ValidationResult.IsValid;
         }
 
         public class ShopCartClientValidation : AbstractValidator<ShopCartClient>
