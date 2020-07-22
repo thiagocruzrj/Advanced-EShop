@@ -39,6 +39,7 @@ namespace AES.ShopCart.API.Controllers
             else
                 HandlerExistentShopCart(shopCart, item);
 
+            ValidatingShopCart(shopCart);
             if (!ValidOperation()) return CustomResponse();
 
             await PersistData();
@@ -55,6 +56,9 @@ namespace AES.ShopCart.API.Controllers
 
             shopCart.UpdateUnits(item, item.Quantity);
 
+            ValidatingShopCart(shopCart);
+            if (!ValidOperation()) return CustomResponse();
+
             _context.ShopCartItems.Update(itemShopCart);
             _context.ShopCartClients.Update(shopCart);
 
@@ -67,10 +71,14 @@ namespace AES.ShopCart.API.Controllers
         public async Task<IActionResult> RemoveShopCartItem(Guid productId)
         {
             var shopCart = await GetShopCartClient();
+
             var itemShopCart = await GetValidShopCartItem(productId, shopCart);
             if (itemShopCart == null) return CustomResponse();
 
             shopCart.RemoveItem(itemShopCart);
+
+            ValidatingShopCart(shopCart);
+            if (!ValidOperation()) return CustomResponse();
 
             _context.ShopCartItems.Remove(itemShopCart);
             _context.ShopCartClients.Update(shopCart);
