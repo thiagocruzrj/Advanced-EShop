@@ -39,8 +39,6 @@ namespace AES.ShopCart.API.Model
 
         internal void AddItem(ShopCartItem item)
         {
-            if (!item.IsValid()) return;
-
             item.AssociatingShopCart(Id);
 
             if (ShopCartItemExists(item))
@@ -58,7 +56,6 @@ namespace AES.ShopCart.API.Model
 
         internal void UpdateItem(ShopCartItem item)
         {
-            if (!item.IsValid()) return;
             item.AssociatingShopCart(Id);
 
             var existentItem = GetByProductId(item.ProductId);
