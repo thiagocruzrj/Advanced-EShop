@@ -83,7 +83,7 @@ namespace AES.ShopCart.API.Model
 
         internal bool IsValid()
         {
-
+            var errors = Items.SelectMany(i => new ShopCartItem.ShopCartItemValidation().Validate(i).Errors).ToList();
         }
 
         public class ShopCartClientValidation : AbstractValidator<ShopCartClient>

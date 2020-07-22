@@ -42,12 +42,12 @@ namespace AES.ShopCart.API.Model
 
         internal bool IsValid()
         {
-            return new ShopCartItemOrderValidation().Validate(this).IsValid;
+            return new ShopCartItemValidation().Validate(this).IsValid;
         }
 
-        public class ShopCartItemOrderValidation : AbstractValidator<ShopCartItem>
+        public class ShopCartItemValidation : AbstractValidator<ShopCartItem>
         {
-            public ShopCartItemOrderValidation()
+            public ShopCartItemValidation()
             {
                 RuleFor(c => c.ProductId)
                     .NotEqual(Guid.Empty)
