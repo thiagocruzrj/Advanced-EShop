@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace AES.ShopCart.API.Model
         public Guid ClientId { get; set; }
         public decimal TotalPrice { get; set; }
         public List<ShopCartItem> Items { get; set; } = new List<ShopCartItem>();
+        public ValidationResult ValidationResult { get; set; }
 
         internal void CalculatingShopCartTotalPrice()
         {
@@ -78,6 +80,9 @@ namespace AES.ShopCart.API.Model
             Items.Remove(GetByProductId(item.ProductId));
             CalculatingShopCartTotalPrice();
         }
+
+        internal bool IsValid()
+        { }
 
         public class ShopCartClientValidation : AbstractValidator<ShopCartClient>
         {
