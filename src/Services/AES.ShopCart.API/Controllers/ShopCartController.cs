@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AES.ShopCart.API.Controllers
@@ -141,6 +142,14 @@ namespace AES.ShopCart.API.Controllers
         {
             var result = await _context.SaveChangesAsync();
             if (result <= 0) AddProcessingError("Isn't possible to persist data on db");
+        }
+
+        private bool ValidatingShopCart(ShopCartClient shopCart)
+        {
+            if (shopCart.IsValid()) return true;
+
+            shopCart.ValidationResult.Errors.ToList().ForEach(e => AddProcessingError(e.ErrorMessage));
+            return false;
         }
     }
 }
