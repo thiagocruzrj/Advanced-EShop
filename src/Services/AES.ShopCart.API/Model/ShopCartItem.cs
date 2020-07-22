@@ -59,15 +59,15 @@ namespace AES.ShopCart.API.Model
 
                 RuleFor(c => c.Quantity)
                     .GreaterThan(0)
-                    .WithMessage("Minimum Product quantity is 1");
+                    .WithMessage(item => $"Minimum {item.Name} quantity is 1");
 
                 RuleFor(c => c.Quantity)
                     .LessThan(ShopCartClient.MAX_QUANTITY_ITEM)
-                    .WithMessage($"Maximum Product quantity is {ShopCartClient.MAX_QUANTITY_ITEM}");
+                    .WithMessage(item => $"Maximum {item.Name} quantity is {ShopCartClient.MAX_QUANTITY_ITEM}");
 
                 RuleFor(c => c.Price)
                     .GreaterThan(0)
-                    .WithMessage("Product price need to be greater than 0");
+                    .WithMessage(item => $"{item.Name} price need to be greater than 0");
             }
         }
     }
