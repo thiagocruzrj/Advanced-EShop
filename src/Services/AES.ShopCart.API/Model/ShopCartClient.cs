@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,24 @@ namespace AES.ShopCart.API.Model
         {
             Items.Remove(GetByProductId(item.ProductId));
             CalculatingShopCartTotalPrice();
+        }
+
+        public class ShopCartClientValidation : AbstractValidator<ShopCartClient>
+        {
+            public ShopCartClientValidation()
+            {
+                RuleFor(c => c.ClientId)
+                    .NotEqual(Guid.Empty)
+                    .WithMessage("Client unknown");
+
+                RuleFor(c => c.Items.Count)
+                    .GreaterThan(0)
+                    .WithMessage("Cart hasn't items");
+
+                RuleFor(c => c.TotalPrice)
+                    .GreaterThan(0)
+                    .WithMessage("Total cart price should be greater than 0");
+            }
         }
     }
 }
