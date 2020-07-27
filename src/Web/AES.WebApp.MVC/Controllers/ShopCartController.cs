@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Controllers
@@ -21,6 +22,13 @@ namespace AES.WebApp.MVC.Controllers
         [HttpPut]
         [Route("shopCart/update-item")]
         public async Task<IActionResult> UpdateShopCartItem()
+        {
+            return RedirectToAction("Index");
+        }
+
+        [HttpDelete]
+        [Route("shopCart/remove-item")]
+        public async Task<IActionResult> RemoveShopCartItem(Guid productId)
         {
             return RedirectToAction("Index");
         }
