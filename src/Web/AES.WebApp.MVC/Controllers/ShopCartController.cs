@@ -17,5 +17,12 @@ namespace AES.WebApp.MVC.Controllers
         {
             return RedirectToAction("Index");
         }
+
+        [HttpPut]
+        [Route("shopCart/update-item")]
+        public async Task<IActionResult> UpdateShopCartItem()
+        {
+            return RedirectToAction("Index");
+        }
     }
 }
