@@ -24,9 +24,27 @@ namespace AES.WebApp.MVC.Extensions
             return amount > 0 ? $"Only {amount} on stock!" : "Sold out product!";
         }
 
+        public static string UnitsByProduct(this RazorPage page, int units)
+        {
+            return units > 1 ? $"{units} units" : $"{units} unit";
+        }
+
         public static string CoinFormat(this RazorPage page, decimal price)
         {
             return price > 0 ? string.Format(Thread.CurrentThread.CurrentCulture, "{0:C}", price) : "Free";
+        }
+
+        public static string SelectOptionsByQuantity(this RazorPage page, int quantity, int selectedValue = 0)
+        {
+            var sb = new StringBuilder();
+            for (var i = 1; i <= quantity; i++)
+            {
+                var selected = "";
+                if (i == selectedValue) selected = "selected";
+                sb.Append($"<option {selected} value='{i}'>{i}</option>");
+            }
+
+            return sb.ToString();
         }
     }
 }
