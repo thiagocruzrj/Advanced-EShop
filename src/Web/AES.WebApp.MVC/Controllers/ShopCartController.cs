@@ -28,6 +28,16 @@ namespace AES.WebApp.MVC.Controllers
         [Route("shopCart/add-item")]
         public async Task<IActionResult> AddShopCartItem(ProductItemViewModel productItem)
         {
+            var product = await _catalogService.GetById(productItem.ProductId);
+
+            productItem.Name = product.Name;
+            productItem.Price = product.Price;
+            productItem.Image = product.Image;
+
+            var response = await _shopCartService.AddItemOnShopCart(productItem);
+
+            if (ResponseHasErrors(response)) return View("Index", await _shopCartService.GetShopCart());
+
             return RedirectToAction("Index");
         }
 
