@@ -1,4 +1,5 @@
 ﻿using AES.WebApp.MVC.Extensions;
+using AES.WebApp.MVC.Models;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -42,6 +43,11 @@ namespace AES.WebApp.MVC.Service
 
             response.EnsureSuccessStatusCode();
             return true;
+        }
+
+        protected ResponseResult ReturnOk()
+        {
+            return new ResponseResult();
         }
     }
 }
