@@ -45,9 +45,9 @@ namespace AES.WebApp.MVC.Service
             return ReturnOk();
         }
 
-        public async Task<ResponseResult> RemoveItemOnShopCart(ProductItemViewModel product)
+        public async Task<ResponseResult> RemoveItemOnShopCart(Guid productId)
         {
-            var response = await _httpClient.DeleteAsync($"/shopCart/{product.ProductId}");
+            var response = await _httpClient.DeleteAsync($"/shopCart/{productId}");
 
             if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 
