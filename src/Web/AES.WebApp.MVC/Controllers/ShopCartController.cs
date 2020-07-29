@@ -1,4 +1,5 @@
 ﻿using AES.WebApp.MVC.Models;
+using AES.WebApp.MVC.Service;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -7,10 +8,20 @@ namespace AES.WebApp.MVC.Controllers
 {
     public class ShopCartController : MainController
     {
+        private readonly IShopCartService _shopCartService;
+        private readonly ICatalogService _catalogService;
+
+        public ShopCartController(IShopCartService shopCartService,
+                                  ICatalogService catalogService)
+        {
+            _shopCartService = shopCartService;
+            _catalogService = catalogService;
+        }
+
         [Route("shopCart")]
         public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _shopCartService.GetShopCart());
         }
 
         [HttpPost]
