@@ -30,6 +30,9 @@ namespace AES.WebApp.MVC.Controllers
         {
             var product = await _catalogService.GetById(productItem.ProductId);
 
+            ValidatingShopCartItem(product, productItem.Quantity);
+            if (!ValidOperation()) return View("Index", await _shopCartService.GetShopCart());
+
             productItem.Name = product.Name;
             productItem.Price = product.Price;
             productItem.Image = product.Image;
@@ -46,7 +49,9 @@ namespace AES.WebApp.MVC.Controllers
         public async Task<IActionResult> UpdateShopCartItem(Guid productId, int quantity)
         {
             var product = await _catalogService.GetById(productId);
-            if (product == null) AddValidationError("Product doesnt exist");
+
+            ValidatingShopCartItem(product, quantity);
+            if (!ValidOperation()) return View("Index", await _shopCartService.GetShopCart());
 
             var itemProduct = new ProductItemViewModel { ProductId = productId, Quantity = quantity };
             var response = await _shopCartService.UpdateItemOnShopCart(productId, itemProduct);
@@ -72,6 +77,13 @@ namespace AES.WebApp.MVC.Controllers
             if (ResponseHasErrors(response)) return View("Index", await _shopCartService.GetShopCart());
 
             return RedirectToAction("Index");
+        }
+
+        private void ValidatingShopCartItem(ProductViewModel product, int quantity)
+        {
+            if (product == null) AddValidationError("Product doesnt exist");
+            if (quantity < 1) AddValidationError($"Choise at least an product unit {product.Name}");
+            if (quantity > product.StockQuantity) AddValidationError($"Product {product.Name} has {quantity} units");
         }
     }
 }
