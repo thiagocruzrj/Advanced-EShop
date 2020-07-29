@@ -45,6 +45,13 @@ namespace AES.WebApp.MVC.Controllers
         [Route("shopCart/update-item")]
         public async Task<IActionResult> UpdateShopCartItem(Guid productId, int quantity)
         {
+            var product = await _catalogService.GetById(productId);
+
+            var itemProduct = new ProductItemViewModel { ProductId = productId, Quantity = quantity };
+            var response = await _shopCartService.UpdateItemOnShopCart(productId, itemProduct);
+
+            if (ResponseHasErrors(response)) return View("Index", await _shopCartService.GetShopCart());
+
             return RedirectToAction("Index");
         }
 

@@ -35,10 +35,10 @@ namespace AES.WebApp.MVC.Service
             return ReturnOk();
         }
 
-        public async Task<ResponseResult> UpdateItemOnShopCart(ProductItemViewModel product)
+        public async Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ProductItemViewModel product)
         {
             var itemContent = GetContent(product);
-            var response = await _httpClient.PutAsync($"/shopCart/{product.ProductId}", itemContent);
+            var response = await _httpClient.PutAsync($"/shopCart/{productId}", itemContent);
 
             if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 
