@@ -25,9 +25,14 @@ namespace AES.WebApp.MVC.Service
             return await DeserializeObjectResponse<ShopCartViewModel>(response);
         }
 
-        public Task<ResponseResult> AddItemOnShopCart(ProductItemViewModel product)
+        public async Task<ResponseResult> AddItemOnShopCart(ProductItemViewModel product)
         {
-            throw new NotImplementedException();
+            var itemContent = GetContent(product);
+            var response = await _httpClient.PostAsync("/shopCart/", itemContent);
+
+            if(!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return new ResponseResult();
         }
 
         public Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ProductItemViewModel product)
