@@ -32,6 +32,12 @@ namespace AES.WebApp.MVC.Configuration
                     .AddPolicyHandler(PollyExtentions.WaitTry())
                     .AddTransientHttpErrorPolicy(
                         p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
+
+            services.AddHttpClient<IShopCartService, ShopCartService>()
+                    .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                    .AddPolicyHandler(PollyExtentions.WaitTry())
+                    .AddTransientHttpErrorPolicy(
+                        p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
             #endregion
         }
     }
