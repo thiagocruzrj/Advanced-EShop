@@ -1,22 +1,28 @@
-﻿using AES.WebApp.MVC.Models;
+﻿using AES.WebApp.MVC.Extensions;
+using AES.WebApp.MVC.Models;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Service
 {
-    public class ShopCartService : IShopCartService
+    public class ShopCartService : Service, IShopCartService
     {
         private readonly HttpClient _httpClient;
 
-        public ShopCartService(HttpClient httpClient)
+        public ShopCartService(HttpClient httpClient, IOptions<AppSettings> settings)
         {
             _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri(settings.Value.ShopCartUrl);
         }
 
-        public Task<ShopCartViewModel> GetShopCart()
+        public async Task<ShopCartViewModel> GetShopCart()
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync("/shopCart/");
+            HandlingErrorsReponse(response);
+
+            return await DeserializeObjectResponse<ShopCartViewModel>(response);
         }
 
         public Task<ResponseResult> AddItemOnShopCart(ProductItemViewModel product)
