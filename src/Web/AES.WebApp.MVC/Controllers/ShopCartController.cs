@@ -61,8 +61,16 @@ namespace AES.WebApp.MVC.Controllers
         public async Task<IActionResult> RemoveShopCartItem(Guid productId)
         {
             var product = await _catalogService.GetById(productId);
+            if (product == null)
+            {
+                AddValidationError("Product doesnt exist");
+                return View("Index", await _shopCartService.GetShopCart());
+            }
 
-            var response = await _shopCartService.RemoveItemOnShopCart(product);
+            var response = await _shopCartService.RemoveItemOnShopCart(productId);
+
+            if (ResponseHasErrors(response)) return View("Index", await _shopCartService.GetShopCart());
+
             return RedirectToAction("Index");
         }
     }
