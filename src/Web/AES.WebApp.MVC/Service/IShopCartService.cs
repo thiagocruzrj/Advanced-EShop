@@ -8,7 +8,7 @@ namespace AES.WebApp.MVC.Service
     {
         Task<ShopCartViewModel> GetShopCart();
         Task<ResponseResult> AddItemOnShopCart(ProductItemViewModel product);
-        Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ProductItemViewModel product);
-        Task<ResponseResult> RemoveItemOnShopCart(Guid productId);
+        Task<ResponseResult> UpdateItemOnShopCart(ProductItemViewModel product);
+        Task<ResponseResult> RemoveItemOnShopCart(ProductItemViewModel product);
     }
 }
