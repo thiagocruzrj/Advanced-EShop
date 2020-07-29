@@ -32,17 +32,26 @@ namespace AES.WebApp.MVC.Service
 
             if(!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 
-            return new ResponseResult();
+            return ReturnOk();
         }
 
-        public Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ProductItemViewModel product)
+        public async Task<ResponseResult> UpdateItemOnShopCart(ProductItemViewModel product)
         {
-            throw new NotImplementedException();
+            var itemContent = GetContent(product);
+            var response = await _httpClient.PostAsync($"/shopCart/{product.ProductId}", itemContent);
+
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
         }
 
-        public Task<ResponseResult> RemoveItemOnShopCart(Guid productId)
+        public async Task<ResponseResult> RemoveItemOnShopCart(ProductItemViewModel product)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.DeleteAsync($"/shopCart/{product.ProductId}");
+
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
         }
     }
 }
