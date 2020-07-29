@@ -15,21 +15,24 @@ namespace AES.WebApp.MVC.Configuration
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddSingleton<IValidationAttributeAdapterProvider, CpfValidationAttributeAdapterProvider>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
+
+            #region HttpServices
 
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
-            services.AddHttpClient<IAuthService, AuthService>();
+            services.AddHttpClient<IAuthService, AuthService>()
+                .AddPolicyHandler(PollyExtentions.WaitTry())
+                .AddTransientHttpErrorPolicy(
+                    p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogService, CatalogService>()
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                    //.AddTransientHttpErrorPolicy(
-                    //p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
                     .AddPolicyHandler(PollyExtentions.WaitTry())
                     .AddTransientHttpErrorPolicy(
                         p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddScoped<IAspNetUser, AspNetUser>();
+            #endregion
         }
     }
 }
