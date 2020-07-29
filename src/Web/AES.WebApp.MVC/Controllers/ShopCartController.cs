@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AES.WebApp.MVC.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
@@ -14,14 +15,14 @@ namespace AES.WebApp.MVC.Controllers
 
         [HttpPost]
         [Route("shopCart/add-item")]
-        public async Task<IActionResult> AddShopCartItem()
+        public async Task<IActionResult> AddShopCartItem(ProductItemViewModel productItem)
         {
             return RedirectToAction("Index");
         }
 
         [HttpPut]
         [Route("shopCart/update-item")]
-        public async Task<IActionResult> UpdateShopCartItem()
+        public async Task<IActionResult> UpdateShopCartItem(Guid productId, int quantity)
         {
             return RedirectToAction("Index");
         }
