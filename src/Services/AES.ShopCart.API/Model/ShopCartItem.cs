@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using System;
+using System.Text.Json.Serialization;
 
 namespace AES.ShopCart.API.Model
 {
@@ -18,6 +19,8 @@ namespace AES.ShopCart.API.Model
         public string Image { get; set; }
         // Foreach key
         public Guid ShopCartId { get; set; }
+
+        [JsonIgnore]
         public ShopCartClient ShopCartClient { get; set; }
 
         internal void AssociatingShopCart(Guid shopCartId)
