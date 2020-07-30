@@ -39,7 +39,6 @@ namespace AES.ShopCart.API.Controllers
             else
                 HandlerExistentShopCart(shopCart, item);
 
-            ValidatingShopCart(shopCart);
             if (!ValidOperation()) return CustomResponse();
 
             await PersistData();
@@ -98,7 +97,9 @@ namespace AES.ShopCart.API.Controllers
         private void HandleNewCartItem(ShopCartItem item)
         {
             var cartItem = new ShopCartClient(_user.GetUserId());
+            cartItem.AddItem(item);
 
+            ValidatingShopCart(cartItem);
             _context.ShopCartClients.Add(cartItem);
         }
 
@@ -107,6 +108,7 @@ namespace AES.ShopCart.API.Controllers
             var productItemExistent = cart.ShopCartItemExists(item);
 
             cart.AddItem(item);
+            ValidatingShopCart(cart);
 
             if (productItemExistent)
             {
