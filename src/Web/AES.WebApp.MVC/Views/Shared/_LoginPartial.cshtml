@@ -4,6 +4,10 @@
 
 @if (AppUser.IsAuthenticated())
 {
+<div>
+    <vc:shop-cart/>
+</div>
+<div>
     <div class="dropdown d-inline-block">
         <a href="#" class="icontext dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
             <img class="icon icon-sm rounded-circle" src="https://s.gravatar.com/avatar/@this.HashEmailForGravatar(AppUser.GetUserEmail())?d=mm&s=45">
@@ -15,6 +19,7 @@
             <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Exit</a>
         </div>
     </div>
+</div>
 }
 else
 {
