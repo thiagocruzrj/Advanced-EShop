@@ -28,5 +28,12 @@ namespace AES.BFF.Purchases.Controllers
         {
             return CustomResponse();
         }
+
+        [HttpPut]
+        [Route("purchases/shopCart/items/{productId}")]
+        public async Task<IActionResult> UpdateShopCartItem()
+        {
+            return CustomResponse();
+        }
     }
 }
