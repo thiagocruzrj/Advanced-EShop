@@ -9,10 +9,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.4.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\AES.Core\AES.Core.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\AES.MessageBus\AES.MessageBus.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\NSE.WebApi.Core\AES.WebApi.Core.csproj" />
   </ItemGroup>
 
 </Project>
