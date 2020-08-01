@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
 
-namespace AES.Clients.API.Configuration
+namespace AES.BFF.Purchases.Configuration
 {
     public static class SwaggerConfig
     {
@@ -11,10 +11,10 @@ namespace AES.Clients.API.Configuration
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "Advanced Enterprise Shop Api",
-                    Description = "Api created to manage clients context",
+                    Title = "Advanced E-Shop Purchase BFF Api Gateway",
+                    Description = "This API was created to manage requests between apis and front-end",
                     Contact = new OpenApiContact() { Name = "Thiago Cruz", Email = "thagocruz@gmail.com" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensourse.org/licenses/MIT") }
                 });
@@ -43,7 +43,6 @@ namespace AES.Clients.API.Configuration
                         new string[] {}
                     }
                 });
-
             });
         }
 
