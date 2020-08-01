@@ -17,6 +17,7 @@
     <ProjectReference Include="..\..\BuildingBlocks\AES.Core\AES.Core.csproj" />
     <ProjectReference Include="..\..\BuildingBlocks\AES.MessageBus\AES.MessageBus.csproj" />
     <ProjectReference Include="..\..\BuildingBlocks\NSE.WebApi.Core\AES.WebApi.Core.csproj" />
+    <ProjectReference Include="..\..\Web\AES.WebApp.MVC\AES.WebApp.MVC.csproj" />
   </ItemGroup>
 
 </Project>
