@@ -35,5 +35,12 @@ namespace AES.BFF.Purchases.Controllers
         {
             return CustomResponse();
         }
+
+        [HttpDelete]
+        [Route("purchases/shopCart/items/{productId}")]
+        public async Task<IActionResult> RemoveShopCartItem()
+        {
+            return CustomResponse();
+        }
     }
 }
