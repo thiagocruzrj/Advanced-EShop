@@ -5,9 +5,6 @@ namespace AES.BFF.Purchases.Configuration
 {
     public static class MessageBusConfig
     {
-        public static void AddMessageBusConfiguration(this IServiceCollection services, IConfiguration configuration)
-        {
-
-        }
+        public static void AddMessageBusConfiguration(this IServiceCollection services, IConfiguration configuration) { }
     }
 }
