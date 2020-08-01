@@ -21,5 +21,12 @@ namespace AES.BFF.Purchases.Controllers
         {
             return CustomResponse();
         }
+
+        [HttpPost]
+        [Route("purchases/shopCart/items")]
+        public async Task<IActionResult> AddShopCartItem()
+        {
+            return CustomResponse();
+        }
     }
 }
