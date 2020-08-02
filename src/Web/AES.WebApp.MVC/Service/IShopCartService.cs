@@ -1,4 +1,5 @@
-﻿using AES.WebApp.MVC.Models;
+﻿using AES.Core.Communication;
+using AES.WebApp.MVC.Models;
 using System;
 using System.Threading.Tasks;
 

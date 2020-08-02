@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AES.Core.Communication;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 

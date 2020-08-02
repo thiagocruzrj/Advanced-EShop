@@ -1,4 +1,5 @@
-﻿using AES.WebApp.MVC.Extensions;
+﻿using AES.Core.Communication;
+using AES.WebApp.MVC.Extensions;
 using AES.WebApp.MVC.Models;
 using Microsoft.Extensions.Options;
 using System;

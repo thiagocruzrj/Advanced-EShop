@@ -1,4 +1,4 @@
-﻿using AES.WebApp.MVC.Models;
+﻿using AES.Core.Communication;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 

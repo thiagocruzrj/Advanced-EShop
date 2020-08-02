@@ -1,5 +1,5 @@
-﻿using AES.WebApp.MVC.Extensions;
-using AES.WebApp.MVC.Models;
+﻿using AES.Core.Communication;
+using AES.WebApp.MVC.Extensions;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
