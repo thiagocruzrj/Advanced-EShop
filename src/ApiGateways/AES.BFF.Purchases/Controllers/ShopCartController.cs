@@ -1,4 +1,5 @@
-﻿using AES.Core.Controllers;
+﻿using AES.BFF.Purchases.Services;
+using AES.Core.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -8,6 +9,15 @@ namespace AES.BFF.Purchases.Controllers
     [Authorize]
     public class ShopCartController : MainController
     {
+        private readonly IShopCartService _shopCartService;
+        private readonly ICatalogService _catalogService;
+
+        public ShopCartController(IShopCartService shopCartService, ICatalogService catalogService)
+        {
+            _shopCartService = shopCartService;
+            _catalogService = catalogService;
+        }
+
         [HttpGet]
         [Route("purchases/shopCart")]
         public async Task<IActionResult> Index()
