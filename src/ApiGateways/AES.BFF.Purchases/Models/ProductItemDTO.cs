@@ -20,4 +20,11 @@ namespace AES.BFF.Purchases.Models
         public string Image { get; set; }
         public int Quantity { get; set; }
     }
+
+    public class ShopCartDTO
+    {
+        public decimal TotalPrice { get; set; }
+        public decimal Discount { get; set; }
+        public List<ShopCartItemDTO> Items { get; set; } = new List<ShopCartItemDTO>();
+    }
 }
