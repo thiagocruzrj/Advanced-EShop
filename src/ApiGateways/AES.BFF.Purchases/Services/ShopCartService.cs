@@ -27,14 +27,6 @@ namespace AES.BFF.Purchases.Services
             return await DeserializeObjectResponse<ShopCartDTO>(response);
         }
 
-        public async Task<int> GetShopCartQuantity()
-        {
-            var response = await _httpClient.GetAsync("/shopCart/");
-            HandlingErrorsReponse(response);
-
-            return await DeserializeObjectResponse<int>(response);
-        }
-
         public async Task<ResponseResult> AddItemOnShopCart(ShopCartItemDTO product)
         {
             var itemContent = GetContent(product);
