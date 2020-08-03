@@ -1,5 +1,4 @@
-﻿using AES.WebApp.MVC.Extensions;
-using AES.WebApp.MVC.Models;
+﻿using AES.Core.Communication;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -34,6 +33,11 @@ namespace AES.BFF.Purchases.Services
 
             response.EnsureSuccessStatusCode();
             return true;
+        }
+
+        protected ResponseResult ReturnOk()
+        {
+            return new ResponseResult();
         }
     }
 }
