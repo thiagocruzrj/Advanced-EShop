@@ -18,29 +18,50 @@ namespace AES.BFF.Purchases.Services
             _httpClient.BaseAddress = new Uri(settings.Value.ShopCartUrl);
         }
 
-        public Task<ShopCartDTO> GetShopCart()
+
+        public async Task<ShopCartDTO> GetShopCart()
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync("/shopCart/");
+            HandlingErrorsReponse(response);
+
+            return await DeserializeObjectResponse<ShopCartDTO>(response);
         }
 
-        public Task<int> GetShopCartQuantity()
+        public async Task<int> GetShopCartQuantity()
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.GetAsync("/shopCart/");
+            HandlingErrorsReponse(response);
+
+            return await DeserializeObjectResponse<int>(response);
         }
 
-        public Task<ResponseResult> AddItemOnShopCart(ShopCartItemDTO product)
+        public async Task<ResponseResult> AddItemOnShopCart(ShopCartItemDTO product)
         {
-            throw new NotImplementedException();
+            var itemContent = GetContent(product);
+            var response = await _httpClient.PostAsync("/shopCart/", itemContent);
+
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
         }
 
-        public Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemDTO product)
+        public async Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemDTO product)
         {
-            throw new NotImplementedException();
+            var itemContent = GetContent(product);
+            var response = await _httpClient.PutAsync($"/shopCart/{productId}", itemContent);
+
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
         }
 
-        public Task<ResponseResult> RemoveItemOnShopCart(Guid productId)
+        public async Task<ResponseResult> RemoveItemOnShopCart(Guid productId)
         {
-            throw new NotImplementedException();
+            var response = await _httpClient.DeleteAsync($"/shopCart/{productId}");
+
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
         }
     }
 }
