@@ -37,7 +37,7 @@ namespace AES.BFF.Purchases.Controllers
 
         [HttpPost]
         [Route("purchases/shopCart/items")]
-        public async Task<IActionResult> AddShopCartItem()
+        public async Task<IActionResult> AddShopCartItem(ShopCartItemDTO productItem)
         {
             return CustomResponse();
         }
