@@ -3,6 +3,7 @@ using AES.BFF.Purchases.Services;
 using AES.Core.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,16 +56,23 @@ namespace AES.BFF.Purchases.Controllers
 
         [HttpPut]
         [Route("purchases/shopCart/items/{productId}")]
-        public async Task<IActionResult> UpdateShopCartItem()
+        public async Task<IActionResult> UpdateShopCartItem(Guid productId, ShopCartItemDTO productItem)
         {
-            return CustomResponse();
+            var product = await _catalogService.GetById(productId);
+
+            await ValidateShopCartItem(product, productItem.Quantity);
+            if (!ValidOperation()) return CustomResponse();
+
+            var response = await _shopCartService.UpdateItemOnShopCart(productId, productItem);
+
+            return CustomResponse(response);
+
         }
 
         [HttpDelete]
         [Route("purchases/shopCart/items/{productId}")]
-        public async Task<IActionResult> RemoveShopCartItem()
+        public async Task<IActionResult> RemoveShopCartItem(Guid productId)
         {
-            return CustomResponse();
         }
 
         private async Task ValidateShopCartItem(ProductItemDTO product, int quantity)
