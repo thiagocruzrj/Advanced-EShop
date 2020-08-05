@@ -2,6 +2,7 @@
 using AES.Core.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace AES.BFF.Purchases.Controllers
@@ -22,14 +23,15 @@ namespace AES.BFF.Purchases.Controllers
         [Route("purchases/shopCart")]
         public async Task<IActionResult> Index()
         {
-            return CustomResponse();
+            return CustomResponse(await _shopCartService.GetShopCart());
         }
 
         [HttpGet]
         [Route("purchases/shop-cart-quantity")]
-        public async Task<IActionResult> GetShopCartQuantity()
+        public async Task<int> GetShopCartQuantity()
         {
-            return CustomResponse();
+            var quantity = await _shopCartService.GetShopCart();
+            return quantity?.Items.Sum(i => i.Quantity) ?? 0;
         }
 
         [HttpPost]
