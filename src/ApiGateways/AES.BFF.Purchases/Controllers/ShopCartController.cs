@@ -44,7 +44,13 @@ namespace AES.BFF.Purchases.Controllers
             await ValidateShopCartItem(product, productItem.Quantity);
             if (!ValidOperation()) return CustomResponse();
 
-            return CustomResponse();
+            productItem.Name = product.Name;
+            productItem.Price = product.Price;
+            productItem.Image = product.Image;
+
+            var response = await _shopCartService.AddItemOnShopCart(productItem);
+
+            return CustomResponse(response);
         }
 
         [HttpPut]
