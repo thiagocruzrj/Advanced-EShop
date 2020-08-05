@@ -73,6 +73,17 @@ namespace AES.BFF.Purchases.Controllers
         [Route("purchases/shopCart/items/{productId}")]
         public async Task<IActionResult> RemoveShopCartItem(Guid productId)
         {
+            var product = await _catalogService.GetById(productId);
+
+            if (product == null)
+            {
+                AddProcessingError("Product doesn't exist");
+                return CustomResponse();
+            }
+
+            var response = await _shopCartService.RemoveItemOnShopCart(productId);
+
+            return CustomResponse(response);
         }
 
         private async Task ValidateShopCartItem(ProductItemDTO product, int quantity)
