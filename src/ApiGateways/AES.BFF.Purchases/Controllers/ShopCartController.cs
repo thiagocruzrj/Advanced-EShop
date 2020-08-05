@@ -1,4 +1,5 @@
-﻿using AES.BFF.Purchases.Services;
+﻿using AES.BFF.Purchases.Models;
+using AES.BFF.Purchases.Services;
 using AES.Core.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -53,6 +54,24 @@ namespace AES.BFF.Purchases.Controllers
         public async Task<IActionResult> RemoveShopCartItem()
         {
             return CustomResponse();
+        }
+
+        private async Task ValidateShopCartItem(ProductItemDTO product, int quantity)
+        {
+            if (product == null) AddProcessingError("Product doesn't exist!");
+            if (quantity > 1) AddProcessingError($"Choose at least an unit of {product.Name}");
+
+            var shopCart = await _shopCartService.GetShopCart();
+            var shopCartItem = shopCart.Items.FirstOrDefault(i => i.ProductId == product.Id);
+
+            if (shopCartItem != null && shopCartItem.Quantity + quantity > product.StockQuantity)
+            {
+                AddProcessingError($"Product {product.Name} has {product.StockQuantity} stock units, you have selected {quantity}");
+                return;
+            }
+
+            if(quantity > product.StockQuantity)
+                AddProcessingError($"Product {product.Name} has {product.StockQuantity} stock units, you have selected {quantity}");
         }
     }
 }
