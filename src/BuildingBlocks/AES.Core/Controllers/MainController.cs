@@ -55,6 +55,13 @@ namespace AES.Core.Controllers
             return true;
         }
 
+        protected ActionResult CustomResponse(ResponseResult response)
+        {
+            ResponseHasErrors(response);
+
+            return CustomResponse();
+        }
+
         protected bool ValidOperation()
         {
             return !Errors.Any();
