@@ -39,6 +39,11 @@ namespace AES.BFF.Purchases.Controllers
         [Route("purchases/shopCart/items")]
         public async Task<IActionResult> AddShopCartItem(ShopCartItemDTO productItem)
         {
+            var product = await _catalogService.GetById(productItem.ProductId);
+
+            await ValidateShopCartItem(product, productItem.Quantity);
+            if (!ValidOperation()) return CustomResponse();
+
             return CustomResponse();
         }
 
