@@ -1,4 +1,5 @@
-﻿using FluentValidation.Results;
+﻿using AES.Core.Communication;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Collections.Generic;
@@ -42,6 +43,16 @@ namespace AES.Core.Controllers
             }
 
             return CustomResponse();
+        }
+
+        protected bool ResponseHasErrors(ResponseResult response)
+        {
+            if (response == null || !response.Errors.Messages.Any()) return false;
+            foreach (var message in response.Errors.Messages)
+            {
+                AddProcessingError(message);
+            }
+            return true;
         }
 
         protected bool ValidOperation()
