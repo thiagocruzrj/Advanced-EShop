@@ -1,7 +1,7 @@
 ﻿using AES.BFF.Purchases.Extensions;
 using AES.BFF.Purchases.Services;
 using AES.WebApi.Core.Users;
-using AES.WebApp.MVC.Extensions;
+using AES.WebApi.Core.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Polly;
@@ -20,12 +20,12 @@ namespace AES.BFF.Purchases.Configuration
 
             services.AddHttpClient<ICatalogService, CatalogService>()
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                    .AddPolicyHandler(PollyExtentions.WaitTry())
+                    .AddPolicyHandler(PollyExtensions.WaitTry())
                     .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IShopCartService, ShopCartService>()
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                    .AddPolicyHandler(PollyExtentions.WaitTry())
+                    .AddPolicyHandler(PollyExtensions.WaitTry())
                     .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
         }
     }
