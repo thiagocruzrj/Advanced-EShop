@@ -4,9 +4,9 @@ using Polly.Retry;
 using System;
 using System.Net.Http;
 
-namespace AES.WebApp.MVC.Extensions
+namespace AES.WebApi.Core.Extensions
 {
-    public class PollyExtentions
+    public static class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> WaitTry()
         {
