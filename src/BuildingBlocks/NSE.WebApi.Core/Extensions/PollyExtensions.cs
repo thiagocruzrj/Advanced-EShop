@@ -16,12 +16,7 @@ namespace AES.WebApi.Core.Extensions
                 {
                     TimeSpan.FromSeconds(1),
                     TimeSpan.FromSeconds(5),
-                    TimeSpan.FromSeconds(10),
-                }, (outcome, timespan, retryCount, context) =>
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"Trying for the {retryCount} time!");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    TimeSpan.FromSeconds(10)
                 });
 
             return retry;
