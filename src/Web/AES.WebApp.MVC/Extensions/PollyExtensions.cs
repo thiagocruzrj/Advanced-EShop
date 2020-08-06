@@ -6,7 +6,7 @@ using System.Net.Http;
 
 namespace AES.WebApp.MVC.Extensions
 {
-    public class PollyExtentions
+    public class PollyExtensions
     {
         public static AsyncRetryPolicy<HttpResponseMessage> WaitTry()
         {

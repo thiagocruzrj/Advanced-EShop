@@ -23,19 +23,19 @@ namespace AES.WebApp.MVC.Configuration
             services.AddTransient<HttpClientAuthorizationDelegatingHandler>();
 
             services.AddHttpClient<IAuthService, AuthService>()
-                .AddPolicyHandler(PollyExtentions.WaitTry())
+                .AddPolicyHandler(PollyExtensions.WaitTry())
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<ICatalogService, CatalogService>()
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                    .AddPolicyHandler(PollyExtentions.WaitTry())
+                    .AddPolicyHandler(PollyExtensions.WaitTry())
                     .AddTransientHttpErrorPolicy(
                         p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
             services.AddHttpClient<IShopCartService, ShopCartService>()
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
-                    .AddPolicyHandler(PollyExtentions.WaitTry())
+                    .AddPolicyHandler(PollyExtensions.WaitTry())
                     .AddTransientHttpErrorPolicy(
                         p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
             #endregion
