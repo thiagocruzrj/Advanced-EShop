@@ -8,20 +8,20 @@ namespace AES.WebApp.MVC.Controllers
 {
     public class ShopCartController : MainController
     {
-        private readonly IShopCartService _shopCartService;
+        private readonly IPurchaseBffService _purchaseBffService;
         private readonly ICatalogService _catalogService;
 
-        public ShopCartController(IShopCartService shopCartService,
+        public ShopCartController(IPurchaseBffService purchaseBffSService,
                                   ICatalogService catalogService)
         {
-            _shopCartService = shopCartService;
+            _purchaseBffService = purchaseBffSService;
             _catalogService = catalogService;
         }
 
         [Route("shopCart")]
         public async Task<IActionResult> Index()
         {
-            return View(await _shopCartService.GetShopCart());
+            return View(await _purchaseBffService.GetShopCart());
         }
 
         [HttpPost]
@@ -31,15 +31,15 @@ namespace AES.WebApp.MVC.Controllers
             var product = await _catalogService.GetById(productItem.ProductId);
 
             ValidatingShopCartItem(product, productItem.Quantity);
-            if (!ValidOperation()) return View("Index", await _shopCartService.GetShopCart());
+            if (!ValidOperation()) return View("Index", await _purchaseBffService.GetShopCart());
 
             productItem.Name = product.Name;
             productItem.Price = product.Price;
             productItem.Image = product.Image;
 
-            var response = await _shopCartService.AddItemOnShopCart(productItem);
+            var response = await _purchaseBffService.AddItemOnShopCart(productItem);
 
-            if (ResponseHasErrors(response)) return View("Index", await _shopCartService.GetShopCart());
+            if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());
 
             return RedirectToAction("Index");
         }
@@ -51,12 +51,12 @@ namespace AES.WebApp.MVC.Controllers
             var product = await _catalogService.GetById(productId);
 
             ValidatingShopCartItem(product, quantity);
-            if (!ValidOperation()) return View("Index", await _shopCartService.GetShopCart());
+            if (!ValidOperation()) return View("Index", await _purchaseBffService.GetShopCart());
 
             var itemProduct = new ProductItemViewModel { ProductId = productId, Quantity = quantity };
-            var response = await _shopCartService.UpdateItemOnShopCart(productId, itemProduct);
+            var response = await _purchaseBffService.UpdateItemOnShopCart(productId, itemProduct);
 
-            if (ResponseHasErrors(response)) return View("Index", await _shopCartService.GetShopCart());
+            if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());
 
             return RedirectToAction("Index");
         }
@@ -69,12 +69,12 @@ namespace AES.WebApp.MVC.Controllers
             if (product == null)
             {
                 AddValidationError("Product doesnt exist");
-                return View("Index", await _shopCartService.GetShopCart());
+                return View("Index", await _purchaseBffService.GetShopCart());
             }
 
-            var response = await _shopCartService.RemoveItemOnShopCart(productId);
+            var response = await _purchaseBffService.RemoveItemOnShopCart(productId);
 
-            if (ResponseHasErrors(response)) return View("Index", await _shopCartService.GetShopCart());
+            if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());
 
             return RedirectToAction("Index");
         }

@@ -7,16 +7,16 @@ namespace AES.WebApp.MVC.Extensions
 {
     public class ShopCartViewComponent : ViewComponent
     {
-        private readonly IShopCartService _shopCartService;
+        private readonly IPurchaseBffService _purchaseBffService;
 
-        public ShopCartViewComponent(IShopCartService shopCartService)
+        public ShopCartViewComponent(IPurchaseBffService purchaseBffService)
         {
-            _shopCartService = shopCartService;
+            _purchaseBffService = purchaseBffService;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _shopCartService.GetShopCart() ?? new ShopCartViewModel());
+            return View(await _purchaseBffService.GetShopCart() ?? new ShopCartViewModel());
         }
     }
 }

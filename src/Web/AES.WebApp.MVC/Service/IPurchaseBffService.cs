@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Service
 {
-    public interface IShopCartService
+    public interface IPurchaseBffService
     {
         Task<ShopCartViewModel> GetShopCart();
         Task<ResponseResult> AddItemOnShopCart(ProductItemViewModel product);

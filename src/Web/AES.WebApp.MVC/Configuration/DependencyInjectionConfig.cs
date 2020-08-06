@@ -33,7 +33,7 @@ namespace AES.WebApp.MVC.Configuration
                     .AddTransientHttpErrorPolicy(
                         p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            services.AddHttpClient<IShopCartService, ShopCartService>()
+            services.AddHttpClient<IPurchaseBffService, PurchaseBffService>()
                     .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
                     .AddPolicyHandler(PollyExtensions.WaitTry())
                     .AddTransientHttpErrorPolicy(

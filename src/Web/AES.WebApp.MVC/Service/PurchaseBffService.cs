@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Service
 {
-    public class ShopCartService : Service, IShopCartService
+    public class PurchaseBffService : Service, IPurchaseBffService
     {
         private readonly HttpClient _httpClient;
 
-        public ShopCartService(HttpClient httpClient, IOptions<AppSettings> settings)
+        public PurchaseBffService(HttpClient httpClient, IOptions<AppSettings> settings)
         {
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri(settings.Value.ShopCartUrl);
