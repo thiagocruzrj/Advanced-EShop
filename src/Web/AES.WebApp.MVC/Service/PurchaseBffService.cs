@@ -26,9 +26,9 @@ namespace AES.WebApp.MVC.Service
             return await DeserializeObjectResponse<ShopCartViewModel>(response);
         }
 
-        public async Task<ResponseResult> AddItemOnShopCart(ProductItemViewModel product)
+        public async Task<ResponseResult> AddItemOnShopCart(ShopCartItemViewModel shopCartItem)
         {
-            var itemContent = GetContent(product);
+            var itemContent = GetContent(shopCartItem);
             var response = await _httpClient.PostAsync("/shopCart/", itemContent);
 
             if(!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
@@ -36,9 +36,9 @@ namespace AES.WebApp.MVC.Service
             return ReturnOk();
         }
 
-        public async Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ProductItemViewModel product)
+        public async Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemViewModel shopCartItem)
         {
-            var itemContent = GetContent(product);
+            var itemContent = GetContent(shopCartItem);
             var response = await _httpClient.PutAsync($"/shopCart/{productId}", itemContent);
 
             if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);

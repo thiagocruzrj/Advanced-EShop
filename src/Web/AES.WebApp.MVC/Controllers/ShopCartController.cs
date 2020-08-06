@@ -26,18 +26,18 @@ namespace AES.WebApp.MVC.Controllers
 
         [HttpPost]
         [Route("shopCart/add-item")]
-        public async Task<IActionResult> AddShopCartItem(ProductItemViewModel productItem)
+        public async Task<IActionResult> AddShopCartItem(ShopCartItemViewModel shopCartItem)
         {
-            var product = await _catalogService.GetById(productItem.ProductId);
+            var product = await _catalogService.GetById(shopCartItem.ProductId);
 
-            ValidatingShopCartItem(product, productItem.Quantity);
+            ValidatingShopCartItem(product, shopCartItem.Quantity);
             if (!ValidOperation()) return View("Index", await _purchaseBffService.GetShopCart());
 
-            productItem.Name = product.Name;
-            productItem.Price = product.Price;
-            productItem.Image = product.Image;
+            shopCartItem.Name = product.Name;
+            shopCartItem.Price = product.Price;
+            shopCartItem.Image = product.Image;
 
-            var response = await _purchaseBffService.AddItemOnShopCart(productItem);
+            var response = await _purchaseBffService.AddItemOnShopCart(shopCartItem);
 
             if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());
 
@@ -53,7 +53,7 @@ namespace AES.WebApp.MVC.Controllers
             ValidatingShopCartItem(product, quantity);
             if (!ValidOperation()) return View("Index", await _purchaseBffService.GetShopCart());
 
-            var itemProduct = new ProductItemViewModel { ProductId = productId, Quantity = quantity };
+            var itemProduct = new ShopCartItemViewModel { ProductId = productId, Quantity = quantity };
             var response = await _purchaseBffService.UpdateItemOnShopCart(productId, itemProduct);
 
             if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());

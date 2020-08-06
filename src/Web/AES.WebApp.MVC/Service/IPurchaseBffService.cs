@@ -8,8 +8,8 @@ namespace AES.WebApp.MVC.Service
     public interface IPurchaseBffService
     {
         Task<ShopCartViewModel> GetShopCart();
-        Task<ResponseResult> AddItemOnShopCart(ProductItemViewModel product);
-        Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ProductItemViewModel product);
+        Task<ResponseResult> AddItemOnShopCart(ShopCartItemViewModel product);
+        Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemViewModel product);
         Task<ResponseResult> RemoveItemOnShopCart(Guid productId);
     }
 }
