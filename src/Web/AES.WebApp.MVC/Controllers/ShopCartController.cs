@@ -9,13 +9,10 @@ namespace AES.WebApp.MVC.Controllers
     public class ShopCartController : MainController
     {
         private readonly IPurchaseBffService _purchaseBffService;
-        private readonly ICatalogService _catalogService;
 
-        public ShopCartController(IPurchaseBffService purchaseBffSService,
-                                  ICatalogService catalogService)
+        public ShopCartController(IPurchaseBffService purchaseBffSService)
         {
             _purchaseBffService = purchaseBffSService;
-            _catalogService = catalogService;
         }
 
         [Route("shopCart")]
@@ -28,15 +25,6 @@ namespace AES.WebApp.MVC.Controllers
         [Route("shopCart/add-item")]
         public async Task<IActionResult> AddShopCartItem(ShopCartItemViewModel shopCartItem)
         {
-            var product = await _catalogService.GetById(shopCartItem.ProductId);
-
-            ValidatingShopCartItem(product, shopCartItem.Quantity);
-            if (!ValidOperation()) return View("Index", await _purchaseBffService.GetShopCart());
-
-            shopCartItem.Name = product.Name;
-            shopCartItem.Price = product.Price;
-            shopCartItem.Image = product.Image;
-
             var response = await _purchaseBffService.AddItemOnShopCart(shopCartItem);
 
             if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());
