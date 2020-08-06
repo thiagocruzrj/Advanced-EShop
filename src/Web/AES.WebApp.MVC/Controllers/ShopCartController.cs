@@ -54,12 +54,5 @@ namespace AES.WebApp.MVC.Controllers
 
             return RedirectToAction("Index");
         }
-
-        private void ValidatingShopCartItem(ProductViewModel product, int quantity)
-        {
-            if (product == null) AddValidationError("Product doesnt exist");
-            if (quantity < 1) AddValidationError($"Choise at least an product unit {product.Name}");
-            if (quantity > product.StockQuantity) AddValidationError($"Product {product.Name} has {quantity} units");
-        }
     }
 }
