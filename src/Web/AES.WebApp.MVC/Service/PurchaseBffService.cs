@@ -20,18 +20,26 @@ namespace AES.WebApp.MVC.Service
 
         public async Task<ShopCartViewModel> GetShopCart()
         {
-            var response = await _httpClient.GetAsync("/shopCart/");
+            var response = await _httpClient.GetAsync("/puchases/shopCart/");
             HandlingErrorsReponse(response);
 
             return await DeserializeObjectResponse<ShopCartViewModel>(response);
         }
 
-        public async Task<ResponseResult> AddItemOnShopCart(ShopCartItemViewModel shopCartItem)
+        public async Task<int> GetQuantityOnShopCart()
+        {
+            var response = await _httpClient.GetAsync("/purchases/shopCart-quantity/");
+            HandlingErrorsReponse(response);
+
+            return await DeserializeObjectResponse<int>(response);
+        }
+
+    public async Task<ResponseResult> AddItemOnShopCart(ShopCartItemViewModel shopCartItem)
         {
             var itemContent = GetContent(shopCartItem);
-            var response = await _httpClient.PostAsync("/shopCart/", itemContent);
+            var response = await _httpClient.PostAsync("/purchases/shopCart/items/", itemContent);
 
-            if(!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 
             return ReturnOk();
         }
@@ -39,7 +47,7 @@ namespace AES.WebApp.MVC.Service
         public async Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemViewModel shopCartItem)
         {
             var itemContent = GetContent(shopCartItem);
-            var response = await _httpClient.PutAsync($"/shopCart/{productId}", itemContent);
+            var response = await _httpClient.PutAsync($"/purchases/shopCart/items/{productId}", itemContent);
 
             if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 
@@ -48,7 +56,7 @@ namespace AES.WebApp.MVC.Service
 
         public async Task<ResponseResult> RemoveItemOnShopCart(Guid productId)
         {
-            var response = await _httpClient.DeleteAsync($"/shopCart/{productId}");
+            var response = await _httpClient.DeleteAsync($"/purchases/shopCart/items/{productId}");
 
             if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 
