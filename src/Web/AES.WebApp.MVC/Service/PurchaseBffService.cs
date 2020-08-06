@@ -15,7 +15,7 @@ namespace AES.WebApp.MVC.Service
         public PurchaseBffService(HttpClient httpClient, IOptions<AppSettings> settings)
         {
             _httpClient = httpClient;
-            _httpClient.BaseAddress = new Uri(settings.Value.ShopCartUrl);
+            _httpClient.BaseAddress = new Uri(settings.Value.PurchasesBffUrl);
         }
 
         public async Task<ShopCartViewModel> GetShopCart()
