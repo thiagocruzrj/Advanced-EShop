@@ -36,13 +36,8 @@ namespace AES.WebApp.MVC.Controllers
         [Route("shopCart/update-item")]
         public async Task<IActionResult> UpdateShopCartItem(Guid productId, int quantity)
         {
-            var product = await _catalogService.GetById(productId);
-
-            ValidatingShopCartItem(product, quantity);
-            if (!ValidOperation()) return View("Index", await _purchaseBffService.GetShopCart());
-
-            var itemProduct = new ShopCartItemViewModel { ProductId = productId, Quantity = quantity };
-            var response = await _purchaseBffService.UpdateItemOnShopCart(productId, itemProduct);
+            var item = new ShopCartItemViewModel { ProductId = productId, Quantity = quantity };
+            var response = await _purchaseBffService.UpdateItemOnShopCart(productId, item);
 
             if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());
 
