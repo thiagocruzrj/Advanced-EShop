@@ -16,7 +16,7 @@ namespace AES.WebApp.MVC.Extensions
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            return View(await _purchaseBffService.GetShopCart() ?? new ShopCartViewModel());
+            return View(await _purchaseBffService.GetQuantityOnShopCart());
         }
     }
 }
