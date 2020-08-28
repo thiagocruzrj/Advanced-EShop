@@ -1,4 +1,5 @@
 ﻿using AES.Core.Data;
+using AES.Core.DomainObjects;
 using AES.Core.Mediator;
 using AES.Core.Messages;
 using Microsoft.EntityFrameworkCore;
@@ -29,9 +30,36 @@ namespace AES.Order.Infra
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrdersContext).Assembly);
         }
 
-        public Task<bool> Commit()
+        public async Task<bool> Commit()
         {
-            throw new System.NotImplementedException();
+            var success = await SaveChangesAsync() > 0;
+            if (success) await _mediator.PublishEvents(this);
+            return success;
+        }
+    }
+
+    public static class MediatorExtension
+    {
+        public static async Task PublishEvents<T>(this IMediatorHandler mediator, T ctx) where T : DbContext
+        {
+            var domainEntities = ctx.ChangeTracker
+                .Entries<Entity>()
+                .Where(x => x.Entity.Notifications != null && x.Entity.Notifications.Any());
+
+            var domainEvents = domainEntities
+                .SelectMany(x => x.Entity.Notifications)
+                .ToList();
+
+            domainEntities.ToList()
+                .ForEach(entity => entity.Entity.CleanEvents());
+
+            var tasks = domainEvents
+                .Select(async (domainEvent) =>
+                {
+                    await mediator.PublishEvent(domainEvent);
+                });
+
+            await Task.WhenAll(tasks);
         }
     }
 }
