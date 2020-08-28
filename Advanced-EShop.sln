@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AES.Order.Domain", "src\Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AES.Order.API", "src\Services\Order\AES.Order.API\AES.Order.API.csproj", "{7DD65BA7-C4E2-491C-87A8-974360E355D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AES.Order.Infra", "src\Services\Order\AES.Order.Infra\AES.Order.Infra.csproj", "{91AFC49F-FE25-4DFC-A6A8-85FBDA05B9A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{7DD65BA7-C4E2-491C-87A8-974360E355D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DD65BA7-C4E2-491C-87A8-974360E355D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DD65BA7-C4E2-491C-87A8-974360E355D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91AFC49F-FE25-4DFC-A6A8-85FBDA05B9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91AFC49F-FE25-4DFC-A6A8-85FBDA05B9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91AFC49F-FE25-4DFC-A6A8-85FBDA05B9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91AFC49F-FE25-4DFC-A6A8-85FBDA05B9A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +151,7 @@ Global
 		{8BD155C9-3CBF-465A-A107-7094B544044C} = {01CAD9CC-F0EF-4E98-83C7-A5C3BDF40910}
 		{40309EF1-B65B-47BB-8940-2AAA4C3B5A03} = {31C76D8F-39E9-4488-A178-F7598B474203}
 		{7DD65BA7-C4E2-491C-87A8-974360E355D1} = {31C76D8F-39E9-4488-A178-F7598B474203}
+		{91AFC49F-FE25-4DFC-A6A8-85FBDA05B9A6} = {31C76D8F-39E9-4488-A178-F7598B474203}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0F839E5-E7CE-4EA5-BDFB-FD7238387503}
