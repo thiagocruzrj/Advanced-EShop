@@ -5,7 +5,7 @@ namespace AES.Order.Domain.Vouchers
 {
     public class Voucher : Entity, IAggregateRoot
     {
-        public string Code { get; private private set; }
+        public string Code { get; private set; }
         public decimal? Percent { get; private set; }
         public decimal? DiscountValue { get; private set; }
         public int Quantity { get; private set; }
