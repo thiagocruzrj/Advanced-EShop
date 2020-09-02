@@ -21,8 +21,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Application\" />
-	  <Folder Include="Controllers\" />
+	  <Folder Include="Application\Queries\" />
+	  <Folder Include="Application\Events\" />
+	  <Folder Include="Application\Commands\" />
 	</ItemGroup>
 
 </Project>
