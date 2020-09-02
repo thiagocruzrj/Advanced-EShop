@@ -24,7 +24,7 @@ namespace AES.Order.Domain.Vouchers.Specs
     {
         public override Expression<Func<Voucher, bool>> ToExpression()
         {
-            return voucher => voucher.Active;
+            return voucher => voucher.Active && !voucher.Used;
         }
     }
 }
