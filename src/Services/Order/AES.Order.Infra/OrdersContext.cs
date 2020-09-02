@@ -2,6 +2,7 @@
 using AES.Core.DomainObjects;
 using AES.Core.Mediator;
 using AES.Core.Messages;
+using AES.Order.Domain.Vouchers;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace AES.Order.Infra
         {
             _mediator = mediator;
         }
+
+        public DbSet<Voucher> Vouchers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
