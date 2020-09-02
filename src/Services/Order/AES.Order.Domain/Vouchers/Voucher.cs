@@ -15,5 +15,20 @@ namespace AES.Order.Domain.Vouchers
         public DateTime ExpirationDate { get; private set; }
         public bool Active { get; private set; }
         public bool Used { get; private set; }
+
+        public bool IsValidToUse()
+        {
+            if (!Active) return false;
+            if (Used) return false;
+
+            return true;
+        }
+
+        public void MarkAsUsed()
+        {
+            Active = false;
+            Used = true;
+            Quantity = 0;
+        }
     }
 }
