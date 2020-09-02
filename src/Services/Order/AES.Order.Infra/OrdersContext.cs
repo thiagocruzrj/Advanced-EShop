@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace AES.Order.Infra
 {
-    public class OrdersContext : DbContext, IUnitOfWork
+    public class OrderContext : DbContext, IUnitOfWork
     {
         private readonly IMediatorHandler _mediator;
 
-        public OrdersContext(DbContextOptions<OrdersContext> options, IMediatorHandler mediator)
+        public OrderContext(DbContextOptions<OrderContext> options, IMediatorHandler mediator) : base(options)
         {
             _mediator = mediator;
         }
@@ -30,7 +30,7 @@ namespace AES.Order.Infra
             modelBuilder.Ignore<Event>();
             modelBuilder.Ignore<ValidationResult>();
 
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrdersContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderContext).Assembly);
         }
 
         public async Task<bool> Commit()
