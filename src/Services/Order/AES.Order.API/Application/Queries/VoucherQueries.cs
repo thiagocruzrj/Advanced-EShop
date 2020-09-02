@@ -24,7 +24,7 @@ namespace AES.Order.API.Application.Queries
 
             if (voucher == null) return null;
 
-            // Validating valid voucher
+            if (!voucher.IsValidToUse()) return null;
 
             return new VoucherDTO
             {
