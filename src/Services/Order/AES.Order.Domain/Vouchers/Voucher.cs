@@ -1,4 +1,5 @@
 ﻿using AES.Core.DomainObjects;
+using AES.Order.Domain.Vouchers.Specs;
 using System;
 
 namespace AES.Order.Domain.Vouchers
@@ -18,10 +19,9 @@ namespace AES.Order.Domain.Vouchers
 
         public bool IsValidToUse()
         {
-            if (!Active) return false;
-            if (Used) return false;
-
-            return true;
+            return new VoucherActiveSpecification()
+                .And(new VoucherDataSpecification())
+                .And(new VoucherQuantitySpecification()).IsSatisfiedBy(this);
         }
 
         public void MarkAsUsed()
