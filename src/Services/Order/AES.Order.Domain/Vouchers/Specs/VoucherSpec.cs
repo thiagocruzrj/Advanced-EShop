@@ -19,4 +19,12 @@ namespace AES.Order.Domain.Vouchers.Specs
             return voucher => voucher.Quantity > 0;
         }
     }
+
+    public class VoucherActiveSpecification : Specification<Voucher>
+    {
+        public override Expression<Func<Voucher, bool>> ToExpression()
+        {
+            return voucher => voucher.Active;
+        }
+    }
 }
