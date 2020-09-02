@@ -18,9 +18,21 @@ namespace AES.Order.API.Application.Queries
             _repository = repository;
         }
 
-        public Task<VoucherDTO> GetVoucherByCode(string code)
+        public async Task<VoucherDTO> GetVoucherByCode(string code)
         {
-            throw new System.NotImplementedException();
+            var voucher = await _repository.GetVoucherByCode(code);
+
+            if (voucher == null) return null;
+
+            // Validating valid voucher
+
+            return new VoucherDTO
+            {
+                Code = voucher.Code,
+                DiscountType = (int)voucher.DiscountType,
+                Percent = voucher.Percent,
+                DiscountValue = voucher.DiscountValue
+            };
         }
     }
 }
