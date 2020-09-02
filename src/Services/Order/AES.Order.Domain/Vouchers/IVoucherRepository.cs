@@ -2,7 +2,5 @@
 
 namespace AES.Order.Domain.Vouchers
 {
-    public interface IVoucherRepository : IRepository<Voucher>
-    {
-    }
+    public interface IVoucherRepository : IRepository<Voucher> { }
 }
