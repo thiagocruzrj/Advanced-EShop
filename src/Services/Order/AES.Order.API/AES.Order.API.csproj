@@ -12,12 +12,12 @@
   </ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\BuildingBlocks\NSE.WebApi.Core\AES.WebApi.Core.csproj" />
 		<ProjectReference Include="..\AES.Order.Domain\AES.Order.Domain.csproj" />
 		<ProjectReference Include="..\AES.Order.Infra\AES.Order.Infra.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Configuration\" />
 	  <Folder Include="Application\" />
 	  <Folder Include="Controllers\" />
 	</ItemGroup>
