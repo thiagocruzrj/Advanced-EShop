@@ -1,7 +1,9 @@
 ﻿using AES.Core.Controllers;
+using AES.Order.API.Application.DTO;
 using AES.Order.API.Application.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace AES.Order.API.Controllers
@@ -16,6 +18,9 @@ namespace AES.Order.API.Controllers
             _voucherQueries = voucherQueries;
         }
 
+        [HttpGet("voucher/{code}")]
+        [ProducesResponseType(typeof(VoucherDTO), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
         public async Task<IActionResult> GetByCode(string code)
         {
             if (string.IsNullOrEmpty(code)) return NotFound();
