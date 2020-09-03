@@ -1,4 +1,5 @@
 ﻿using AES.Core.Mediator;
+using AES.Order.API.Application.Queries;
 using AES.Order.Domain.Vouchers;
 using AES.Order.Infra;
 using AES.Order.Infra.Data;
@@ -18,6 +19,7 @@ namespace AES.Order.API.Configuration
 
             // Application
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+            services.AddScoped<IVoucherQueries, VoucherQueries>();
 
             // Data
             services.AddScoped<IVoucherRepository, VoucherRepository>();
