@@ -14,7 +14,7 @@ namespace AES.BFF.Purchases.Services
         Task<ResponseResult> AddItemOnShopCart(ShopCartItemDTO product);
         Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemDTO product);
         Task<ResponseResult> RemoveItemOnShopCart(Guid productId);
-        Task<ResponseResult> AppyVoucherOnShopCart(VoucherDTO voucher);
+        Task<ResponseResult> ApplyVoucherOnShopCart(VoucherDTO voucher);
     }
 
     public class ShopCartService : Service, IShopCartService
