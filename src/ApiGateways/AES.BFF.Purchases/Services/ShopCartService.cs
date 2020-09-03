@@ -14,6 +14,7 @@ namespace AES.BFF.Purchases.Services
         Task<ResponseResult> AddItemOnShopCart(ShopCartItemDTO product);
         Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemDTO product);
         Task<ResponseResult> RemoveItemOnShopCart(Guid productId);
+        Task<ResponseResult> AppyVoucherOnShopCart(VoucherDTO voucher);
     }
 
     public class ShopCartService : Service, IShopCartService
@@ -25,7 +26,6 @@ namespace AES.BFF.Purchases.Services
             _httpClient = httpClient;
             _httpClient.BaseAddress = new Uri(settings.Value.ShopCartUrl);
         }
-
 
         public async Task<ShopCartDTO> GetShopCart()
         {
@@ -58,6 +58,17 @@ namespace AES.BFF.Purchases.Services
         public async Task<ResponseResult> RemoveItemOnShopCart(Guid productId)
         {
             var response = await _httpClient.DeleteAsync($"/shopCart/{productId}");
+
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+
+        public async Task<ResponseResult> ApplyVoucherOnShopCart(VoucherDTO voucher)
+        {
+            var itemContent = GetContent(voucher);
+
+            var response = await _httpClient.PostAsync("/shopCart/appy-voucher", itemContent);
 
             if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 
