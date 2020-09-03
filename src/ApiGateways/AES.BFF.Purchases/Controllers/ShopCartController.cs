@@ -14,11 +14,14 @@ namespace AES.BFF.Purchases.Controllers
     {
         private readonly IShopCartService _shopCartService;
         private readonly ICatalogService _catalogService;
+        private readonly IOrderService _orderService;
 
-        public ShopCartController(IShopCartService shopCartService, ICatalogService catalogService)
+        public ShopCartController(IShopCartService shopCartService, ICatalogService catalogService,
+                                IOrderService orderService)
         {
             _shopCartService = shopCartService;
             _catalogService = catalogService;
+            _orderService = orderService;
         }
 
         [HttpGet]
@@ -82,6 +85,22 @@ namespace AES.BFF.Purchases.Controllers
             }
 
             var response = await _shopCartService.RemoveItemOnShopCart(productId);
+
+            return CustomResponse(response);
+        }
+
+        [HttpPost]
+        [Route("purchases/shopCart/apply-voucher")]
+        public async Task<IActionResult> ApplyVouchers([FromBody]string voucherCode)
+        {
+            var voucher = await _orderService.GetVoucherByCode(voucherCode);
+            if(voucher is null)
+            {
+                AddProcessingError("Invalid voucher or not found!");
+                return CustomResponse();
+            }
+
+            var response = await _shopCartService.ApplyVoucherOnShopCart(voucher);
 
             return CustomResponse(response);
         }
