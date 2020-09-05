@@ -1,5 +1,6 @@
 ﻿using AES.ShopCart.API.Model;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -27,6 +28,24 @@ namespace AES.ShopCart.API.Data
             modelBuilder.Entity<ShopCartClient>()
                 .HasIndex(c => c.ClientId)
                 .HasName("IDX_Client");
+
+            modelBuilder.Entity<ShopCartClient>()
+                .Ignore(c => c.Voucher)
+                .OwnsOne(c => c.Voucher, v =>
+                {
+                    v.Property(vc => vc.Code)
+                        .HasColumnName("VoucherCode")
+                        .HasColumnType("varchar(50)");
+
+                    v.Property(vc => vc.DiscountType)
+                        .HasColumnName("DiscountType");
+
+                    v.Property(vc => vc.Percent)
+                        .HasColumnName("Percent");
+
+                    v.Property(vc => vc.DiscountValue)
+                        .HasColumnName("DiscountValue");
+                });
 
             modelBuilder.Entity<ShopCartClient>()
                 .HasMany(c => c.Items)
