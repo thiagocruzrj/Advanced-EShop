@@ -117,14 +117,19 @@
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <dl class="dlist-align">
-                                    <dt>Total price:</dt>
-                                    <dd class="text-right">@this.CoinFormat(Model.TotalPrice)</dd>
-                                </dl>
-                                <dl class="dlist-align">
-                                    <dt>Discount:</dt>
-                                    <dd class="text-right">R$ 0,00</dd>
-                                </dl>
+                                @{ 
+                                    if(Model.VoucherUsed)
+                                    {
+                                        <dl class="dlist-align">
+                                            <dt>Original price:</dt>
+                                            <dd class="text-right">@this.CoinFormat(Model.TotalPrice + Model.Discount)</dd>
+                                        </dl>
+                                        <dl class="dlist-align" style="color:green">
+                                            <dt>Discount:</dt>
+                                            <dd class="text-right">@this.CoinFormat(Model.Discount)</dd>
+                                        </dl>
+                                    }
+                                }
                                 <dl class="dlist-align">
                                     <dt>Total:</dt>
                                     <dd class="text-right  h5">
