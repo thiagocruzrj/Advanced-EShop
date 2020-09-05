@@ -8,6 +8,16 @@ using System.Threading.Tasks;
 
 namespace AES.WebApp.MVC.Service
 {
+    public interface IPurchaseBffService
+    {
+        Task<ShopCartViewModel> GetShopCart();
+        Task<int> GetQuantityOnShopCart();
+        Task<ResponseResult> AddItemOnShopCart(ShopCartItemViewModel product);
+        Task<ResponseResult> UpdateItemOnShopCart(Guid productId, ShopCartItemViewModel product);
+        Task<ResponseResult> RemoveItemOnShopCart(Guid productId);
+        Task<ResponseResult> ApplyVoucherOnShopCart(string voucher);
+    }
+
     public class PurchaseBffService : Service, IPurchaseBffService
     {
         private readonly HttpClient _httpClient;
@@ -57,6 +67,17 @@ namespace AES.WebApp.MVC.Service
         public async Task<ResponseResult> RemoveItemOnShopCart(Guid productId)
         {
             var response = await _httpClient.DeleteAsync($"/purchases/shopCart/items/{productId}");
+
+            if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
+
+            return ReturnOk();
+        }
+
+        public async Task<ResponseResult> ApplyVoucherOnShopCart(string voucher)
+        {
+            var itemContent = GetContent(voucher);
+
+            var response = await _httpClient.PostAsync("/purchases/shopCart/apply-voucher", itemContent);
 
             if (!HandlingErrorsReponse(response)) return await DeserializeObjectResponse<ResponseResult>(response);
 

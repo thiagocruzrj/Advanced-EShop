@@ -6,6 +6,7 @@ namespace AES.WebApp.MVC.Models
     public class ShopCartViewModel
     {
         public decimal TotalPrice { get; set; }
+        public VoucherViewModel Voucher { get; set; }
         public bool VoucherUsed { get; set; }
         public decimal Discount { get; set; }
         public List<ShopCartItemViewModel> Itens { get; set; } = new List<ShopCartItemViewModel>();
