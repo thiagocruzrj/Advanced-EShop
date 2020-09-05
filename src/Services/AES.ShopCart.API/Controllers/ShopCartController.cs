@@ -95,8 +95,8 @@ namespace AES.ShopCart.API.Controllers
 
             shopCart.ApplyVoucher(voucher);
 
-            var result = await _context.SaveChangesAsync();
-            if (result <= 0) AddProcessingError("Isn't possible to persist data on DB");
+            _context.ShopCartClients.Update(shopCart);
+            await PersistData();
 
             return CustomResponse();
         }
