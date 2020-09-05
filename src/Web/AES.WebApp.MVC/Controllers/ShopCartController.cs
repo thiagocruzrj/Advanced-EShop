@@ -54,5 +54,16 @@ namespace AES.WebApp.MVC.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [Route("shopCart/apply-voucher")]
+        public async Task<IActionResult> ApplyVoucher(string voucherCode)
+        {
+            var response = await _purchaseBffService.ApplyVoucherOnShopCart(voucherCode);
+
+            if (ResponseHasErrors(response)) return View("Index", await _purchaseBffService.GetShopCart());
+
+            return RedirectToAction("Index");
+        }
     }
 }
