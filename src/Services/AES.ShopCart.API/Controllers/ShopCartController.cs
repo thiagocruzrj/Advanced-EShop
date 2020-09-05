@@ -87,6 +87,20 @@ namespace AES.ShopCart.API.Controllers
             return CustomResponse();
         }
 
+        [HttpPost]
+        [Route("shopCart/apply-voucher")]
+        public async Task<IActionResult> ApplyVoucher(Voucher voucher)
+        {
+            var shopCart = await GetShopCartClient();
+
+            shopCart.ApplyVoucher(voucher);
+
+            var result = await _context.SaveChangesAsync();
+            if (result <= 0) AddProcessingError("Isn't possible to persist data on DB");
+
+            return CustomResponse();
+        }
+
         private async Task<ShopCartClient> GetShopCartClient()
         {
             return await _context.ShopCartClients

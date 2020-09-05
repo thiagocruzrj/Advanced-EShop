@@ -29,7 +29,7 @@ namespace AES.ShopCart.API.Model
             ClientId = clientId;
         }
 
-        public void AppyVoucher(Voucher voucher)
+        public void ApplyVoucher(Voucher voucher)
         {
             Voucher = voucher;
             VoucherUsed = true;
