@@ -102,11 +102,11 @@
                     <aside class="col-md-3">
                         <div class="card mb-3">
                             <div class="card-body">
-                                <form>
+                                <form asp-action="ApplyVoucher">
                                     <div class="form-group">
                                         <label>Has any Cupon?</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" name="" placeholder="Descount Cupon">
+                                            <input type="text" class="form-control" name="VoucherCode" id="VoucherCode" value="@Model.Voucher?.Code" placeholder="Discount Cupom">
                                             <span class="input-group-append">
                                                 <button class="btn btn-primary">APPLY</button>
                                             </span>
