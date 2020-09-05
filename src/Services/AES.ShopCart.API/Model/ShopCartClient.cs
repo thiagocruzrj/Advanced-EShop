@@ -24,6 +24,9 @@ namespace AES.ShopCart.API.Model
         public decimal TotalPrice { get; set; }
         public List<ShopCartItem> Items { get; set; } = new List<ShopCartItem>();
         public ValidationResult ValidationResult { get; set; }
+        public bool UsedDiscount { get; set; }
+        public decimal DiscountValue { get; set; }
+        public Voucher Voucher { get; set; }
 
         internal void CalculatingShopCartTotalPrice()
         {
