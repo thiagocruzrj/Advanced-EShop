@@ -39,6 +39,32 @@ namespace AES.ShopCart.API.Model
         internal void CalculatingShopCartTotalPrice()
         {
             TotalPrice = Items.Sum(p => p.CalculatingQuantityPrice());
+            CalculateTotalDiscountValue();
+        }
+
+        private void CalculateTotalDiscountValue()
+        {
+            if (!VoucherUsed) return;
+
+            decimal discount = 0;
+            var value = TotalPrice;
+
+            if(Voucher.DiscountType == VoucherDiscountType.Percent)
+            {
+                if(Voucher.Percent.HasValue)
+                {
+                    discount = (value * Voucher.Percent.Value) / 100;
+                    value -= discount;
+                }
+            } else
+            {
+                if(Voucher.DiscountValue.HasValue)
+                {
+                    discount = Voucher.DiscountValue.Value;
+                }
+            }
+            TotalPrice = value < 0 ? 0 : value;
+            DiscountValue = discount;
         }
 
         internal bool ShopCartItemExists(ShopCartItem item)
